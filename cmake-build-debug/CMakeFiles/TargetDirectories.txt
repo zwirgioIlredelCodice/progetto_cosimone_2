@@ -1,3 +1,3 @@
-C:/Users/marco/OneDrive/Desktop/PROGRAMMAZIONE/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/progetto_cosimone_2.dir
-C:/Users/marco/OneDrive/Desktop/PROGRAMMAZIONE/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/marco/OneDrive/Desktop/PROGRAMMAZIONE/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/zamagnialice/Desktop/programmazione/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/progetto_cosimone_2.dir
+/Users/zamagnialice/Desktop/programmazione/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/zamagnialice/Desktop/programmazione/clion/progetto_cosimone_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
