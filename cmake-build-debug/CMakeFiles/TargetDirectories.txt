@@ -1,0 +1,3 @@
+C:/Users/murer/CLionProjects/progetto-cosimone-2/cmake-build-debug/CMakeFiles/progetto_cosimone_2.dir
+C:/Users/murer/CLionProjects/progetto-cosimone-2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/murer/CLionProjects/progetto-cosimone-2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
