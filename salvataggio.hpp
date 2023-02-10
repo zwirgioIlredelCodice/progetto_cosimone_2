@@ -28,11 +28,15 @@ public:
     s_list();
 
     // inserisce un nuovo nodo
-    void insert(string name = "", string value = "");
+    void insert(string name, string value);
     // data una stringa nome, ritorna il valore associato a quel nome
     string getvalue(string name);
     // data una stringa nome, aggiorna il valore associato a quel nome, se il nome non è presente non fà niente
     void updatevalue(string name, string new_value);
+    // ritorna true se è presente un nodo con il name = name, false altrimenti
+    bool isin(string name);
+    // rimuove un elemento con name = name
+    void remove(string name);
     // screive tutta la lista
     void print();
 };
@@ -55,14 +59,13 @@ public:
     string get_string(string name);
     // data una stringa nome, ritorna il valore (int) associato a quel nome
     int get_int(string name);
-    // aggiunge una variabile di salvataggio con value (string)
-    void add_string(string name, string value);
-    // aggiunge una variabile di salvataggio con value (int)
-    void add_int(string name, int value);
-    // data una stringa nome, aggiorna il valore associato a quel nome, se il nome non è presente non fà niente
-    void update_string(string name, string value);
-    // data una stringa nome, aggiorna il valore associato a quel nome, se il nome non è presente non fà niente
-    void update_int(string name, int value);
+
+    // inserisce o aggiorna un elemento a secondo se è presente o no
+    void set_string(string name, string value);
+    // inserisce o aggiorna un elemento a secondo se è presente o no
+    void set_int(string name, int value);
+    // rimuove un dato dal salvataggio
+    void remove(string name);
 };
 
 

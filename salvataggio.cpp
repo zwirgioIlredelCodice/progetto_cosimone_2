@@ -22,14 +22,11 @@ s_list::s_list() {
 
 void s_list::insert(string name, string value) {
     s_data* newdata = new s_data(name, value);
-    s_data* t = head;
     if (head == nullptr) {
         head = newdata;
     } else {
-        while (t->next != nullptr) {
-            t = t->next;
-        }
-        t->next = newdata;
+        newdata->next = head;
+        head = newdata;
     }
 }
 
@@ -66,6 +63,42 @@ void s_list::updatevalue(string name, string new_value) {
     }
 }
 
+bool s_list::isin(string name) {
+    if (this->getvalue(name) == "") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+void s_list::remove(string name) {
+    s_data* t = head;
+
+    if (t != nullptr) {
+        if (t->name == name) {
+            head = head->next;
+            delete t;
+        } else {
+            bool isdel = false;
+            while (t->next != nullptr && !isdel) {
+                if (t->next->name == name) {
+                    s_data* temp = t->next;
+                    t->next = t->next->next;
+                    delete temp;
+                    isdel = true;
+                }
+                if (!isdel && t != nullptr) {
+                    if (t->name == name) {
+                        s_data* temp = t;
+                        t = t->next;
+                        delete temp;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void s_list::print() {
     s_data* t = head;
     cout << '[' << endl;
@@ -85,26 +118,27 @@ string salvataggio::get_string(string name) {
 }
 
 /*
- * Post condition: se non può essere convertito ad un int ritorna std::invalid_argument
+ * Post condition: se non può essere convertito a un int ritorna std::invalid_argument
  */
 int salvataggio::get_int(string name) {
     return stoi(datalist.getvalue(name));
 }
 
-void salvataggio::add_string(string name, string value) {
-    datalist.insert(name, value);
+void salvataggio::set_string(string name, string value) {
+    if (datalist.isin(name)) {
+        datalist.updatevalue(name, value);
+    } else {
+        datalist.insert(name, value);
+    }
 }
 
-void salvataggio::add_int(string name, int value) {
-    datalist.insert(name, to_string(value));
-}
-
-void salvataggio::update_string(string name, string value) {
-    datalist.updatevalue(name, value);
-}
-
-void salvataggio::update_int(string name, int value) {
-    datalist.updatevalue(name, to_string(value));
+void salvataggio::set_int(string name, int value) {
+    string svalue = to_string(value);
+    if (datalist.isin(name)) {
+        datalist.updatevalue(name, svalue);
+    } else {
+        datalist.insert(name, svalue);
+    }
 }
 
 void salvataggio::load() {
@@ -136,4 +170,8 @@ void salvataggio::save() {
             t = t->next;
         }
     }
+}
+
+void salvataggio::remove(string name) {
+    datalist.remove(name);
 }
