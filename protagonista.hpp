@@ -19,11 +19,14 @@ protected:
     int valuta;
     arma armi[N_ARMI];
     int n_armi;
+    WINDOW * win;
+    int yMax, xMax, yLoc, xLoc;
+    char simbol; //carattere con cui viene mostrato il progtagonista
 
 public:
-    Protagonista(int salute, int valuta, arma armi[], int n);
+    Protagonista(int salute, int valuta, arma armi[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
 
-    // movimento e sparare
+    // sparare
 
     //funzioni che riguardano l'iterazione con la mappa
 
@@ -38,6 +41,18 @@ public:
     void nuova_arma(arma nuova);
 
     void reset_consumabili();
+
+    void mvup();
+
+    void mvdown();
+
+    void mvleft();
+
+    void mvright();
+
+    int getmv();
+
+    void display();
 
 
 };
