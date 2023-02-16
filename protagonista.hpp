@@ -1,16 +1,7 @@
-#include <iostream>
-#include <ncurses.h>
+
+#include "strutture.h"
 
 using namespace std;
-
-#define N_ARMI 5   //numero massimo di armi, !!MODIFICARE!!
-
-struct arma
-{
-    string nome;
-    int danno;
-    int portata;
-};
 
 class Protagonista
 {

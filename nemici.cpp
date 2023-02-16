@@ -82,4 +82,38 @@ void Goblin::subisci_danno(int danno)
 void Goblin::sparisci()
 {
     this->simbol = ' ';   //mette il simbolo a spazio così non viene visto
+    Goblin::display();
+}
+
+
+//-----------------------------------------
+
+Arciere::Arciere(int salute, arma ar, WINDOW *win, int yLoc, int xLox, char simbol, int guadagno)
+{
+    this->salute = salute;
+    this->arco.portata = ar.portata;
+    this->arco.nome = "Arco";
+    this->arco.danno = ar.danno;
+    this->win = win;
+    this->simbol = simbol;
+    this->guadagno = guadagno;
+    this->yLoc = yLoc;
+    this->xLoc = xLox;
+    getmaxyx(win, this->yMax, this->xMax);
+}
+
+void Arciere::subisci_danno(int danno)
+{
+    this->salute -= danno;
+}
+
+void Arciere::display()
+{
+    mvwaddch(win, yLoc, xLoc, this->simbol);
+}
+
+void Arciere::sparisci()
+{
+    this->simbol == ' ';
+    Arciere::display();
 }

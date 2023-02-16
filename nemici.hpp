@@ -1,7 +1,5 @@
-#include <iostream>
-#include <ncurses.h>
-#include <ctime>
-#include <cstdlib>
+
+#include "strutture.h"
 
 using namespace std;
 
@@ -35,4 +33,26 @@ public:
 
     void sparisci(); // quando viene ucciso
 
+};
+
+class Arciere
+{
+protected:
+    int salute;
+    arma arco;
+    WINDOW * win;
+    int yMax, xMax, yLoc, xLoc;
+    char simbol;
+    int guadagno;
+
+public:
+    Arciere(int salute, arma ar, WINDOW * win, int yLoc, int xLox, char simbol, int guadagno);
+
+    void subisci_danno(int danno);
+
+    //funzione per sparare
+
+    void display();
+
+    void sparisci();
 };
