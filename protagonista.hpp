@@ -6,33 +6,40 @@ using namespace std;
 class Protagonista
 {
 protected:
-    int salute;
-    int valuta;
-    arma armi[N_ARMI];
-    int n_armi;
+    int life;
+    int currency;
+    arma weapons[N_ARMI];
+    int n_weap;
     WINDOW * win;
     int yMax, xMax, yLoc, xLoc;
     char simbol; //carattere con cui viene mostrato il progtagonista
 
 public:
-    Protagonista(int salute, int valuta, arma armi[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
+    Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
 
     // sparare
 
     //funzioni che riguardano l'iterazione con la mappa
 
-    void subisci_danno(int danno);
+    // decrementa la vita
+    void decreaseLife(int damage);
 
-    void aumenta_vita(int vita);
+    // incrementa la vita
+    void increaseLife(int life);
 
-    void incrementa_valuta(int valuta);
+    // incrementa la valuta
+    void increaseCurrency(int currency);
 
-    void decrementa_valuta(int valuta);
+    // decrementa la valuta
+    void decreaseCurrency(int currency);
 
-    void nuova_arma(arma nuova);
+    // aggiunge una nuova arma
+    void newWeapon(weapon Weapon);
 
-    void reset_consumabili();
+    // resetta i potenziamenti temporanei
+    void resetConsumable();
 
+    // funzioni legate al movimento
     void mvup();
 
     void mvdown();

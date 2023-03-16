@@ -1,14 +1,14 @@
 #include "nemici.hpp"
 
-Goblin::Goblin(int salute, int danno, WINDOW * win, char simbol, int yLoc, int xLoc, int guadagno)
+Goblin::Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value)
 {
-    this->salute = salute;
-    this->danno = danno;
+    this->life = life;
+    this->damage = damage;
     this->win = win;
     this->simbol = simbol;
     this->yLoc = yLoc;
     this->xLoc = xLoc;
-    this->guadagno = guadagno;
+    this->value = value;
     getmaxyx(win, this->yMax, this->xMax);
 }
 
@@ -74,12 +74,14 @@ void Goblin::display()
     mvwaddch(win, yLoc, xLoc, simbol);
 }
 
-void Goblin::subisci_danno(int danno)
+void Goblin::decreaseLife(int damage)
 {
-    this->salute -= danno;
+    this->life -= damage;
+    if (this->life <= 0)
+        Goblin::disappear();
 }
 
-void Goblin::sparisci()
+void Goblin::disappear()
 {
     this->simbol = ' ';   //mette il simbolo a spazio così non viene visto
     Goblin::display();
@@ -88,23 +90,25 @@ void Goblin::sparisci()
 
 //-----------------------------------------
 
-Arciere::Arciere(int salute, arma ar, WINDOW *win, int yLoc, int xLox, char simbol, int guadagno)
+Arciere::Arciere(int life, weapon ar, WINDOW *win, int yLoc, int xLox, char simbol, int value)
 {
-    this->salute = salute;
-    this->arco.portata = ar.portata;
-    this->arco.nome = "Arco";
-    this->arco.danno = ar.danno;
+    this->life = life;
+    this->bow.scope = ar.scope;
+    this->bow.name = "Bow";
+    this->bow.damage = ar.damage;
     this->win = win;
     this->simbol = simbol;
-    this->guadagno = guadagno;
+    this->value = value;
     this->yLoc = yLoc;
     this->xLoc = xLox;
     getmaxyx(win, this->yMax, this->xMax);
 }
 
-void Arciere::subisci_danno(int danno)
+void Arciere::decreaseLife(int damage)
 {
-    this->salute -= danno;
+    this->life -= damage;
+    if (this->life <= 0)
+        Arciere::disappear();
 }
 
 void Arciere::display()
@@ -112,7 +116,7 @@ void Arciere::display()
     mvwaddch(win, yLoc, xLoc, this->simbol);
 }
 
-void Arciere::sparisci()
+void Arciere::disappear()
 {
     this->simbol == ' ';
     Arciere::display();

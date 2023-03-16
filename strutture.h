@@ -12,9 +12,9 @@ using namespace std;
 
 #define N_ARMI 5   //numero massimo di armi, !!MODIFICARE!!
 
-struct arma
+struct weapon
 {
-    string nome;
-    int danno;
-    int portata;
+    string name;
+    int damage;
+    int scope;
 };

@@ -1,18 +1,18 @@
 #include "protagonista.hpp"
 
-Protagonista::Protagonista(int salute, int valuta, arma armi[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
+Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
 {
-    this->salute = salute;
-    this->valuta = valuta;
+    this->life = life;
+    this->currency = currency;
     if (n > N_ARMI)
-        this->n_armi = N_ARMI;
+        this->n_weap = N_ARMI;
     else
-        this->n_armi = n;
-    for (int i = 0; i < this->n_armi; i++)
+        this->n_weap = n;
+    for (int i = 0; i < this->n_weap; i++)
     {
-        this->armi[i].nome = armi[i].nome;
-        this->armi[i].danno = armi[i].danno;
-        this->armi[i].portata = armi[i].portata;
+        this->weapons[i].nome = weapons[i].nome;
+        this->weapons[i].danno = weapons[i].danno;
+        this->weapons[i].portata = weapons[i].portata;
     }
     this->win = win;
     this->xLoc = xLoc;
@@ -21,38 +21,38 @@ Protagonista::Protagonista(int salute, int valuta, arma armi[], int n, WINDOW * 
     this->simbol = simbol;
 }
 
-void Protagonista::subisci_danno(int danno)
+void Protagonista::decreaseLife(int damage)
 {
-    this->salute -= danno;
+    this->life -= damage;
 }
 
-void Protagonista::aumenta_vita(int vita)
+void Protagonista::increaseLife(int life)
 {
-    this->salute += vita;
+    this->life += life;
 }
 
-void Protagonista::incrementa_valuta(int valuta)
+void Protagonista::increaseCurrency(int currency)
 {
-    this->valuta += valuta;
+    this->currency += currency;
 }
 
-void Protagonista::decrementa_valuta(int valuta)
+void Protagonista::decreaseCurrency(int currency)
 {
-    this->valuta -= valuta;
+    this->currency -= currency;
 }
 
-void Protagonista::nuova_arma(arma nuova)
+void Protagonista::newWeapon(weapon Weapon)
 {
-    if (this->n_armi < N_ARMI)
+    if (this->n_weap < N_ARMI)
     {
-        this->armi[n_armi].nome = nuova.nome;
-        this->armi[n_armi].danno = nuova.danno;
-        this->armi[n_armi].portata = nuova.portata;
+        this->weapons[n_weap].name = Weapon.name;
+        this->weapons[n_weap].damage = Weapon.damage;
+        this->weapons[n_weap].scope = Weapon.scope;
     }
-    this->n_armi++;
+    this->n_weap++;
 }
 
-void Protagonista::reset_consumabili()
+void Protagonista::resetConsumable()
 {
     // i potenziamenti devono essere registrati in modo tale da poter eliminare i consumabili
     // ogni volta che si esce dalla partita
