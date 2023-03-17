@@ -1,3 +1,7 @@
+
+#ifndef PROGETTO_COSIMONE_2_STRUTTURE_H
+#define PROGETTO_COSIMONE_2_STRUTTURE_H
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -18,3 +22,5 @@ struct weapon
     int damage;
     int scope;
 };
+
+#endif //PROGETTO_COSIMONE_2_STRUTTURE_H
