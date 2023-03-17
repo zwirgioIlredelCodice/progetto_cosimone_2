@@ -6,56 +6,23 @@ using namespace std;
 int main() {
     initscr();
     noecho();
-    cbreak();
 
-    int yMax, xMax;
-    getmaxyx(stdscr, yMax, xMax);
+    int height, width, starty, startx;
+    height = 20;
+    width = 40;
+    starty = startx = 10;
 
-    WINDOW * menuwin = newwin(6, xMax-12, yMax-8, 5);
-    box(menuwin, 0, 0);
+    WINDOW * trywin = newwin(height, width, starty, startx);
     refresh();
-    wrefresh(menuwin);
-    keypad(menuwin, true);
+    box (trywin, 0, 0);
 
-    string choices[3] = {"Walk", "Jog", "Run"};
-    int choice;
-    int highlight = 0;
+    wrefresh(trywin);
 
-    while(1){   //muoversi nel menu
-        for(int i = 0; i < 3; i++){
-            if (i == highlight)
-                wattron(menuwin, A_REVERSE);
-            mvwprintw(menuwin, i+1, 1, choices[i].c_str());
-            wattroff(menuwin, A_REVERSE);
-        }
-        choice = wgetch(menuwin);
-        switch(choice){
-            case KEY_UP:
-                highlight--;
-                if (highlight == -1)
-                    highlight = 0;
-                break;
-            case KEY_DOWN:
-                highlight++;
-                if (highlight == 3)
-                    highlight = 2;
-                break;
-            default:
-                break;
-        }
-        if (choice == 10)  // 10 sarebbe enter
-            break;
-    }
-
-    printw("Your choice was: %s", choices[highlight].c_str());
-
+    mvprintw(30, 51, "life: %d", 100);
+    mvprintw(31,51,"value: %d", 10);
 
     getch();
     endwin();
-    return 0;
 
-    //ciao mondo
-    //ciao
-    // cioaaui
-    //fggwe
+    return 0;
 }
