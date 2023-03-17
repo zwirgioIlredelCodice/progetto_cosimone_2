@@ -8,7 +8,7 @@ class Protagonista
 protected:
     int life;
     int currency;
-    arma weapons[N_ARMI];
+    weapon weapons[N_ARMI];
     int n_weap;
     WINDOW * win;
     int yMax, xMax, yLoc, xLoc;

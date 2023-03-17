@@ -10,9 +10,9 @@ Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW 
         this->n_weap = n;
     for (int i = 0; i < this->n_weap; i++)
     {
-        this->weapons[i].nome = weapons[i].nome;
-        this->weapons[i].danno = weapons[i].danno;
-        this->weapons[i].portata = weapons[i].portata;
+        this->weapons[i].name = weapons[i].name;
+        this->weapons[i].damage = weapons[i].damage;
+        this->weapons[i].scope = weapons[i].scope;
     }
     this->win = win;
     this->xLoc = xLoc;
