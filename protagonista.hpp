@@ -1,3 +1,6 @@
+#ifndef PROGETTO_COSIMONE_2_PROTAGONISTA_HPP
+#define PROGETTO_COSIMONE_2_PROTAGONISTA_HPP
+
 
 #include "strutture.h"
 
@@ -54,3 +57,6 @@ public:
 
 
 };
+
+
+#endif //PROGETTO_COSIMONE_2_PROTAGONISTA_HPP

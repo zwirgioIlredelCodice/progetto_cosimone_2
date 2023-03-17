@@ -1,4 +1,7 @@
 
+#ifndef PROGETTO_COSIMONE_2_NEMICI_HPP
+#define PROGETTO_COSIMONE_2_NEMICI_HPP
+
 #include "strutture.h"
 
 using namespace std;
@@ -56,3 +59,5 @@ public:
 
     void disappear(); // qunado viene eliminato
 };
+
+#endif //PROGETTO_COSIMONE_2_NEMICI_HPP
