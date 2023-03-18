@@ -18,8 +18,8 @@ protected:
     int yMax, xMax, yLoc, xLoc;
     char simbol; //carattere con cui viene mostrato il progtagonista
 
-public:
-    Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
+public:   // int life, int currency, weapon weap[], int n,
+    Protagonista( WINDOW * win, int yLoc, int xLoc, char simbol);
 
     // sparare
 

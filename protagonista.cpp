@@ -1,7 +1,7 @@
 #include "protagonista.hpp"
-
-Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
-{
+//int life, int currency, weapon weap[], int n,
+Protagonista::Protagonista( WINDOW * win, int yLoc, int xLoc, char simbol)
+{/*
     this->weap_index = 0;
     this->life = life;
     this->currency = currency;
@@ -14,7 +14,7 @@ Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW 
         this->weapons[i].name = weapons[i].name;
         this->weapons[i].damage = weapons[i].damage;
         this->weapons[i].scope = weapons[i].scope;
-    }
+    }*/
     this->win = win;
     this->xLoc = xLoc;
     this->yLoc = yLoc;
@@ -94,7 +94,8 @@ void Protagonista::mvright()
 int Protagonista::getmv()
 {
     int choice = wgetch(win);
-    switch (choice) {
+    switch (choice)
+    {
         case KEY_UP:
             mvup();
             break;
@@ -106,9 +107,6 @@ int Protagonista::getmv()
             break;
         case KEY_RIGHT:
             mvright();
-            break;
-        case ' ':
-            shoot();
             break;
         default:
             break;
@@ -125,7 +123,7 @@ void Protagonista::display()
 void Protagonista::shoot()
 {
     int choice = wgetch(win);
-    if (choice == ' ')   // da controllare se funziona
+    if (choice == 'c')   // da controllare se funziona
     {
         for(int i = 0; i < weapons[weap_index].scope && i+xLoc <xMax; i++)
         {

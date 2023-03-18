@@ -1,41 +1,46 @@
 #include <iostream>
 #include <ncurses.h>
 #include "protagonista.hpp"
+#include "player.hpp"
 
 using namespace std;
 
-int main() {
+int main() {   // sto sperimanentando una roba
     initscr();
     noecho();
 
-    int height, width, starty, startx;
-    height = 20;
-    width = 40;
-    starty = startx = 10;
-
-    WINDOW * trywin = newwin(height, width, starty, startx);
-    refresh();
-    box (trywin, 0, 0);
-
-    wrefresh(trywin);
-
-    mvprintw(30, 51, "life: %d", 100);
-    mvprintw(31,51,"value: %d", 10);
+    int yMax, xMax;
+    getmaxyx(stdscr, yMax, xMax);
+/*
     weapon A[1] = {
-            "AAA", 10, 5,
+            "AAA", 10, 5
     };
-    Protagonista p = *new Protagonista(100, 0, A, 1, trywin, 1, 1, '@');
+    */
+/*
+    WINDOW * playwin = newwin(20, 50, (yMax/2)-10, 10);
+    box(playwin, 0, 0);
+    refresh();
+    wrefresh(playwin);
 
-    while(1)
-    {
-        p.getmv();
-        p.display();
-    }
+    Protagonista *p = new Protagonista( playwin, 1, 1, '@');   //10, 10, A, 1,
+    do {
+        p->display();
+        wrefresh(playwin);
+    } while (p->getmv() != 'x');   // x per uscire
 
-      // da sistemare
+    endwin();*/
 
+    WINDOW * playwin = newwin(20, 50, (yMax/2)-10, 10);
+    box(playwin, 0, 0);
+    refresh();
+    wrefresh(playwin);
 
-    getch();
+    Player *p = new Player(playwin, 1, 1, '@');
+    do {
+        p->display();
+        wrefresh(playwin);
+    } while (p->getmv() != 'x');   // x per uscire
+
     endwin();
 
     return 0;
