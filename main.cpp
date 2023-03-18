@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ncurses.h>
+#include "protagonista.hpp"
 
 using namespace std;
 
@@ -20,6 +21,19 @@ int main() {
 
     mvprintw(30, 51, "life: %d", 100);
     mvprintw(31,51,"value: %d", 10);
+    weapon A[1] = {
+            "AAA", 10, 5,
+    };
+    Protagonista p = *new Protagonista(100, 0, A, 1, trywin, 1, 1, '@');
+
+    while(1)
+    {
+        p.getmv();
+        p.display();
+    }
+
+      // da sistemare
+
 
     getch();
     endwin();

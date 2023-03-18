@@ -13,6 +13,7 @@ protected:
     int currency;
     weapon weapons[N_ARMI];
     int n_weap;
+    int weap_index;
     WINDOW * win;
     int yMax, xMax, yLoc, xLoc;
     char simbol; //carattere con cui viene mostrato il progtagonista
@@ -54,6 +55,8 @@ public:
     int getmv();
 
     void display();
+
+    void shoot();
 
 
 };

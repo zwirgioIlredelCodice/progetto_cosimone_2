@@ -2,6 +2,7 @@
 
 Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
 {
+    this->weap_index = 0;
     this->life = life;
     this->currency = currency;
     if (n > N_ARMI)
@@ -106,6 +107,9 @@ int Protagonista::getmv()
         case KEY_RIGHT:
             mvright();
             break;
+        case ' ':
+            shoot();
+            break;
         default:
             break;
     }
@@ -116,4 +120,18 @@ int Protagonista::getmv()
 void Protagonista::display()
 {
     mvwaddch(win, yLoc, xLoc, simbol);
+}
+
+void Protagonista::shoot()
+{
+    int choice = wgetch(win);
+    if (choice == ' ')   // da controllare se funziona
+    {
+        for(int i = 0; i < weapons[weap_index].scope && i+xLoc <xMax; i++)
+        {
+            mvwaddch(win, yLoc, xLoc+i, ' ');
+            mvwaddch(win, yLoc, xLoc+i+1, '-');
+        }
+    }
+
 }
