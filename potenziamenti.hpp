@@ -4,7 +4,7 @@
 
 #ifndef PROGETTO_COSIMONE_2_POTENZIAMENTI_HPP
 #define PROGETTO_COSIMONE_2_POTENZIAMENTI_HPP
-#include "protagonista.hpp"
+#include "player.hpp"
 
 enum effects {
     nothing,

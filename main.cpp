@@ -1,6 +1,4 @@
-#include <iostream>
-#include <ncurses.h>
-#include "protagonista.hpp"
+
 #include "player.hpp"
 
 using namespace std;
@@ -11,11 +9,11 @@ int main() {   // sto sperimanentando una roba
 
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
-/*
+
     weapon A[1] = {
             "AAA", 10, 5
     };
-    */
+
 /*
     WINDOW * playwin = newwin(20, 50, (yMax/2)-10, 10);
     box(playwin, 0, 0);
@@ -35,7 +33,7 @@ int main() {   // sto sperimanentando una roba
     refresh();
     wrefresh(playwin);
 
-    Player *p = new Player(playwin, 1, 1, '@');
+    Protagonista *p = new Protagonista(10, 10, A, 1, playwin, 1, 1, '@');
     do {
         p->display();
         wrefresh(playwin);

@@ -6,87 +6,66 @@
 #define PROGETTO_COSIMONE_2_PLAYER_HPP
 
 
-#include <ncurses.h>
+#include "strutture.h"
 
-class Player{
+//  using namespace std;
+
+class Protagonista
+{
+protected:
+      int life;
+      int currency;
+      weapon weapons[N_ARMI];
+      int n_weap;
+      int weap_index;
+    WINDOW * curwin;
+    int yMax, xMax, yLoc, xLoc;
+    char simbol; //carattere con cui viene mostrato il progtagonista
+
 public:
-    Player(WINDOW * win, int y, int x, char c);
+    Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
+
+    // sparare
+
+    //funzioni che riguardano l'iterazione con la mappa
+
+    // decrementa la vita
+
+    void decreaseLife(int damage);
+
+    // incrementa la vita
+    void increaseLife(int life);
+
+    // incrementa la valuta
+    void increaseCurrency(int currency);
+
+    // decrementa la valuta
+    void decreaseCurrency(int currency);
+
+    // aggiunge una nuova arma
+    void newWeapon(weapon Weapon);
+
+    // resetta i potenziamenti temporanei
+    void resetConsumable();
+
+    // funzioni legate al movimento
 
     void mvup();
+
     void mvdown();
+
     void mvleft();
+
     void mvright();
+
     int getmv();
+
     void display();
 
-protected:
-    int xLoc, yLoc, xMax, yMax;
-    char character;
-    WINDOW * curwin;
+    void shoot();
+
 
 };
 
-Player::Player(WINDOW *win, int y, int x, char c) {
-    curwin = win;
-    xLoc = x;
-    yLoc = y;
-    getmaxyx(curwin, yMax, xMax);
-    keypad(curwin, 1);
-    character = c;
-}
-
-void Player::mvup() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    yLoc--;
-    if (yLoc < 1)
-        yLoc = 1;
-}
-
-void Player::mvdown() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    yLoc++;
-    if (yLoc > yMax-2)
-        yLoc = yMax-2;
-}
-
-void Player::mvleft() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    xLoc--;
-    if (xLoc < 1)
-        xLoc = 1;
-}
-
-void Player::mvright() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    xLoc++;
-    if (xLoc > xMax-2)
-        xLoc = xMax-2;
-}
-
-int Player::getmv(){
-    int choice = wgetch(curwin);
-    switch (choice) {
-        case KEY_UP:
-            mvup();
-            break;
-        case KEY_DOWN:
-            mvdown();
-            break;
-        case KEY_LEFT:
-            mvleft();
-            break;
-        case KEY_RIGHT:
-            mvright();
-            break;
-        default:
-            break;
-    }
-    return choice;
-}
-
-
-void Player::display() {
-    mvwaddch(curwin, yLoc, xLoc, character);
-}
 
 #endif //PROGETTO_COSIMONE_2_PLAYER_HPP

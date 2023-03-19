@@ -1,7 +1,11 @@
-#include "protagonista.hpp"
-//int life, int currency, weapon weap[], int n,
-Protagonista::Protagonista( WINDOW * win, int yLoc, int xLoc, char simbol)
-{/*
+//
+// Created by marco on 19/03/2023.
+//
+
+#include "player.hpp"
+
+Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
+{
     this->weap_index = 0;
     this->life = life;
     this->currency = currency;
@@ -14,11 +18,11 @@ Protagonista::Protagonista( WINDOW * win, int yLoc, int xLoc, char simbol)
         this->weapons[i].name = weapons[i].name;
         this->weapons[i].damage = weapons[i].damage;
         this->weapons[i].scope = weapons[i].scope;
-    }*/
-    this->win = win;
+    }
+    this->curwin = win;
     this->xLoc = xLoc;
     this->yLoc = yLoc;
-    getmaxyx(win, this->yMax, this->xMax);
+    getmaxyx(curwin, this->yMax, this->xMax);
     this->simbol = simbol;
 }
 
@@ -61,7 +65,7 @@ void Protagonista::resetConsumable()
 
 void Protagonista::mvup()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
+    mvwaddch(curwin, yLoc, xLoc, ' ');
     yLoc--;
     if (yLoc < 1)
         yLoc = 1;
@@ -69,7 +73,7 @@ void Protagonista::mvup()
 
 void Protagonista::mvdown()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
+    mvwaddch(curwin, yLoc, xLoc, ' ');
     yLoc++;
     if (yLoc > yMax-2)
         yLoc = yMax-2;
@@ -77,7 +81,7 @@ void Protagonista::mvdown()
 
 void Protagonista::mvleft()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
+    mvwaddch(curwin, yLoc, xLoc, ' ');
     xLoc--;
     if (xLoc < 1)
         xLoc = 1;
@@ -85,7 +89,7 @@ void Protagonista::mvleft()
 
 void Protagonista::mvright()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
+    mvwaddch(curwin, yLoc, xLoc, ' ');
     xLoc++;
     if (xLoc > xMax-2)
         xLoc = xMax-2;
@@ -93,7 +97,7 @@ void Protagonista::mvright()
 
 int Protagonista::getmv()
 {
-    int choice = wgetch(win);
+    int choice = wgetch(curwin);
     switch (choice)
     {
         case KEY_UP:
@@ -117,19 +121,18 @@ int Protagonista::getmv()
 
 void Protagonista::display()
 {
-    mvwaddch(win, yLoc, xLoc, simbol);
+    mvwaddch(curwin, yLoc, xLoc, simbol);
 }
 
 void Protagonista::shoot()
 {
-    int choice = wgetch(win);
+    int choice = wgetch(curwin);
     if (choice == 'c')   // da controllare se funziona
-    {
+
         for(int i = 0; i < weapons[weap_index].scope && i+xLoc <xMax; i++)
         {
-            mvwaddch(win, yLoc, xLoc+i, ' ');
-            mvwaddch(win, yLoc, xLoc+i+1, '-');
+            mvwaddch(curwin, yLoc, xLoc+i, ' ');
+            mvwaddch(curwin, yLoc, xLoc+i+1, '-');
         }
-    }
-
 }
+
