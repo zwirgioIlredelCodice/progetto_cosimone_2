@@ -3,6 +3,7 @@
 //
 
 #include "player.hpp"
+/*
 
 Protagonista::Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol)
 {
@@ -136,3 +137,91 @@ void Protagonista::shoot()
         }
 }
 
+*/
+
+
+Protagonista::Protagonista(WINDOW *win, int y, int x, char c, int life, int currency)
+{
+    this->life = life;
+    this->currency = currency;
+    curwin = win;
+    xLoc = x;
+    yLoc = y;
+    getmaxyx(curwin, yMax, xMax);
+    keypad(curwin, 1);
+    character = c;
+}
+
+void Protagonista::mvup() {
+    mvwaddch(curwin, yLoc, xLoc, ' ');
+    yLoc--;
+    if (yLoc < 1)
+        yLoc = 1;
+}
+
+void Protagonista::mvdown() {
+    mvwaddch(curwin, yLoc, xLoc, ' ');
+    yLoc++;
+    if (yLoc > yMax-2)
+        yLoc = yMax-2;
+}
+
+void Protagonista::mvleft() {
+    mvwaddch(curwin, yLoc, xLoc, ' ');
+    xLoc--;
+    if (xLoc < 1)
+        xLoc = 1;
+}
+
+void Protagonista::mvright() {
+    mvwaddch(curwin, yLoc, xLoc, ' ');
+    xLoc++;
+    if (xLoc > xMax-2)
+        xLoc = xMax-2;
+}
+
+int Protagonista::getmv(){
+    int choice = wgetch(curwin);
+    switch (choice) {
+        case KEY_UP:
+            mvup();
+            break;
+        case KEY_DOWN:
+            mvdown();
+            break;
+        case KEY_LEFT:
+            mvleft();
+            break;
+        case KEY_RIGHT:
+            mvright();
+            break;
+        default:
+            break;
+    }
+    return choice;
+}
+
+
+void Protagonista::display() {
+    mvwaddch(curwin, yLoc, xLoc, character);
+}
+
+void Protagonista::decreaseLife(int damage)
+{
+    this->life -= damage;
+}
+
+void Protagonista::increaseLife(int life)
+{
+    this->life += life;
+}
+
+void Protagonista::increaseCurrency(int currency)
+{
+    this->currency += currency;
+}
+
+void Protagonista::decreaseCurrency(int currency)
+{
+    this->currency -= currency;
+}

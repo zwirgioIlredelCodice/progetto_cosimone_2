@@ -12,6 +12,7 @@
 
 class Protagonista
 {
+    /*
 protected:
       int life;
       int currency;
@@ -62,7 +63,39 @@ public:
 
     void display();
 
-    void shoot();
+    void shoot();*/
+
+    public:
+        Protagonista(WINDOW * win, int y, int x, char c, int life, int currency);
+
+        void mvup();
+        void mvdown();
+        void mvleft();
+        void mvright();
+        int getmv();
+        void display();
+        // decrementa la vita
+
+        void decreaseLife(int damage);
+
+        // incrementa la vita
+        void increaseLife(int life);
+
+        // incrementa la valuta
+        void increaseCurrency(int currency);
+
+        // decrementa la valuta
+        void decreaseCurrency(int currency);
+
+    protected:
+        int life;
+        int currency;
+        int xLoc, yLoc, xMax, yMax;
+        char character;
+        WINDOW * curwin;
+
+
+
 
 
 };
