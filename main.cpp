@@ -23,7 +23,7 @@ int main() {   // sto sperimanentando una roba
     initscr();
     noecho();
     cbreak();
-//    curs_set(0);
+    curs_set(0);
 
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
