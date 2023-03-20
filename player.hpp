@@ -12,61 +12,8 @@
 
 class Protagonista
 {
-    /*
-protected:
-      int life;
-      int currency;
-      weapon weapons[N_ARMI];
-      int n_weap;
-      int weap_index;
-    WINDOW * curwin;
-    int yMax, xMax, yLoc, xLoc;
-    char simbol; //carattere con cui viene mostrato il progtagonista
-
-public:
-    Protagonista(int life, int currency, weapon weap[], int n, WINDOW * win, int yLoc, int xLoc, char simbol);
-
-    // sparare
-
-    //funzioni che riguardano l'iterazione con la mappa
-
-    // decrementa la vita
-
-    void decreaseLife(int damage);
-
-    // incrementa la vita
-    void increaseLife(int life);
-
-    // incrementa la valuta
-    void increaseCurrency(int currency);
-
-    // decrementa la valuta
-    void decreaseCurrency(int currency);
-
-    // aggiunge una nuova arma
-    void newWeapon(weapon Weapon);
-
-    // resetta i potenziamenti temporanei
-    void resetConsumable();
-
-    // funzioni legate al movimento
-
-    void mvup();
-
-    void mvdown();
-
-    void mvleft();
-
-    void mvright();
-
-    int getmv();
-
-    void display();
-
-    void shoot();*/
-
     public:
-        Protagonista(WINDOW * win, int y, int x, char c, int life, int currency);
+        Protagonista(WINDOW * win, int y, int x, char c, int life, int currency, weapon A[], int n);
 
         void mvup();
         void mvdown();
@@ -87,16 +34,25 @@ public:
         // decrementa la valuta
         void decreaseCurrency(int currency);
 
+        // aggiunge una nuova arma all' array
+        void newWeapon(weapon Weapon);
+
+        // funzione per sparare
+        void shoot(); // 'c' to trigger
+
+        // funzione per cambiare arma
+        void changeWeapon();  // 's' to trigger
+
+
     protected:
         int life;
         int currency;
         int xLoc, yLoc, xMax, yMax;
         char character;
         WINDOW * curwin;
-
-
-
-
+        weapon weapons[N_ARMI];
+        int n_weap;
+        int weap_index;
 
 };
 

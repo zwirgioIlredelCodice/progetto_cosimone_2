@@ -6,6 +6,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <ncurses.h>
+#include <cstdlib>
+#include <unistd.h>
 
 // file in cui mettere le strutture dati per essere usate in tutti i file
 //include anche le librerie così da non doverle mettere in ogni file, basta includere questo file.
