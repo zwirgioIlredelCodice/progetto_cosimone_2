@@ -29,31 +29,43 @@ Protagonista::Protagonista(WINDOW *win, int y, int x, char c, int life, int curr
 }
 
 void Protagonista::mvup() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    yLoc--;
-    if (yLoc < 1)
-        yLoc = 1;
+    if (mvwinch(curwin, yLoc - 1, xLoc) != '+')
+    {
+        mvwaddch(curwin, yLoc, xLoc, ' ');
+        yLoc--;
+        if (yLoc < 1)
+            yLoc = 1;
+    }
 }
 
 void Protagonista::mvdown() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    yLoc++;
-    if (yLoc > yMax-2)
-        yLoc = yMax-2;
+    if (mvwinch(curwin, yLoc + 1, xLoc) != '+')
+    {
+        mvwaddch(curwin, yLoc, xLoc, ' ');
+        yLoc++;
+        if (yLoc > yMax - 2)
+            yLoc = yMax - 2;
+    }
 }
 
 void Protagonista::mvleft() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    xLoc--;
-    if (xLoc < 1)
-        xLoc = 1;
+    if (mvwinch(curwin, yLoc, xLoc - 1) != '+')
+    {
+        mvwaddch(curwin, yLoc, xLoc, ' ');
+        xLoc--;
+        if (xLoc < 1)
+            xLoc = 1;
+    }
 }
 
 void Protagonista::mvright() {
-    mvwaddch(curwin, yLoc, xLoc, ' ');
-    xLoc++;
-    if (xLoc > xMax-2)
-        xLoc = xMax-2;
+    if (mvwinch(curwin, yLoc, xLoc + 1) != '+')
+    {
+        mvwaddch(curwin, yLoc, xLoc, ' ');
+        xLoc++;
+        if (xLoc > xMax - 2)
+            xLoc = xMax - 2;
+    }
 }
 
 int Protagonista::getmv(){
@@ -121,18 +133,21 @@ void Protagonista::newWeapon(weapon Weapon)
 
 void Protagonista::shoot()
 {
-    int i = 0;
+    int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i+xLoc < xMax - 3)
-    {
-        mvwaddch(curwin, yLoc, xLoc + i + 1, ' ');
-        mvwaddch(curwin, yLoc, xLoc + i + 2, '-');
-        usleep(1000);
+    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != '+' && mvwinch(curwin, locy, locx + i) != '+') // mvwinch(curwin, locy, locx + i + 3) != ''   // controlla il carattere in una posizione
+    {                                                       // carattere + per controllare che non cancelli un nemico
+        mvwaddch(curwin, yLoc, xLoc + i, ' ');
+        mvwaddch(curwin, yLoc, xLoc + i + 1, '-');
+        usleep(20000);
         wrefresh(curwin);
         i++;
     }
-    mvwaddch(curwin, locy, locx + i + 1, ' ');
+    usleep(20000);
+    if (mvwinch(curwin, locy, locx + i) != '+')
+        mvwaddch(curwin, locy, locx + i, ' ');
+    // altrimenti ho hittato un nemico
 
 
 }
