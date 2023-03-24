@@ -29,7 +29,7 @@ Protagonista::Protagonista(WINDOW *win, int y, int x, char c, int life, int curr
 }
 
 void Protagonista::mvup() {
-    if (mvwinch(curwin, yLoc - 1, xLoc) != '+')
+    if (mvwinch(curwin, yLoc - 1, xLoc) != 'g')
     {
         mvwaddch(curwin, yLoc, xLoc, ' ');
         yLoc--;
@@ -39,7 +39,7 @@ void Protagonista::mvup() {
 }
 
 void Protagonista::mvdown() {
-    if (mvwinch(curwin, yLoc + 1, xLoc) != '+')
+    if (mvwinch(curwin, yLoc + 1, xLoc) != 'g')
     {
         mvwaddch(curwin, yLoc, xLoc, ' ');
         yLoc++;
@@ -49,7 +49,7 @@ void Protagonista::mvdown() {
 }
 
 void Protagonista::mvleft() {
-    if (mvwinch(curwin, yLoc, xLoc - 1) != '+')
+    if (mvwinch(curwin, yLoc, xLoc - 1) != 'g')
     {
         mvwaddch(curwin, yLoc, xLoc, ' ');
         xLoc--;
@@ -59,7 +59,7 @@ void Protagonista::mvleft() {
 }
 
 void Protagonista::mvright() {
-    if (mvwinch(curwin, yLoc, xLoc + 1) != '+')
+    if (mvwinch(curwin, yLoc, xLoc + 1) != 'g')
     {
         mvwaddch(curwin, yLoc, xLoc, ' ');
         xLoc++;
@@ -88,6 +88,8 @@ int Protagonista::getmv(){
             break;
         case 's':
             changeWeapon();
+            break;
+        case -1:
             break;
         default:
             break;
@@ -136,7 +138,7 @@ void Protagonista::shoot()
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != '+' && mvwinch(curwin, locy, locx + i) != '+') // mvwinch(curwin, locy, locx + i + 3) != ''   // controlla il carattere in una posizione
+    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g') // mvwinch(curwin, locy, locx + i + 3) != ''   // controlla il carattere in una posizione
     {                                                       // carattere + per controllare che non cancelli un nemico
         mvwaddch(curwin, yLoc, xLoc + i, ' ');
         mvwaddch(curwin, yLoc, xLoc + i + 1, '-');
@@ -145,7 +147,7 @@ void Protagonista::shoot()
         i++;
     }
     usleep(20000);
-    if (mvwinch(curwin, locy, locx + i) != '+')
+    if (mvwinch(curwin, locy, locx + i) != 'g')
         mvwaddch(curwin, locy, locx + i, ' ');
     // altrimenti ho hittato un nemico
 
@@ -162,4 +164,19 @@ void Protagonista::changeWeapon()
     {
         weap_index ++;
     }
+}
+
+int Protagonista::positionX()
+{
+    return xLoc;
+}
+
+int Protagonista::positionY()
+{
+    return yLoc;
+}
+
+char Protagonista::retChar()
+{
+    return character;
 }

@@ -1,7 +1,8 @@
 #include "nemici.hpp"
 
-Goblin::Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value)
+Goblin::Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value, Protagonista *p)
 {
+    this->p = p;
     this->life = life;
     this->damage = damage;
     this->win = win;
@@ -15,41 +16,66 @@ Goblin::Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xL
 
 void Goblin::mvup()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
-    yLoc--;
-    if (yLoc < 1)
-        yLoc = 1;
+    if (mvwinch(win, yLoc - 1, xLoc) != p->retChar())
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        yLoc--;
+        if (yLoc < 1)
+            yLoc = 1;
+    }
+    else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvdown()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
-    yLoc++;
-    if (yLoc > yMax-2)
-        yLoc = yMax-2;
+    if (mvwinch(win, yLoc + 1, xLoc) != p->retChar())
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        yLoc++;
+        if (yLoc > yMax - 2)
+            yLoc = yMax - 2;
+    }
+    else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvleft()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
-    xLoc--;
-    if (xLoc < 1)
-        xLoc = 1;
+    if (mvwinch(win, yLoc, xLoc - 1) != p->retChar())
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        xLoc--;
+        if (xLoc < 1)
+            xLoc = 1;
+    }
+    else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvright()
 {
-    mvwaddch(win, yLoc, xLoc, ' ');
-    xLoc++;
-    if (xLoc > xMax-2)
-        xLoc = xMax-2;
+    if(mvwinch(win, yLoc, xLoc + 1) != p->retChar())
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        xLoc++;
+        if (xLoc > xMax - 2)
+            xLoc = xMax - 2;
+    }
+    else p->decreaseLife(this->damage);
 }
 
-int Goblin::getmv()
+int Goblin::getmv()  // movimento simulato verso il protagonista ma troppo veloce
 {
-    srand(time(NULL));
-    int choice = rand() % 4;
-    switch (choice) {
+    usleep(100000);      // un po buggato
+    int move = -1;
+    if(yLoc > p->positionY())
+        move = 0;
+    else if (yLoc < p->positionY())
+        move = 1;
+    else if (xLoc < p->positionX())
+        move = 3;
+    else if (xLoc > p->positionX())
+        move = 2;
+
+    switch (move) {
         case 0:
             mvup();
             break;
@@ -65,9 +91,8 @@ int Goblin::getmv()
         default:
             break;
     }
-    return choice;
+    return move;
 }
-
 
 void Goblin::display()
 {
@@ -86,6 +111,7 @@ void Goblin::disappear()
     this->simbol = ' ';   //mette il simbolo a spazio così non viene visto
     Goblin::display();
 }
+
 
 
 //-----------------------------------------

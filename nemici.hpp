@@ -3,6 +3,7 @@
 #define PROGETTO_COSIMONE_2_NEMICI_HPP
 
 #include "strutture.h"
+#include "player.hpp"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ using namespace std;
 class Goblin  // nemico che corre e fa danno se addosso al protagonista
 {
 protected:
+    Protagonista *p;
     int life;
     int damage;
     WINDOW * win;
@@ -18,7 +20,7 @@ protected:
     int value;  // quanto guadagna il protagonista se uccide questo nemico
 
 public:
-    Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value);
+    Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value, Protagonista *p);
 
     void mvup();
 
@@ -35,6 +37,9 @@ public:
     void decreaseLife(int damage);
 
     void disappear(); // quando viene ucciso
+
+    // ritorna il carattere
+    char retChar();
 
 };
 

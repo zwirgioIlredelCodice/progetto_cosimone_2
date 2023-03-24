@@ -43,6 +43,15 @@ class Protagonista
         // funzione per cambiare arma
         void changeWeapon();  // 's' to trigger
 
+        //ritorna la posizione del protagonista nell'asse x
+        int positionX();
+
+        // ritorna la posizione nell' asse y
+        int positionY();
+
+        // ritorna il carattere del protagonista
+        char retChar();
+
 
     protected:
         int life;
