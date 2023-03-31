@@ -23,7 +23,7 @@ void Goblin::mvup()
         if (yLoc < 1)
             yLoc = 1;
     }
-    else p->decreaseLife(this->damage);
+ //   else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvdown()
@@ -35,7 +35,7 @@ void Goblin::mvdown()
         if (yLoc > yMax - 2)
             yLoc = yMax - 2;
     }
-    else p->decreaseLife(this->damage);
+ //   else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvleft()
@@ -47,7 +47,7 @@ void Goblin::mvleft()
         if (xLoc < 1)
             xLoc = 1;
     }
-    else p->decreaseLife(this->damage);
+ //   else p->decreaseLife(this->damage);
 }
 
 void Goblin::mvright()
@@ -59,12 +59,11 @@ void Goblin::mvright()
         if (xLoc > xMax - 2)
             xLoc = xMax - 2;
     }
-    else p->decreaseLife(this->damage);
+ //   else p->decreaseLife(this->damage);
 }
 
-int Goblin::getmv()  // movimento simulato verso il protagonista ma troppo veloce
+int Goblin::getmv()
 {
-    usleep(100000);      // un po buggato
     int move = -1;
     if(yLoc > p->positionY())
         move = 0;

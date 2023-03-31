@@ -1,12 +1,11 @@
 
-#include <future>
 #include "player.hpp"
 #include "nemici.hpp"
 
 
 using namespace std;
 
-int main() {   // sto sperimanentando una roba
+int main() {
 
     initscr();
     noecho();
@@ -26,20 +25,30 @@ int main() {   // sto sperimanentando una roba
     box(playwin, 0, 0);
     refresh();
     wrefresh(playwin);
-    mvwaddch(playwin, 10, 40, '+');
 
 
     Protagonista *p = new Protagonista(playwin, 1, 1, '@', 1000, 10, A, 2);
     Goblin *g = new Goblin(30, 50, playwin, 'g', 10, 40, 10, p);
+    auto startTime = chrono::steady_clock::now();
+    usleep(1000000);
     do
     {
         p->display();
         g->display();
+
         p->getmv();
+
         wrefresh(playwin);
-        g->getmv(); // problema: eseguire più operazioni di movimento contemporaneamnete
-        p->getmv();
+
+        if ((chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startTime).count() / 1000) % 2 == 0)
+        {
+            g->getmv(); // problema: viene eseguito un movimento di troppe caselle come se si muovess anche se non entre nell'if
+            g->display();
+            wrefresh(playwin);
+        }
+
         wrefresh(playwin);
+
     }
     while (1);   // termina con ctrl C
 
