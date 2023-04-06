@@ -18,6 +18,7 @@ protected:
     int yMax, xMax, yLoc, xLoc;
     char simbol;
     int value;  // quanto guadagna il protagonista se uccide questo nemico
+    bool alive;
 
 public:
     Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value, Protagonista *p);
@@ -40,6 +41,10 @@ public:
 
     // ritorna il carattere
     char retChar();
+
+    int positionX();
+
+    int positionY();
 
 };
 

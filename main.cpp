@@ -17,7 +17,7 @@ int main() {
     getmaxyx(stdscr, yMax, xMax);
     weapon A[2] = {
             "bow", 100, 10,
-            "gun", 200, 20,
+            "gun", 20, 20,
     };
 
     WINDOW * playwin = newwin(25, 50, 10, 10);
@@ -37,17 +37,26 @@ int main() {
         g->display();
 
         p->getmv();
+        if (p->getmv() == 's')
+        {
+            pair<int, int> cs = p->shoot();
+            if (cs.first == g->positionY() && cs.second == g->positionX())
+                g->decreaseLife(p->retCurrentDamage());
+        }
 
         wrefresh(playwin);
+        refresh();
 
-        if ((chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - startTime).count() / 1000) % 2 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 10000 == 0)
         {
-            g->getmv(); // problema: viene eseguito un movimento di troppe caselle come se si muovess anche se non entre nell'if
+            g->getmv();
             g->display();
             wrefresh(playwin);
         }
 
+        g->display();
         wrefresh(playwin);
+        refresh();
 
     }
     while (1);   // termina con ctrl C

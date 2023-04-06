@@ -38,7 +38,7 @@ class Protagonista
         void newWeapon(weapon Weapon);
 
         // funzione per sparare
-        void shoot(); // 'c' to trigger
+        pair<int, int> shoot(); // 'c' to trigger
 
         // funzione per cambiare arma
         void changeWeapon();  // 's' to trigger
@@ -51,6 +51,16 @@ class Protagonista
 
         // ritorna il carattere del protagonista
         char retChar();
+
+        /*
+         * funzione che ritorna il danno attuale della sua arma
+         */
+        int retCurrentDamage();
+
+        /*
+         * funzione che ritorna la portata attuale dell'arma selezionata
+         */
+        int retCurrentScope();
 
 
     protected:

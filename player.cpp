@@ -83,10 +83,10 @@ int Protagonista::getmv(){
         case KEY_RIGHT:
             mvright();
             break;
-        case 'c':
+        case 's':
             shoot();
             break;
-        case 's':
+        case 'c':
             changeWeapon();
             break;
         case -1:
@@ -133,13 +133,13 @@ void Protagonista::newWeapon(weapon Weapon)
     this->n_weap++;
 }
 
-void Protagonista::shoot()
+pair<int, int> Protagonista::shoot()
 {
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g') // mvwinch(curwin, locy, locx + i + 3) != ''   // controlla il carattere in una posizione
-    {                                                       // carattere + per controllare che non cancelli un nemico
+    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g') // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'
+    {
         mvwaddch(curwin, yLoc, xLoc + i, ' ');
         mvwaddch(curwin, yLoc, xLoc + i + 1, '-');
         usleep(20000);
@@ -149,6 +149,8 @@ void Protagonista::shoot()
     usleep(20000);
     if (mvwinch(curwin, locy, locx + i) != 'g')
         mvwaddch(curwin, locy, locx + i, ' ');
+    else
+        return make_pair(locy, locx + i);
     // altrimenti ho hittato un nemico
 
 
@@ -179,4 +181,14 @@ int Protagonista::positionY()
 char Protagonista::retChar()
 {
     return character;
+}
+
+int Protagonista::retCurrentDamage()
+{
+    return weapons[weap_index].damage;
+}
+
+int Protagonista::retCurrentScope()
+{
+    return weapons[weap_index].scope;
 }
