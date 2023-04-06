@@ -30,7 +30,7 @@ public:
 
     void mvright();
 
-    int getmv();
+    void getmv();
 
     void display();
 

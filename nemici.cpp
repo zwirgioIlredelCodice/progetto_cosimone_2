@@ -62,8 +62,9 @@ void Goblin::mvright()
  //   else p->decreaseLife(this->damage);
 }
 
-int Goblin::getmv()
+void Goblin::getmv()
 {
+    /*
     int move = -1;
     if(yLoc > p->positionY())
         move = 0;
@@ -91,6 +92,15 @@ int Goblin::getmv()
             break;
     }
     return move;
+     */
+    if(yLoc > p->positionY())
+        mvup();
+    else if (yLoc < p->positionY())
+        mvdown();
+    else if (xLoc > p->positionX())
+        mvleft();
+    else if (xLoc < p->positionX())
+        mvright();
 }
 
 void Goblin::display()
