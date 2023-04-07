@@ -98,8 +98,13 @@ int Protagonista::getmv(){
 }
 
 
-void Protagonista::display() {
+void Protagonista::display()
+{
+    mvwprintw(stdscr, 30, 60, "                 ");
+    mvwprintw(stdscr, 32, 60, "                             ");
     mvwaddch(curwin, yLoc, xLoc, character);
+    mvwprintw(stdscr, 30, 60, "Life : %d", getLife());
+    mvwprintw(stdscr, 32, 60, "Currency : %d", getCurrency());
 }
 
 void Protagonista::decreaseLife(int damage)
@@ -133,12 +138,12 @@ void Protagonista::newWeapon(weapon Weapon)
     this->n_weap++;
 }
 
-pair<int, int> Protagonista::shoot()
+void Protagonista::shoot()
 {
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i + locx < xMax - 2 && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g') // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'
+    while( i < weapons[weap_index].scope && i + locx < xMax - 2) // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'
     {
         mvwaddch(curwin, yLoc, xLoc + i, ' ');
         mvwaddch(curwin, yLoc, xLoc + i + 1, '-');
@@ -147,13 +152,11 @@ pair<int, int> Protagonista::shoot()
         i++;
     }
     usleep(20000);
-    if (mvwinch(curwin, locy, locx + i) != 'g')
-        mvwaddch(curwin, locy, locx + i, ' ');
-    else
-        return make_pair(locy, locx + i);
+//    if (mvwinch(curwin, locy, locx + i) != 'g')
+    mvwaddch(curwin, locy, locx + i, ' ');
+//    else
+//        return make_pair(locy, locx + i);
     // altrimenti ho hittato un nemico
-
-
 }
 
 void Protagonista::changeWeapon()
@@ -191,4 +194,14 @@ int Protagonista::retCurrentDamage()
 int Protagonista::retCurrentScope()
 {
     return weapons[weap_index].scope;
+}
+
+int Protagonista::getLife()
+{
+    return life;
+}
+
+int Protagonista::getCurrency()
+{
+    return currency;
 }

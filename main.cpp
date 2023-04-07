@@ -36,18 +36,15 @@ int main() {
         p->display();
         g->display();
 
-        p->getmv();
-        if (p->getmv() == 's')
+        int choice = p->getmv();
+        if(choice == 's')
         {
-            pair<int, int> cs = p->shoot();
-            if (cs.first == g->positionY() && cs.second == g->positionX())
-                g->decreaseLife(p->retCurrentDamage());
+            g->checkDamage();
         }
 
         wrefresh(playwin);
         refresh();
-
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 10000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 40000 == 0)
         {
             g->getmv();
             g->display();
@@ -59,7 +56,7 @@ int main() {
         refresh();
 
     }
-    while (1);   // termina con ctrl C
+    while (true);   // termina con ctrl C
 
     endwin();
 

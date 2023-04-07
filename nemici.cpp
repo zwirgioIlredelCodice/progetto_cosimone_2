@@ -24,7 +24,7 @@ void Goblin::mvup()
         if (yLoc < 1)
             yLoc = 1;
     }
-    else
+    else if (mvwinch(win, yLoc - 1, xLoc) == p->retChar())
     {
         p->decreaseLife(this->damage);
     }
@@ -39,7 +39,7 @@ void Goblin::mvdown()
         if (yLoc > yMax - 2)
             yLoc = yMax - 2;
     }
-    else
+    else if (mvwinch(win, yLoc + 1, xLoc) == p->retChar())
     {
         p->decreaseLife(this->damage);
     }
@@ -54,7 +54,7 @@ void Goblin::mvleft()
         if (xLoc < 1)
             xLoc = 1;
     }
-    else
+    else if(mvwinch(win, yLoc, xLoc - 1) == p->retChar())
     {
         p->decreaseLife(this->damage);
     }
@@ -69,7 +69,7 @@ void Goblin::mvright()
         if (xLoc > xMax - 2)
             xLoc = xMax - 2;
     }
-    else
+    else if (mvwinch(win, yLoc, xLoc + 1) == p->retChar())
     {
         p->decreaseLife(this->damage);
     }
@@ -92,7 +92,10 @@ void Goblin::getmv()
 
 void Goblin::display()
 {
-    mvwaddch(win, yLoc, xLoc, simbol);
+    if(alive)
+    {
+        mvwaddch(win, yLoc, xLoc, simbol);
+    }
 }
 
 void Goblin::decreaseLife(int damage)
@@ -111,6 +114,7 @@ void Goblin::disappear()
     alive = false;
     this->simbol = ' ';
     Goblin::display();
+    p->increaseCurrency(this->value);
 }
 
 int Goblin::positionY()
@@ -123,6 +127,13 @@ int Goblin::positionX()
     return xLoc;
 }
 
+void Goblin::checkDamage()
+{
+    if (p->positionY() == yLoc && p->positionX() < xLoc && p->positionX() + p->retCurrentScope() >= xLoc)
+    {
+        decreaseLife(p->retCurrentDamage());
+    }
+}
 
 
 //-----------------------------------------

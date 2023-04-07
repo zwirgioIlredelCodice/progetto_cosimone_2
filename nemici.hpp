@@ -46,6 +46,11 @@ public:
 
     int positionY();
 
+    /*
+     * funzione per controllare se è stato hittato
+     */
+    void checkDamage();
+
 };
 
 class Arciere

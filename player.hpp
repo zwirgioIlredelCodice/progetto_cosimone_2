@@ -38,7 +38,7 @@ class Protagonista
         void newWeapon(weapon Weapon);
 
         // funzione per sparare
-        pair<int, int> shoot(); // 'c' to trigger
+        void shoot(); // 'c' to trigger
 
         // funzione per cambiare arma
         void changeWeapon();  // 's' to trigger
@@ -61,6 +61,16 @@ class Protagonista
          * funzione che ritorna la portata attuale dell'arma selezionata
          */
         int retCurrentScope();
+
+        /*
+         * funzione che ritorna la vita attuale
+         */
+        int getLife();
+
+        /*
+         * funzione che ritorna la valuta attuale
+         */
+        int getCurrency();
 
 
     protected:
