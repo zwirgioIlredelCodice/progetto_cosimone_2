@@ -56,23 +56,29 @@ public:
 class Arciere
 {
 protected:
+    Protagonista *p;
     int life;
     weapon bow;
     WINDOW * win;
     int yMax, xMax, yLoc, xLoc;
     char simbol;
     int value;  // valore guadagnato se si uccide questo nemico
+    bool alive;
 
 public:
-    Arciere(int life, weapon ar, WINDOW * win, int yLoc, int xLox, char simbol, int value);
+    Arciere(int life, weapon ar, WINDOW * win, int yLoc, int xLox, char simbol, int value, Protagonista *p);
 
     void decreaseLife(int damage);
 
-    //funzione per sparare
+    /*
+     * funzione che spara quando il nostro personaggio è nel tiro
+     */
+    void shoot();
 
     void display();
 
-    void disappear(); // qunado viene eliminato
+    void disappear(); // quando viene eliminato
 };
+
 
 #endif //PROGETTO_COSIMONE_2_NEMICI_HPP

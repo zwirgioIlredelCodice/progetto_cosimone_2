@@ -138,7 +138,7 @@ void Goblin::checkDamage()
 
 //-----------------------------------------
 
-Arciere::Arciere(int life, weapon ar, WINDOW *win, int yLoc, int xLox, char simbol, int value)
+Arciere::Arciere(int life, weapon ar, WINDOW *win, int yLoc, int xLox, char simbol, int value, Protagonista *p)
 {
     this->life = life;
     this->bow.scope = ar.scope;
@@ -150,6 +150,8 @@ Arciere::Arciere(int life, weapon ar, WINDOW *win, int yLoc, int xLox, char simb
     this->yLoc = yLoc;
     this->xLoc = xLox;
     getmaxyx(win, this->yMax, this->xMax);
+    this->p = p;
+    this->alive = true;
 }
 
 void Arciere::decreaseLife(int damage)
@@ -161,11 +163,42 @@ void Arciere::decreaseLife(int damage)
 
 void Arciere::display()
 {
-    mvwaddch(win, yLoc, xLoc, this->simbol);
+    if (alive)
+    {
+        if (yLoc == p->positionY()) {
+            shoot();
+        }
+        mvwaddch(win, yLoc, xLoc, this->simbol);
+    }
 }
 
 void Arciere::disappear()
 {
     this->simbol == ' ';
     Arciere::display();
+    alive = false;
+    p->increaseCurrency(value);
+}
+
+void Arciere::shoot()
+{
+
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    auto startTime = chrono::steady_clock::now();
+    while (i < bow.scope && locx - i > 2) // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'{
+    {
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 8000 == 0)
+        {
+            mvwaddch(win, locy, locx - i, ' ');
+            mvwaddch(win, locy, locx - i - 1, '-');
+            wrefresh(win);
+            i++;
+        }
+        p->getmv();
+        p->display();
+    }
+   // if (mvwinch(win, locy, locx - i) != p->retChar())
+        mvwaddch(win, locy, locx - i, ' ');
 }

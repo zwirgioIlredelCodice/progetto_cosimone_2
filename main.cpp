@@ -16,8 +16,8 @@ int main() {
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
     weapon A[2] = {
-            "bow", 100, 10,
-            "gun", 20, 20,
+            "bow", 20, 100,
+            "gun", 50, 20,
     };
 
     WINDOW * playwin = newwin(25, 50, 10, 10);
@@ -29,6 +29,7 @@ int main() {
 
     Protagonista *p = new Protagonista(playwin, 1, 1, '@', 1000, 10, A, 2);
     Goblin *g = new Goblin(30, 50, playwin, 'g', 10, 40, 10, p);
+    Arciere *a = new Arciere(20, A[0], playwin, 20, 40, 'a', 10, p);
     mvwprintw(stdscr, 10, 60, "Key arrows to move, S-shooting, C-change weapon");
     mvwprintw(stdscr, 11, 60, "Ctrl C to close");
     auto startTime = chrono::steady_clock::now();
@@ -37,6 +38,7 @@ int main() {
     {
         p->display();
         g->display();
+        a->display();
 
         int choice = p->getmv();
         if(choice == 's')
@@ -46,7 +48,7 @@ int main() {
 
         wrefresh(playwin);
         refresh();
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 40000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
             g->getmv();
             g->display();
