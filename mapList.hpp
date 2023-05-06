@@ -27,34 +27,16 @@ protected:
     map maps[10];
     int index;
 
-    void resize(map *A, int l)
-    {
-        map arr[l];
-        for (int i = 0; i < l; ++i)
-        {
-            arr[i] = A[i];
-        }
-        A = arr;
-    }
+    void resize(map *A, int l);
 
 public:
-    void add(map M)
-    {
-        if (n >= size(maps))
-        {
-            resize(maps, size(maps) * 2);
-        }
+    void add(map M);
 
-        map[n] = M;
-        n++;
-        if (n == size(maps))
-        {
-            resize(maps, size(maps) * 2);
-        }
+    void remove(map M);
+
+    void next
 
 
-
-    }
 
 
 };
