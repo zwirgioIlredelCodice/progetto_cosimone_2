@@ -8,36 +8,43 @@
 #define PROGETTO_COSIMONE_2_MAPLIST_HPP
 
 #include "nemici.hpp"
+#include "strutture.h"
 
 #define N_ENEM 10
 
 using namespace std;
 
-struct map
-{
+struct map{
     WINDOW *win;
-    Arciere arch[N_ENEM];
+    Arciere arc[N_ENEM];
+    int arcIndex;
     Goblin gob[N_ENEM];
+    int gobIndex;
 };
 
-class mapList
-{
+class mapList{
 protected:
-    int n;
+    int n;  //capienza attuale array
     map maps[10];
-    int index;
-
-    void resize(map *A, int l);
+    int index; //mappa attualmente selezionata
 
 public:
-    void add(map M);
 
-    void remove(map M);
+    /*
+     * funzioni di base oer il movimento all'interno dell'array
+     */
+    void add(map m); //aggiunge in coda
 
-    void next
+    void remove(int mapIndex);
 
+    void next();
 
+    void prev();
 
+    /*
+     * funzione che "gioca" la mappa
+     */
+    void play();
 
 };
 
