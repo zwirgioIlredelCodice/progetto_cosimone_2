@@ -174,7 +174,7 @@ void Arciere::display()
 
 void Arciere::disappear()
 {
-    this->simbol == ' ';
+    this->simbol = ' ';
     Arciere::display();
     alive = false;
     p->increaseCurrency(value);
