@@ -126,14 +126,6 @@ int Goblin::positionX()
     return xLoc;
 }
 
-void Goblin::checkDamage()
-{
-    if (p->positionY() == yLoc && p->positionX() < xLoc && p->positionX() + p->retCurrentScope() >= xLoc)
-    {
-        decreaseLife(p->retCurrentDamage());
-    }
-}
-
 int Goblin::retLife()
 {
     return this->life;

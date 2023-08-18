@@ -22,6 +22,7 @@ struct map{
     int gobIndex;
 };
 
+
 class mapList {
 protected:
     int n;  //capienza attuale array
@@ -34,6 +35,8 @@ public:
     /*
      * funzioni di base oer il movimento all'interno dell'array
      */
+    mapList();
+
     void add(map m); //aggiunge in coda
 
     void remove(int mapIndex);
@@ -56,4 +59,22 @@ public:
 
 
 };
+
+/*
+WINDOW * win = newwin(10,5,10,5);
+
+mvwprintw(win, 10, 10, '|');
+
+map one = {
+        win
+};
+
+mapList* listaMappe = new mapList();
+
+listaMappe->add(one);
+ */
+
+
+
+
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP

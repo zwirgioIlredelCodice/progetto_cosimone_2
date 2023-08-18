@@ -47,11 +47,6 @@ public:
     int positionY();
 
     /*
-     * funzione per controllare se è stato hittato
-     */
-    void checkDamage();
-
-    /*
      * ritorna la vita attuale del goblin
      */
     int retLife();

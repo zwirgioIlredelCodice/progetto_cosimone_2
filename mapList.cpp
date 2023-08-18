@@ -5,6 +5,10 @@
 #include "mapList.hpp"
 
 
+mapList::mapList() {
+
+}
+
 void mapList::add(map m) {
         if (n < 10){
             maps[n] = m;
