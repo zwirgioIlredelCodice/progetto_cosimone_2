@@ -51,6 +51,16 @@ public:
      */
     void checkDamage();
 
+    /*
+     * ritorna la vita attuale del goblin
+     */
+    int retLife();
+
+    /*
+     * ritorna il valore che si ottiene uccidendo il goblin
+     */
+    int retValue();
+
 };
 
 class Arciere
@@ -78,6 +88,20 @@ public:
     void display();
 
     void disappear(); // quando viene eliminato
+
+    /*
+     * ritorna la vita attuale dell' arciere
+     */
+    int retLife();
+
+    /*
+     * ritorna il valore che si ottiene uccidendo l'arciere
+     */
+    int retValue();
+
+    int positionX();
+
+    int positionY();
 };
 
 

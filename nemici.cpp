@@ -114,7 +114,6 @@ void Goblin::disappear()
     alive = false;
     this->simbol = ' ';
     Goblin::display();
-    p->increaseCurrency(this->value);
 }
 
 int Goblin::positionY()
@@ -133,6 +132,16 @@ void Goblin::checkDamage()
     {
         decreaseLife(p->retCurrentDamage());
     }
+}
+
+int Goblin::retLife()
+{
+    return this->life;
+}
+
+int Goblin::retValue()
+{
+    return this->value;
 }
 
 
@@ -201,4 +210,24 @@ void Arciere::shot()
     }
    // if (mvwinch(win, locy, locx - i) != p->retChar())
         mvwaddch(win, locy, locx - i, ' ');
+}
+
+int Arciere::retLife()
+{
+    return this->life;
+}
+
+int Arciere::retValue()
+{
+    return this->value;
+}
+
+int Arciere::positionX()
+{
+    return this->xLoc;
+}
+
+int Arciere::positionY()
+{
+    return this->yLoc;
 }

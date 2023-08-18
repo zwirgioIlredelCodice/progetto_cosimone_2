@@ -22,11 +22,12 @@ struct map{
     int gobIndex;
 };
 
-class mapList{
+class mapList {
 protected:
     int n;  //capienza attuale array
     map maps[10];
     int index; //mappa attualmente selezionata
+    Protagonista *mainCh;
 
 public:
 
@@ -46,7 +47,13 @@ public:
      */
     void play();
 
+    /*
+    * effettuano il danno ai nemici nella posizione data
+    */
+    void checkGoblin(int x, int y, int damage);
+
+    void checkArciere(int x, int y, int damage);
+
 
 };
-
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
