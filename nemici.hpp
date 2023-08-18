@@ -73,7 +73,7 @@ public:
     /*
      * funzione che spara quando il nostro personaggio è nel tiro
      */
-    void shoot();
+    void shot();
 
     void display();
 

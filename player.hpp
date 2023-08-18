@@ -7,13 +7,14 @@
 
 
 #include "strutture.h"
+#include "mapList.hpp"
 
 //  using namespace std;
 
 class Protagonista
 {
     public:
-        Protagonista(WINDOW * win, int y, int x, char c, int life, int currency, weapon A[], int n);
+        Protagonista(map curMap, int y, int x, char c, int life, int currency, weapon A[], int n);
 
         void mvup();
         void mvdown();
@@ -38,7 +39,7 @@ class Protagonista
         void newWeapon(weapon Weapon);
 
         // funzione per sparare
-        void shoot(); // 'c' to trigger
+        void shot(); // 'c' to trigger
 
         // funzione per cambiare arma
         void changeWeapon();  // 's' to trigger
@@ -75,8 +76,7 @@ class Protagonista
         /*
          * funzione che cambia la finestra in cui si trova il protagonista
          */
-
-        void changeWin(WINDOW* nwin);
+        void changeMap(map nMap);
 
 
     protected:
@@ -84,7 +84,7 @@ class Protagonista
         int currency;
         int xLoc, yLoc, xMax, yMax;
         char character;
-        WINDOW* curwin;
+        map curMap;
         weapon weapons[N_ARMI];
         int n_weap;
         int weap_index;

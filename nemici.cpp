@@ -166,7 +166,7 @@ void Arciere::display()
     if (alive)
     {
         if (yLoc == p->positionY()) {
-            shoot();
+            shot();
         }
         mvwaddch(win, yLoc, xLoc, this->simbol);
     }
@@ -180,7 +180,7 @@ void Arciere::disappear()
     p->increaseCurrency(value);
 }
 
-void Arciere::shoot()
+void Arciere::shot()
 {
 
     int i = 1;

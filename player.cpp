@@ -5,7 +5,7 @@
 
 #include "player.hpp"
 
-Protagonista::Protagonista(WINDOW *win, int y, int x, char c, int life, int currency, weapon A[], int n)
+Protagonista::Protagonista(map curMap, int y, int x, char c, int life, int currency, weapon A[], int n)
 {
     if (n > N_ARMI)
         this->n_weap = N_ARMI;
@@ -20,18 +20,18 @@ Protagonista::Protagonista(WINDOW *win, int y, int x, char c, int life, int curr
     this->weap_index = 0;
     this->life = life;
     this->currency = currency;
-    curwin = win;
+    this->curMap = curMap;
     xLoc = x;
     yLoc = y;
-    getmaxyx(curwin, yMax, xMax);
-    keypad(curwin, 1);
+    getmaxyx(curMap.win, yMax, xMax);
+    keypad(curMap.win, 1);
     character = c;
 }
 
 void Protagonista::mvup() {
-    if (mvwinch(curwin, yLoc - 1, xLoc) != 'g')
+    if (mvwinch(curMap.win, yLoc - 1, xLoc) != 'g')
     {
-        mvwaddch(curwin, yLoc, xLoc, ' ');
+        mvwaddch(curMap.win, yLoc, xLoc, ' ');
         yLoc--;
         if (yLoc < 1)
             yLoc = 1;
@@ -39,9 +39,9 @@ void Protagonista::mvup() {
 }
 
 void Protagonista::mvdown() {
-    if (mvwinch(curwin, yLoc + 1, xLoc) != 'g')
+    if (mvwinch(curMap.win, yLoc + 1, xLoc) != 'g')
     {
-        mvwaddch(curwin, yLoc, xLoc, ' ');
+        mvwaddch(curMap.win, yLoc, xLoc, ' ');
         yLoc++;
         if (yLoc > yMax - 2)
             yLoc = yMax - 2;
@@ -49,9 +49,9 @@ void Protagonista::mvdown() {
 }
 
 void Protagonista::mvleft() {
-    if (mvwinch(curwin, yLoc, xLoc - 1) != 'g')
+    if (mvwinch(curMap.win, yLoc, xLoc - 1) != 'g')
     {
-        mvwaddch(curwin, yLoc, xLoc, ' ');
+        mvwaddch(curMap.win, yLoc, xLoc, ' ');
         xLoc--;
         if (xLoc < 1)
             xLoc = 1;
@@ -59,9 +59,9 @@ void Protagonista::mvleft() {
 }
 
 void Protagonista::mvright() {
-    if (mvwinch(curwin, yLoc, xLoc + 1) != 'g')
+    if (mvwinch(curMap.win, yLoc, xLoc + 1) != 'g')
     {
-        mvwaddch(curwin, yLoc, xLoc, ' ');
+        mvwaddch(curMap.win, yLoc, xLoc, ' ');
         xLoc++;
         if (xLoc > xMax - 2)
             xLoc = xMax - 2;
@@ -69,7 +69,7 @@ void Protagonista::mvright() {
 }
 
 int Protagonista::getmv(){
-    int choice = wgetch(curwin);
+    int choice = wgetch(curMap.win);
     switch (choice) {
         case KEY_UP:
             mvup();
@@ -84,7 +84,7 @@ int Protagonista::getmv(){
             mvright();
             break;
         case 's':
-            shoot();
+            shot();
             break;
         case 'c':
             changeWeapon();
@@ -102,7 +102,7 @@ void Protagonista::display()
 {
     mvwprintw(stdscr, 30, 60, "                 ");
     mvwprintw(stdscr, 32, 60, "                             ");
-    mvwaddch(curwin, yLoc, xLoc, character);
+    mvwaddch(curMap.win, yLoc, xLoc, character);
     mvwprintw(stdscr, 30, 60, "Life : %d", getLife());
     mvwprintw(stdscr, 32, 60, "Currency : %d", getCurrency());
 }
@@ -138,22 +138,22 @@ void Protagonista::newWeapon(weapon Weapon)
     this->n_weap++;
 }
 
-void Protagonista::shoot()
+void Protagonista::shot()
 {
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i + locx < xMax - 2) // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'
+    while( i < weapons[weap_index].scope && i + locx < xMax - 2) // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-        mvwaddch(curwin, yLoc, xLoc + i, ' ');
-        mvwaddch(curwin, yLoc, xLoc + i + 1, '-');
+        mvwaddch(curMap.win, yLoc, xLoc + i, ' ');
+        mvwaddch(curMap.win, yLoc, xLoc + i + 1, '-');
         usleep(20000);
-        wrefresh(curwin);
+        wrefresh(curMap.win);
         i++;
     }
     usleep(20000);
-//    if (mvwinch(curwin, locy, locx + i) != 'g')
-    mvwaddch(curwin, locy, locx + i, ' ');
+//    if (mvwinch(curMap.win, locy, locx + i) != 'g')
+    mvwaddch(curMap.win, locy, locx + i, ' ');
 //    else
 //        return make_pair(locy, locx + i);
     // altrimenti ho hittato un nemico
@@ -206,7 +206,7 @@ int Protagonista::getCurrency()
     return currency;
 }
 
-void Protagonista::changeWin(WINDOW* nwin)
+void Protagonista::changeMap(map nMap)
 {
-    curwin = nwin;
+    curMap = nMap;
 }
