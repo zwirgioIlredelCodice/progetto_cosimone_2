@@ -205,3 +205,8 @@ int Protagonista::getCurrency()
 {
     return currency;
 }
+
+void Protagonista::changeWin(WINDOW* nwin)
+{
+    curwin = nwin;
+}

@@ -72,13 +72,19 @@ class Protagonista
          */
         int getCurrency();
 
+        /*
+         * funzione che cambia la finestra in cui si trova il protagonista
+         */
+
+        void changeWin(WINDOW* nwin);
+
 
     protected:
         int life;
         int currency;
         int xLoc, yLoc, xMax, yMax;
         char character;
-        WINDOW * curwin;
+        WINDOW* curwin;
         weapon weapons[N_ARMI];
         int n_weap;
         int weap_index;
