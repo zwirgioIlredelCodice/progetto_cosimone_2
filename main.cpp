@@ -26,8 +26,9 @@ int main() {
     refresh();
     wrefresh(playwin);
 
+    map* MM;
 
-    Protagonista *p = new Protagonista(playwin, 1, 1, '@', 1000, 10, A, 2);
+    Protagonista *p = new Protagonista(MM, 1, 1, '@', 1000, 10, A, 2);
     Goblin *g = new Goblin(30, 50, playwin, 'g', 10, 40, 10, p);
     Arciere *a = new Arciere(20, A[0], playwin, 20, 40, 'a', 10, p);
     mvwprintw(stdscr, 10, 60, "Key arrows to move, S-shooting, C-change weapon");
@@ -43,7 +44,7 @@ int main() {
         int choice = p->getmv();
         if(choice == 's')
         {
-            g->checkDamage();
+           // g->checkDamage();
         }
 
         wrefresh(playwin);

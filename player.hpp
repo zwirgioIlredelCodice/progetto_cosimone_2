@@ -11,10 +11,12 @@
 
 //  using namespace std;
 
+struct map;
+
 class Protagonista
 {
     public:
-        Protagonista(map curMap, int y, int x, char c, int life, int currency, weapon A[], int n);
+        Protagonista(map* curMap, int y, int x, char c, int life, int currency, weapon A[], int n);
 
         void mvup();
         void mvdown();
@@ -76,7 +78,7 @@ class Protagonista
         /*
          * funzione che cambia la finestra in cui si trova il protagonista
          */
-        void changeMap(map nMap);
+        void changeMap(map* nMap);
 
 
     protected:
@@ -84,7 +86,7 @@ class Protagonista
         int currency;
         int xLoc, yLoc, xMax, yMax;
         char character;
-        map curMap;
+        map *curMap;
         weapon weapons[N_ARMI];
         int n_weap;
         int weap_index;

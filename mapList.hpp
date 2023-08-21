@@ -14,14 +14,21 @@
 
 using namespace std;
 
+class Arciere;
+
+class Goblin;
+
+class Protagonista;
+
 struct map{
+    map();
+
     WINDOW *win;
-    Arciere arc[N_ENEM];
+    Arciere *arc[N_ENEM];
     int arcIndex;
-    Goblin gob[N_ENEM];
+    Goblin *gob[N_ENEM];
     int gobIndex;
 };
-
 
 class mapList {
 protected:
@@ -35,7 +42,6 @@ public:
     /*
      * funzioni di base oer il movimento all'interno dell'array
      */
-    mapList();
 
     void add(map m); //aggiunge in coda
 

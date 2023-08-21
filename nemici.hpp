@@ -7,6 +7,7 @@
 
 using namespace std;
 
+class Protagonista;
 
 class Goblin  // nemico che corre e fa danno se addosso al protagonista
 {
