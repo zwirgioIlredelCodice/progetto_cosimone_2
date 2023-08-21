@@ -26,11 +26,11 @@ int main() {
     refresh();
     wrefresh(playwin);
 
-    map* MM;
+    mapList* MM;
 
     Protagonista *p = new Protagonista(MM, 1, 1, '@', 1000, 10, A, 2);
-    Goblin *g = new Goblin(30, 50, playwin, 'g', 10, 40, 10, p);
-    Arciere *a = new Arciere(20, A[0], playwin, 20, 40, 'a', 10, p);
+    Goblin *g = new Goblin(30, 50, MM->getMap().win, 'g', 10, 40, 10, p);
+    Arciere *a = new Arciere(20, A[0], MM->getMap().win, 20, 40, 'a', 10, p);
     mvwprintw(stdscr, 10, 60, "Key arrows to move, S-shooting, C-change weapon");
     mvwprintw(stdscr, 11, 60, "Ctrl C to close");
     auto startTime = chrono::steady_clock::now();

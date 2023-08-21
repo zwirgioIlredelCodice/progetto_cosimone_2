@@ -63,6 +63,8 @@ public:
 
     void checkArciere(int x, int y, int damage);
 
+    map getMap();
+
 
 };
 

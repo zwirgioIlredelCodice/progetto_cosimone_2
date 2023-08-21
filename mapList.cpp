@@ -23,18 +23,15 @@ void mapList::remove(int mapIndex){
 }
 void mapList :: next(){
     if (index < n-1) index++;
-    mainCh->changeMap(&maps[index]);
 
 };
 
 void mapList::prev() {
     if (index > 0) index--;
-    mainCh->changeMap(&maps[index]);
 
 }
 
 void mapList::play() {
-    mainCh->changeMap(&maps[index]);
 }
 
 void mapList::checkGoblin(int x, int y, int damage){
@@ -67,4 +64,9 @@ void mapList::checkArciere(int x, int y, int damage) {
         }
         i++;
     }
+}
+
+map mapList::getMap()
+{
+    return maps[index];
 }
