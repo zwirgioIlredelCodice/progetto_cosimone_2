@@ -18,6 +18,7 @@ class itemPotenziamenti {
 public:
     potenziamenti potenziamento = potenziamenti(nullptr, nothing);
     int cost;
+    bool can_buy;
 
     itemPotenziamenti(potenziamenti potenziamento, int cost);
     itemPotenziamenti();
@@ -27,6 +28,7 @@ class itemWeapon {
 public:
     weapon wp;
     int cost;
+    bool can_buy;
 
     itemWeapon(weapon wp, int cost);
     itemWeapon();

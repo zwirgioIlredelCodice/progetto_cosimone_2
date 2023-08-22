@@ -8,16 +8,18 @@
 itemPotenziamenti::itemPotenziamenti(potenziamenti potenziamento, int cost) {
     this->potenziamento = potenziamento;
     this->cost = cost;
+    this->can_buy = true;
 }
 
-itemPotenziamenti::itemPotenziamenti() {}
+itemPotenziamenti::itemPotenziamenti(){};
 
 itemWeapon::itemWeapon(weapon wp, int cost) {
     this->wp = wp;
     this->cost = cost;
+    this->can_buy = true;
 }
 
-itemWeapon::itemWeapon() {}
+itemWeapon::itemWeapon(){};
 
 negozio::negozio(Protagonista *protagonista) {
     this->protagonista = protagonista;
@@ -45,8 +47,9 @@ void negozio::populate_negozio() {
 
 bool negozio::buy_potenziamento(int index) {
     itemPotenziamenti p = pot_arr[index];
-    if (protagonista->getCurrency() >= p.cost) {
+    if (protagonista->getCurrency() >= p.cost && p.can_buy) {
         protagonista->decreaseCurrency(p.cost);
+        p.can_buy = false;
         p.potenziamento.apply();
         return true;
     } else return false;
@@ -54,8 +57,9 @@ bool negozio::buy_potenziamento(int index) {
 
 bool negozio::buy_weapon(int index) {
     itemWeapon w = weapon_arr[index];
-    if (protagonista->getCurrency() >= w.cost) {
+    if (protagonista->getCurrency() >= w.cost && w.can_buy) {
         protagonista->decreaseCurrency(w.cost);
+        w.can_buy = false;
         protagonista->newWeapon(w.wp);
         return true;
     } else return false;
