@@ -25,7 +25,7 @@ public:
     void resume();
 
     void next_room();
-    void prev_room()
+    void prev_room();
 };
 
 #endif //PROGETTO_COSIMONE_2_MANAGER_HPP

@@ -36,7 +36,7 @@ void manager::menu() {
         for (int i = 0; i < MENU_ENTRY; i++) {
             if (i == highlight) wattron(menuwin, A_REVERSE);
 
-            mvwprintw(menuwin, i+1, 1, choices[i].c_str());
+            mvwprintw(menuwin, i+1, 1, "%s", choices[i].c_str());
             wattroff(menuwin, A_REVERSE);
         }
         choice = wgetch(menuwin);
