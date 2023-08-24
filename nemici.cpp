@@ -1,12 +1,12 @@
 #include "nemici.hpp"
 
-Goblin::Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value, Protagonista *p)
+Goblin::Goblin(int life, int damage, WINDOW * win, int yLoc, int xLoc, int value, Protagonista *p)
 {
     this->p = p;
     this->life = life;
     this->damage = damage;
     this->win = win;
-    this->simbol = simbol;
+    this->simbol = 'g';
     this->yLoc = yLoc;
     this->xLoc = xLoc;
     this->value = value;
@@ -139,14 +139,14 @@ int Goblin::retValue()
 
 //-----------------------------------------
 
-Arciere::Arciere(int life, weapon ar, WINDOW *win, int yLoc, int xLox, char simbol, int value, Protagonista *p)
+Arciere::Arciere(int life, int damage, WINDOW *win, int yLoc, int xLox, int value, Protagonista *p)
 {
     this->life = life;
-    this->bow.scope = ar.scope;
+    this->bow.scope = 10;
     this->bow.name = "Bow";
-    this->bow.damage = ar.damage;
+    this->bow.damage = damage;
     this->win = win;
-    this->simbol = simbol;
+    this->simbol = 'a';
     this->value = value;
     this->yLoc = yLoc;
     this->xLoc = xLox;

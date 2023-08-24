@@ -21,7 +21,6 @@ class Goblin;
 class Protagonista;
 
 struct map{
-    map();
 
     WINDOW *win;
     Arciere *arc[N_ENEM];
@@ -38,6 +37,7 @@ protected:
     Protagonista *mainCh;
 
 public:
+
 
     /*
      * funzioni di base oer il movimento all'interno dell'array
@@ -65,6 +65,10 @@ public:
 
     map getMap();
 
+    void addArch(map M, int life, int damage, int x, int y, int value);
+
+    void addGob(map M, int life, int damage, int x, int y, int value);
+
 
 };
 
@@ -81,6 +85,10 @@ mapList* listaMappe = new mapList();
 
 listaMappe->add(one);
  */
+
+
+map createMap(WINDOW* win);
+
 
 
 

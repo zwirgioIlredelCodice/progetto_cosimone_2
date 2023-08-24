@@ -22,7 +22,7 @@ protected:
     bool alive;
 
 public:
-    Goblin(int life, int damage, WINDOW * win, char simbol, int yLoc, int xLoc, int value, Protagonista *p);
+    Goblin(int life, int damage, WINDOW * win, int yLoc, int xLoc, int value, Protagonista *p);
 
     void mvup();
 
@@ -72,7 +72,7 @@ protected:
     bool alive;
 
 public:
-    Arciere(int life, weapon ar, WINDOW * win, int yLoc, int xLox, char simbol, int value, Protagonista *p);
+    Arciere(int life, int damage, WINDOW * win, int yLoc, int xLox, int value, Protagonista *p);
 
     void decreaseLife(int damage);
 

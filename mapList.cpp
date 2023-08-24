@@ -70,3 +70,34 @@ map mapList::getMap()
 {
     return maps[index];
 }
+
+void mapList::addArch(map M, int life, int damage, int x, int y, int value)
+{
+    if (M.arcIndex < 10)
+    {
+        M.arc[M.arcIndex] = new Arciere(life, damage, M.win, y, x, value, this->mainCh);
+        M.arcIndex++;
+    }
+}
+
+
+
+void mapList::addGob(map M, int life, int damage, int x, int y, int value)
+{
+    if (M.gobIndex < 10)
+    {
+        M.gob[M.gobIndex] = new Goblin(life, damage, M.win, y, x, value, this->mainCh);
+        M.gobIndex++;
+    }
+}
+
+
+map createMap(WINDOW* win)
+{
+    map M;
+    M.win = win;
+    // metto a 0 gli indici per dire che è vuoto
+    M.arcIndex = 0;
+    M.gobIndex = 0;
+    return M;
+}
