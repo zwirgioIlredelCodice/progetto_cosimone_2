@@ -71,23 +71,23 @@ map mapList::getMap()
     return maps[index];
 }
 
-void mapList::addArch(map M, int life, int damage, int x, int y, int value)
+void mapList::addArch( int life, int damage, int x, int y, int value)
 {
-    if (M.arcIndex < 10)
+    if (maps[index].arcIndex < 10)
     {
-        M.arc[M.arcIndex] = new Arciere(life, damage, M.win, y, x, value, this->mainCh);
-        M.arcIndex++;
+        maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
+        maps[index].arcIndex++;
     }
 }
 
 
 
-void mapList::addGob(map M, int life, int damage, int x, int y, int value)
+void mapList::addGob(int life, int damage, int x, int y, int value)
 {
-    if (M.gobIndex < 10)
+    if (maps[index].gobIndex < 10)
     {
-        M.gob[M.gobIndex] = new Goblin(life, damage, M.win, y, x, value, this->mainCh);
-        M.gobIndex++;
+        maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
+        maps[index].gobIndex++;
     }
 }
 

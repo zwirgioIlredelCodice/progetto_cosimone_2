@@ -65,9 +65,9 @@ public:
 
     map getMap();
 
-    void addArch(map M, int life, int damage, int x, int y, int value);
+    void addArch( int life, int damage, int x, int y, int value);
 
-    void addGob(map M, int life, int damage, int x, int y, int value);
+    void addGob( int life, int damage, int x, int y, int value);
 
 
 };
