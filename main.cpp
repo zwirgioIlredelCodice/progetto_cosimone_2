@@ -1,12 +1,14 @@
 
-#include "player.hpp"
-#include "nemici.hpp"
 
+#include "manager.hpp"
 
 using namespace std;
 
 int main() {
+    manager gamenmanager;
+    gamenmanager.menu();
 
+    /*
     initscr();
     noecho();
     cbreak();
@@ -55,5 +57,5 @@ int main() {
 
     endwin();
 
-    return 0;
+    return 0;*/
 }
