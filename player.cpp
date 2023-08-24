@@ -216,3 +216,5 @@ int Protagonista::getCurrency()
 {
     return currency;
 }
+
+Protagonista::Protagonista() {}
