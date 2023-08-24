@@ -101,3 +101,10 @@ map createMap(WINDOW* win)
     M.gobIndex = 0;
     return M;
 }
+
+mapList::mapList(int n, int index, Protagonista *p)
+{
+    this->n = n;
+    this->index = index;
+    this->mainCh = p;
+}

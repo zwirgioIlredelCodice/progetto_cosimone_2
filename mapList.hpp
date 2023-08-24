@@ -37,6 +37,7 @@ protected:
     Protagonista *mainCh;
 
 public:
+    mapList(int n, int index, Protagonista *p);
 
 
     /*
