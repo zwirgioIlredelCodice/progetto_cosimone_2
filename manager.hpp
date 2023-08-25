@@ -19,11 +19,11 @@ protected:
 public:
     manager();
 
-
     void menu();
     void new_game();
     void resume();
 
+    void new_room();
     void next_room();
     void prev_room();
 };

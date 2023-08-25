@@ -31,7 +31,7 @@ void mapList::prev() {
 
 }
 
-void mapList::play() {
+void mapList::play() { // da implementare
     clear();
     initscr();
     noecho();
@@ -44,9 +44,11 @@ void mapList::play() {
     refresh();
     wrefresh(playwin);
 
-    while(true) {
+    //
+    while(wgetch(playwin) != ' ') {
         sleep(1);
     }
+    endwin();
 }
 
 void mapList::checkGoblin(int x, int y, int damage){
@@ -126,6 +128,10 @@ mapList::mapList(int n, int index, Protagonista *p)
 
 WINDOW *mapList::getWin() {
     return maps[index].win;
+}
+
+mapList::mapList() {
+
 }
 
 map::map(int maptype) {

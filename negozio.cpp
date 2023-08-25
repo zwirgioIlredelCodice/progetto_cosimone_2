@@ -76,6 +76,8 @@ void negozio::room_enter() {
     noecho();
     cbreak();
 
+    clear();
+
     int x_max, y_max;
     getmaxyx(stdscr, x_max, y_max);
 

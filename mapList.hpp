@@ -60,7 +60,7 @@ public:
 
     static WINDOW* init_win(int maptype);
     map();
-    map(int maptype);
+    explicit map(int maptype);
 };
 
 class mapList {
@@ -71,6 +71,7 @@ protected:
     Protagonista *mainCh;
 
 public:
+    mapList();
     mapList(int n, int index, Protagonista *p);
 
 
@@ -107,26 +108,5 @@ public:
 
 
 };
-
-/*
-WINDOW * win = newwin(10,5,10,5);
-
-mvwprintw(win, 10, 10, '|');
-
-map one = {
-        win
-};
-
-mapList* listaMappe = new mapList();
-
-listaMappe->add(one);
- */
-
-
-map createMap(WINDOW* win);
-
-
-
-
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
