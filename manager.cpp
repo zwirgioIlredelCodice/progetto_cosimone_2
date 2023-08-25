@@ -10,9 +10,10 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
 manager::manager()
-    : protagonista()
+    : protagonista(&maps, 1, 1, '@', 1000, 10, this->weapon_array, 1), maps(0, 0, &protagonista)
     /*: protagonista(this->curMap, 1, 1, '@', 1000, 10, this->weapon_array, 2)*/ {
     srand(666123); // da cambiare
+    weapon_array[0] = {"bow", 20, 100};
 }
 
 void manager::menu() {
@@ -64,9 +65,10 @@ void manager::menu() {
                 else if (choices[highlight] == "Quit") {
                     quit = true;
                 }
-            case KEY_F(1):
+            /*case KEY_F(1):
                 quit = true;
                 break;
+            */
             default:
                 break;
         }
@@ -76,8 +78,8 @@ void manager::menu() {
 
 void manager::new_game() {
     // da cambiare
-    negozio nego(&protagonista);
-    nego.room_enter();
+    maps.add(map(0));
+    maps.play();
 }
 
 void manager::resume() {

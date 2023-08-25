@@ -20,13 +20,47 @@ class Goblin;
 
 class Protagonista;
 
-struct map{
+#define MAP_XMAX 20
+#define MAP_YMAX 100
 
+#define MAP_NUMBER 1
+
+const char maps[MAP_NUMBER][MAP_XMAX][MAP_YMAX+1] = {
+{
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                #######                                                             ",
+    "                                #######                                                             ",
+    "                                #######                                                             ",
+    "                                #######                                                             ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+    "                                                                                                    ",
+},
+};
+
+class map{
+public:
     WINDOW *win;
     Arciere *arc[N_ENEM];
     int arcIndex;
     Goblin *gob[N_ENEM];
     int gobIndex;
+
+    static WINDOW* init_win(int maptype);
+    map();
+    map(int maptype);
 };
 
 class mapList {
@@ -65,6 +99,7 @@ public:
     void checkArciere(int x, int y, int damage);
 
     map getMap();
+    WINDOW* getWin();
 
     void addArch( int life, int damage, int x, int y, int value);
 

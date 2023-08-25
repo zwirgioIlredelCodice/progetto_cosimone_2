@@ -21,7 +21,7 @@ void mapList::remove(int mapIndex){
         index --;
 
 }
-void mapList :: next(){
+void mapList::next(){
     if (index < n-1) index++;
 
 };
@@ -32,6 +32,21 @@ void mapList::prev() {
 }
 
 void mapList::play() {
+    clear();
+    initscr();
+    noecho();
+    cbreak();
+    curs_set(0);
+
+    WINDOW* playwin = getWin();
+
+    nodelay(playwin, 1);
+    refresh();
+    wrefresh(playwin);
+
+    while(true) {
+        sleep(1);
+    }
 }
 
 void mapList::checkGoblin(int x, int y, int damage){
@@ -107,4 +122,29 @@ mapList::mapList(int n, int index, Protagonista *p)
     this->n = n;
     this->index = index;
     this->mainCh = p;
+}
+
+WINDOW *mapList::getWin() {
+    return maps[index].win;
+}
+
+map::map(int maptype) {
+    this->win = init_win(maptype);
+    this->arcIndex = 0;
+    this->gobIndex = 0;
+}
+
+WINDOW* map::init_win(int maptype) {
+    WINDOW* win = newwin(MAP_XMAX, MAP_YMAX, 0, 0);
+    for (int i = 0; i < MAP_XMAX; i++) {
+        mvwprintw(win, i, 0, "%s", maps[maptype][i]);
+    }
+    box(win, 0, 0);
+    return win;
+}
+
+map::map() {
+    this->win = nullptr;
+    this->arcIndex = 0;
+    this->gobIndex = 0;
 }

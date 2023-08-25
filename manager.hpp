@@ -15,7 +15,7 @@ protected:
     Protagonista protagonista;
     // cose che servono al protagonista
     weapon weapon_array[10];
-    mapList* curMap;
+    mapList maps;
 public:
     manager();
 
