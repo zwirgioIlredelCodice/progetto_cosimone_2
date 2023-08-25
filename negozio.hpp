@@ -39,6 +39,8 @@ protected:
     Protagonista* protagonista;
     itemPotenziamenti pot_arr[NEGOZIO_POTENZIAMENTI];
     itemWeapon weapon_arr[NEGOZIO_WEAPON];
+    string pot_arr_s[NEGOZIO_POTENZIAMENTI];
+    string weapon_arr_s[NEGOZIO_WEAPON];
 
     itemPotenziamenti pot_choices[NEGOZIO_POT_CHOICE];
     itemWeapon weapon_choices[NEGOZIO_WEAPON_CHOICE];
@@ -48,6 +50,8 @@ public:
     void populate_negozio();
     bool buy_potenziamento(int index);
     bool buy_weapon(int index);
+
+    void room_enter();
 };
 
 #endif //PROGETTO_COSIMONE_2_NEGOZIO_HPP

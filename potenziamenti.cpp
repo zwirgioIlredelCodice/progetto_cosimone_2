@@ -45,3 +45,27 @@ void potenziamenti::remove() {
             break;
     }
 }
+
+string potenziamenti::to_string() {
+    string s = "";
+    switch (effect) {
+        case nothing:
+            break;
+        case life:
+            s.append("vita");
+            break;
+        case damage:
+            s.append("danno");
+            break;
+        case range:
+            s.append("portata");
+            break;
+        case speed:
+            s.append("velocità");
+            break;
+        default:
+            break;
+    }
+    s.append(", incremento: " + std::to_string(val));
+    return s;
+}

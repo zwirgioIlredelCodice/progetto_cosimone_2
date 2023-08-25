@@ -24,6 +24,8 @@ public:
 
     void apply();
     void remove();
+
+    string to_string();
 };
 
 
