@@ -9,6 +9,7 @@
 void mapList::add(map m) {
         if (n < 10){
             maps[n] = m;
+            addEnemys();
             n++;
         }
 }
@@ -32,22 +33,25 @@ void mapList::prev() {
 }
 
 void mapList::play() { // da implementare
+    WINDOW* playwin = getWin();
+
     clear();
     initscr();
     noecho();
     cbreak();
+    keypad(playwin, true);
     curs_set(0);
-
-    WINDOW* playwin = getWin();
 
     nodelay(playwin, 1);
     refresh();
     wrefresh(playwin);
 
     auto startTime = chrono::steady_clock::now();
-    usleep(1000000);
+
     do
     {
+        usleep(100000);
+        mainCh->getmv();
         mainCh->display();
         for(int i = 0; i < maps[index].gobIndex; i++)
         {
@@ -59,21 +63,17 @@ void mapList::play() { // da implementare
             maps[index].arc[i]->display();
         }
 
-        wrefresh(playwin);
-        refresh();
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
             for(int i = 0; i < maps[index].gobIndex; i++)
             {
                 maps[index].gob[i]->getmv();
                 maps[index].gob[i]->display();
-                wrefresh(maps[index].win);
             }
         }
 
-        wrefresh(maps[index].win);
+        wrefresh(playwin);
         refresh();
-
     }
     while (true);  // termina con ctrl C
 
@@ -141,17 +141,6 @@ void mapList::addGob(int life, int damage, int x, int y, int value)
     }
 }
 
-
-map createMap(WINDOW* win)
-{
-    map M;
-    M.win = win;
-    // metto a 0 gli indici per dire che è vuoto
-    M.arcIndex = 0;
-    M.gobIndex = 0;
-    return M;
-}
-
 mapList::mapList(int n, int index, Protagonista *p)
 {
     this->n = n;
@@ -191,4 +180,10 @@ map::map() {
 int mapList::getGobNumber()
 {
     return maps[index].gobIndex;
+}
+
+void mapList::addEnemys() {
+    // da cambiare
+    addArch(10, 10, 10, 2, 100);
+    addGob(20, 5, 80, 15, 22);
 }

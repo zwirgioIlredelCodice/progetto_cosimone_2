@@ -108,6 +108,7 @@ public:
 
     int getGobNumber();
 
+    void addEnemys();
 };
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
