@@ -44,6 +44,40 @@ void mapList::play() { // da implementare
     refresh();
     wrefresh(playwin);
 
+    auto startTime = chrono::steady_clock::now();
+    usleep(1000000);
+    do
+    {
+        mainCh->display();
+        for(int i = 0; i < maps[index].gobIndex; i++)
+        {
+            maps[index].gob[i]->display();
+        }
+
+        for(int i = 0; i < maps[index].arcIndex; i++)
+        {
+            maps[index].arc[i]->display();
+        }
+
+
+        wrefresh(playwin);
+        refresh();
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
+        {
+            for(int i = 0; i < maps[index].gobIndex; i++)
+            {
+                maps[index].gob[i]->getmv();
+                maps[index].gob[i]->display();
+                wrefresh(maps[index].win);
+            }
+        }
+
+        wrefresh(maps[index].win);
+        refresh();
+
+    }
+    while (true);  // termina con ctrl C
+
     //
     while(wgetch(playwin) != ' ') {
         sleep(1);
