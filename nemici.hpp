@@ -98,6 +98,8 @@ public:
     int positionX();
 
     int positionY();
+
+    int retCurrentDamage();
 };
 
 

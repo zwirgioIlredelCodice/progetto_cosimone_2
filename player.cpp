@@ -29,7 +29,7 @@ Protagonista::Protagonista(mapList *curMap, int y, int x, char c, int life, int 
 }
 
 void Protagonista::mvup() {
-    if (mvwinch(listMap->getMap().win, yLoc - 1, xLoc) != 'g')
+    if (mvwinch(listMap->getMap().win, yLoc - 1, xLoc) == ' ')
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc--;
@@ -39,7 +39,7 @@ void Protagonista::mvup() {
 }
 
 void Protagonista::mvdown() {
-    if (mvwinch(listMap->getMap().win, yLoc + 1, xLoc) != 'g')
+    if (mvwinch(listMap->getMap().win, yLoc + 1, xLoc) == ' ')
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc++;
@@ -49,7 +49,7 @@ void Protagonista::mvdown() {
 }
 
 void Protagonista::mvleft() {
-    if (mvwinch(listMap->getMap().win, yLoc, xLoc - 1) != 'g')
+    if (mvwinch(listMap->getMap().win, yLoc, xLoc - 1) == ' ')
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc--;
@@ -59,7 +59,7 @@ void Protagonista::mvleft() {
 }
 
 void Protagonista::mvright() {
-    if (mvwinch(listMap->getMap().win, yLoc, xLoc + 1) != 'g')
+    if (mvwinch(listMap->getMap().win, yLoc, xLoc + 1) == ' ')
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc++;
@@ -165,6 +165,14 @@ void Protagonista::shot()
         usleep(20000);
         wrefresh(listMap->getMap().win);
         i++;
+
+        /*
+        for (int j = 0; j < listMap->getGobNumber(); ++j)
+        {
+            listMap
+        }
+         */
+
     }
     //usleep(20000);
     mvwaddch(listMap->getMap().win, locy, locx + i, ' ');

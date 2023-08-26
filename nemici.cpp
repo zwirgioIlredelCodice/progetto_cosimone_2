@@ -17,7 +17,7 @@ Goblin::Goblin(int life, int damage, WINDOW * win, int yLoc, int xLoc, int value
 
 void Goblin::mvup()
 {
-    if (mvwinch(win, yLoc - 1, xLoc) != p->retChar() && mvwinch(win, yLoc - 1, xLoc) != '-')
+    if (mvwinch(win, yLoc - 1, xLoc) == ' ')
     {
         mvwaddch(win, yLoc, xLoc, ' ');
         yLoc--;
@@ -32,7 +32,7 @@ void Goblin::mvup()
 
 void Goblin::mvdown()
 {
-    if (mvwinch(win, yLoc + 1, xLoc) != p->retChar() && mvwinch(win, yLoc + 1, xLoc) != '-')
+    if (mvwinch(win, yLoc + 1, xLoc) == ' ')
     {
         mvwaddch(win, yLoc, xLoc, ' ');
         yLoc++;
@@ -47,7 +47,7 @@ void Goblin::mvdown()
 
 void Goblin::mvleft()
 {
-    if (mvwinch(win, yLoc, xLoc - 1) != p->retChar() && mvwinch(win, yLoc, xLoc - 2) != '-')
+    if (mvwinch(win, yLoc, xLoc - 1) == ' ')
     {
         mvwaddch(win, yLoc, xLoc, ' ');
         xLoc--;
@@ -62,7 +62,7 @@ void Goblin::mvleft()
 
 void Goblin::mvright()
 {
-    if(mvwinch(win, yLoc, xLoc + 1) != p->retChar() && mvwinch(win, yLoc, xLoc + 1) != '-')
+    if(mvwinch(win, yLoc, xLoc + 1) == ' ')
     {
         mvwaddch(win, yLoc, xLoc, ' ');
         xLoc++;
@@ -188,10 +188,14 @@ void Arciere::shot()
     int locy = yLoc;
     int locx = xLoc;
     auto startTime = chrono::steady_clock::now();
-    while (i < bow.scope && locx - i > 2) // && mvwinch(curwin, locy, locx + i + 1) != 'g' && mvwinch(curwin, locy, locx + i) != 'g'{
+    while (i < bow.scope && locx - i > 2)
     {
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 8000 == 0)
         {
+            if (mvwinch(win, locy, locx - i- 1) == p->retChar())
+            {
+                p->decreaseLife(retCurrentDamage());
+            }
             mvwaddch(win, locy, locx - i, ' ');
             mvwaddch(win, locy, locx - i - 1, '-');
             wrefresh(win);
@@ -199,6 +203,7 @@ void Arciere::shot()
         }
         p->getmv();
         p->display();
+
     }
    // if (mvwinch(win, locy, locx - i) != p->retChar())
         mvwaddch(win, locy, locx - i, ' ');
@@ -222,4 +227,9 @@ int Arciere::positionX()
 int Arciere::positionY()
 {
     return this->yLoc;
+}
+
+int Arciere::retCurrentDamage()
+{
+    return bow.damage;
 }

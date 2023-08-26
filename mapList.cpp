@@ -187,3 +187,8 @@ map::map() {
     this->arcIndex = 0;
     this->gobIndex = 0;
 }
+
+int mapList::getGobNumber()
+{
+    return maps[index].gobIndex;
+}

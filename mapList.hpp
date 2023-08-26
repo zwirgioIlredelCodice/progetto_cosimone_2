@@ -106,6 +106,7 @@ public:
 
     void addGob( int life, int damage, int x, int y, int value);
 
+    int getGobNumber();
 
 };
 
