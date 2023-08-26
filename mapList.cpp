@@ -59,7 +59,6 @@ void mapList::play() { // da implementare
             maps[index].arc[i]->display();
         }
 
-
         wrefresh(playwin);
         refresh();
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
