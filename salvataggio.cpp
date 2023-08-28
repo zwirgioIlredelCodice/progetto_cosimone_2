@@ -109,7 +109,8 @@ void s_list::print() {
     cout << ']' << endl;
 }
 
-salvataggio::salvataggio(string namefile) {
+salvataggio::salvataggio(manager* m, string namefile) {
+    this->m = m;
     this->namefile = namefile;
 }
 
@@ -176,14 +177,56 @@ void salvataggio::remove(string name) {
     datalist.remove(name);
 }
 
-void salvataggio::set_protagonista(Protagonista *p) {
+void salvataggio::set_protagonista() {
+    Protagonista* p = &m->protagonista;
     set_int("p_life", p->getLife());
     set_int("p_currency", p->getCurrency());
     set_int("p_x", p->positionX());
     set_int("p_y", p->positionY());
-    // da completare
+    set_int("p_n_weap", p->getN_weap());
+
+    int n_weap = p->getN_weap();
+    weapon* weapons = p->getWeapons();
+    for (int i = 0; i < n_weap; i++) {
+        string basename = "weapons[" + to_string(i) + "]";
+        set_string(basename + "name", weapons[i].name);
+        set_int(basename + "damage", weapons[i].damage);
+        set_int(basename + "scope", weapons[i].scope);
+    }
 }
 
-void salvataggio::get_protagonista(Protagonista *p) {
-    // da fare
+void salvataggio::get_protagonista() {
+    int p_life = get_int("p_life");
+    int p_currency = get_int("p_currency");
+    int p_x = get_int("p_x");
+    int p_y = get_int("p_y");
+    int p_n_weap = get_int("p_n_weap");
+
+    m->protagonista = Protagonista(nullptr, p_x, p_y, '@', p_life, p_currency , nullptr, p_n_weap);
+
+    int n_weap = get_int("p_n_weap");
+    for (int i = 0; i < n_weap; i++) {
+        weapon w;
+        string basename = "weapons[" + to_string(i) + "]";
+        w.name = get_string(basename + "name");
+        w.damage = get_int(basename + "damage");
+        w.scope = get_int(basename + "scope");
+
+        m->protagonista.newWeapon(w);
+    }
+
+}
+
+void salvataggio::save_gamestate() {
+    set_protagonista();
+    // mappe
+
+    save();
+}
+
+void salvataggio::restore_gamestate() {
+    load();
+
+    get_protagonista();
+    // mappe
 }

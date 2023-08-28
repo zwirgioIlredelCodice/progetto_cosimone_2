@@ -12,11 +12,11 @@
 
 class manager {
 protected:
-    Protagonista protagonista;
     // cose che servono al protagonista
     weapon weapon_array[10];
     mapList maps;
 public:
+    Protagonista protagonista;
     manager();
 
     void menu();

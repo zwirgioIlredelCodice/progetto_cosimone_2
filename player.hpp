@@ -82,6 +82,9 @@ class Protagonista
          * funzione che cambia la finestra in cui si trova il protagonista
          */
 
+        int getN_weap();
+        int getWeap_index();
+        weapon* getWeapons();
 
     protected:
         int life;

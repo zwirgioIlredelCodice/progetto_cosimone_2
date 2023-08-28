@@ -232,3 +232,15 @@ int Protagonista::getCurrency()
 }
 
 Protagonista::Protagonista() {}
+
+int Protagonista::getN_weap() {
+    return n_weap;
+}
+
+int Protagonista::getWeap_index() {
+    return weap_index;
+}
+
+weapon *Protagonista::getWeapons() {
+    return weapons;
+}

@@ -7,6 +7,8 @@
 
 #include <string>
 #include "player.hpp"
+#include "manager.hpp"
+
 using namespace std;
 
 #define REMOVE(var) remove(#var)
@@ -52,10 +54,11 @@ class salvataggio {
 protected:
     s_list datalist;
     string namefile;
+    manager* m;
 public:
 
     // inizializza la classe saves sul file namefile
-    salvataggio(string namefile);
+    salvataggio(manager* m, string namefile);
 
     // legge il file dei salvataggi e crea una lista con essi in modo da poterli leggere e scrivere
     void load();
@@ -74,9 +77,11 @@ public:
     // rimuove un dato dal salvataggio
     void remove(string name);
 
-    void set_protagonista(Protagonista* p);
-    void get_protagonista(Protagonista* p);
+    void set_protagonista();
+    void get_protagonista();
 
+    void save_gamestate();
+    void restore_gamestate();
 };
 
 
