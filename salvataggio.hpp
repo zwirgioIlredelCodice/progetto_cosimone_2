@@ -6,7 +6,14 @@
 #define PROGETTO_COSIMONE_2_SALVATAGGIO_HPP
 
 #include <string>
+#include "player.hpp"
 using namespace std;
+
+#define REMOVE(var) remove(#var)
+#define GET_INT(var) get_int(#var)
+#define GET_STRING(var) get_string(#var)
+#define SET_INT(var) set_int(#var, var)
+#define SET_STRING(var) set_string(#var, var)
 
 class s_data {
 public:
@@ -66,6 +73,10 @@ public:
     void set_int(string name, int value);
     // rimuove un dato dal salvataggio
     void remove(string name);
+
+    void set_protagonista(Protagonista* p);
+    void get_protagonista(Protagonista* p);
+
 };
 
 

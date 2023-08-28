@@ -175,3 +175,15 @@ void salvataggio::save() {
 void salvataggio::remove(string name) {
     datalist.remove(name);
 }
+
+void salvataggio::set_protagonista(Protagonista *p) {
+    set_int("p_life", p->getLife());
+    set_int("p_currency", p->getCurrency());
+    set_int("p_x", p->positionX());
+    set_int("p_y", p->positionY());
+    // da completare
+}
+
+void salvataggio::get_protagonista(Protagonista *p) {
+    // da fare
+}
