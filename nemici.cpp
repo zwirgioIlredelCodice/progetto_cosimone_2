@@ -28,6 +28,7 @@ void Goblin::mvup()
     {
         p->decreaseLife(this->damage);
     }
+    else mvleft();
 }
 
 void Goblin::mvdown()
@@ -43,6 +44,7 @@ void Goblin::mvdown()
     {
         p->decreaseLife(this->damage);
     }
+    else mvright();
 }
 
 void Goblin::mvleft()
@@ -58,6 +60,8 @@ void Goblin::mvleft()
     {
         p->decreaseLife(this->damage);
     }
+    else
+        mvdown();
 }
 
 void Goblin::mvright()
@@ -73,6 +77,8 @@ void Goblin::mvright()
     {
         p->decreaseLife(this->damage);
     }
+    else
+        mvup();
 }
 
 void Goblin::getmv()

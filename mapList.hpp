@@ -28,25 +28,25 @@ class Protagonista;
 const char maps[MAP_NUMBER][MAP_XMAX][MAP_YMAX+1] = {
 {
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
+    "                                                                         |                          ",
+    "                                                                         |                          ",
+    "                                                                         |                          ",
+    "                                                                         |                          ",
+    "                                #######                                  |                          ",
     "                                #######                                                             ",
     "                                #######                                                             ",
     "                                #######                                                             ",
-    "                                #######                                                             ",
     "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
+    "                                                                                                   ",
 },
 };
 
@@ -109,6 +109,7 @@ public:
     int getGobNumber();
 
     void addEnemys();
+
 };
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP

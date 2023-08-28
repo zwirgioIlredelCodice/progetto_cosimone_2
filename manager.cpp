@@ -104,6 +104,7 @@ void manager::resume() {
 
 void manager::next_room() {
     new_room();
+
     maps.play();
     /*
      * DEVE

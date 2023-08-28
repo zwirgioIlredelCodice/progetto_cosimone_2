@@ -35,6 +35,7 @@ void Protagonista::mvup() {
         yLoc--;
         if (yLoc < 1)
             yLoc = 1;
+        display();
     }
 }
 
@@ -45,6 +46,7 @@ void Protagonista::mvdown() {
         yLoc++;
         if (yLoc > yMax - 2)
             yLoc = yMax - 2;
+        display();
     }
 }
 
@@ -55,6 +57,7 @@ void Protagonista::mvleft() {
         xLoc--;
         if (xLoc < 1)
             xLoc = 1;
+        display();
     }
 }
 
@@ -65,6 +68,7 @@ void Protagonista::mvright() {
         xLoc++;
         if (xLoc > xMax - 2)
             xLoc = xMax - 2;
+        display();
     }
 }
 
@@ -94,17 +98,19 @@ int Protagonista::getmv(){
         default:
             break;
     }
+    display();
     return choice;
 }
+
 
 
 void Protagonista::display()
 {
     mvwprintw(stdscr, 30, 60, "                 ");
     mvwprintw(stdscr, 32, 60, "                             ");
-    mvwaddch(listMap->getMap().win, yLoc, xLoc, character);
     mvwprintw(stdscr, 30, 60, "Life : %d", getLife());
     mvwprintw(stdscr, 32, 60, "Currency : %d", getCurrency());
+    mvwaddch(listMap->getMap().win, yLoc, xLoc, character);
 }
 
 void Protagonista::decreaseLife(int damage)
