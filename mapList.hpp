@@ -72,6 +72,7 @@ protected:
 
 public:
     mapList();
+    mapList(Protagonista *p);
     mapList(int n, int index, Protagonista *p);
 
 
@@ -109,6 +110,10 @@ public:
     int getGobNumber();
 
     void addEnemys();
+
+    int getN();
+    int getIndex();
+    map* getMaps();
 
 };
 

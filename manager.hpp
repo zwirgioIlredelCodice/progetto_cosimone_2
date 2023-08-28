@@ -14,9 +14,9 @@ class manager {
 protected:
     // cose che servono al protagonista
     weapon weapon_array[10];
-    mapList maps;
 public:
     Protagonista protagonista;
+    mapList maps;
     manager();
 
     void menu();

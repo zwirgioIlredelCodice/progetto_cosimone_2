@@ -217,6 +217,55 @@ void salvataggio::get_protagonista() {
 
 }
 
+void salvataggio::set_mapList() {
+    mapList* ml = m->protagonista.getMapList();
+    set_int("ml_n", ml->getN());
+    set_int("ml_index", ml->getIndex());
+
+    int ml_n = ml->getN();
+    map* ma = ml->getMaps();
+    for (int i = 0; i < ml_n; i++) {
+        map m = ma[i];
+        string basename = "maps[" + to_string(i) + "]";
+        set_int(basename + "arcIndex", m.arcIndex);
+        set_int(basename + "gobIndex", m.gobIndex);
+
+        for (int j = 0; j < m.arcIndex; j++) {
+            // robe salvare arcieri
+        }
+        for (int j = 0; j < m.gobIndex; j++) {
+            // robe salvare goblin
+        }
+    }
+}
+
+void salvataggio::get_mapList() {
+    mapList* ml = &m->maps;
+    Protagonista* p = &m->protagonista;
+
+    get_int("ml_n");
+    get_int("ml_index");
+
+    int ml_n = get_int("ml_n");
+    map* ma = ml->getMaps();
+    for (int i = 0; i < ml_n; i++) {
+        map* m = &ma[i];
+        string basename = "maps[" + to_string(i) + "]";
+
+        m->arcIndex = get_int(basename + "arcIndex");
+        m->gobIndex = get_int(basename + "gobIndex");
+
+        for (int j = 0; j < m->arcIndex; j++) {
+            // robe caricare arcieri
+        }
+        for (int j = 0; j < m->gobIndex; j++) {
+            // robe caricare goblin
+        }
+    }
+
+    p->setMapList(ml);
+}
+
 void salvataggio::save_gamestate() {
     set_protagonista();
     // mappe

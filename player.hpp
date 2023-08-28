@@ -85,6 +85,9 @@ class Protagonista
         int getN_weap();
         int getWeap_index();
         weapon* getWeapons();
+        mapList* getMapList();
+
+        void setMapList(mapList* ml);
 
     protected:
         int life;

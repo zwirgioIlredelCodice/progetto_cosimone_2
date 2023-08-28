@@ -80,6 +80,9 @@ public:
     void set_protagonista();
     void get_protagonista();
 
+    void set_mapList();
+    void get_mapList();
+
     void save_gamestate();
     void restore_gamestate();
 };

@@ -244,3 +244,11 @@ int Protagonista::getWeap_index() {
 weapon *Protagonista::getWeapons() {
     return weapons;
 }
+
+mapList *Protagonista::getMapList() {
+    return listMap;
+}
+
+void Protagonista::setMapList(mapList* ml) {
+    this->listMap = ml;
+}

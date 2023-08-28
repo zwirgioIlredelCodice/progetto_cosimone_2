@@ -161,6 +161,12 @@ mapList::mapList() {
 
 }
 
+mapList::mapList(Protagonista *p) {
+    this->n = 0;
+    this->index = 0;
+    this->mainCh = p;
+}
+
 map::map(int maptype) {
     this->win = init_win(maptype);
     this->arcIndex = 0;
@@ -191,5 +197,17 @@ void mapList::addEnemys() {
     // da cambiare
     addArch(10, 10, 10, 2, 100);
     addGob(20, 5, 80, 15, 22);
+}
+
+int mapList::getN() {
+    return n;
+}
+
+int mapList::getIndex() {
+    return index;
+}
+
+map *mapList::getMaps() {
+    return maps;
 }
 
