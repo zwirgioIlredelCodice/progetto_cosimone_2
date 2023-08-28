@@ -50,12 +50,12 @@ void mapList::play() { // da implementare
 
     do
     {
-        usleep(100000);
         mainCh->getmv();
-        mainCh->display();
+
         for(int i = 0; i < maps[index].gobIndex; i++)
         {
             maps[index].gob[i]->display();
+            mainCh->getmv();
         }
 
         for(int i = 0; i < maps[index].arcIndex; i++)
@@ -63,12 +63,17 @@ void mapList::play() { // da implementare
             maps[index].arc[i]->display();
         }
 
+        wrefresh(playwin);
+
+        mainCh->getmv();
+
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
             for(int i = 0; i < maps[index].gobIndex; i++)
             {
                 maps[index].gob[i]->getmv();
                 maps[index].gob[i]->display();
+                wrefresh(playwin);
             }
         }
 
@@ -187,3 +192,4 @@ void mapList::addEnemys() {
     addArch(10, 10, 10, 2, 100);
     addGob(20, 5, 80, 15, 22);
 }
+
