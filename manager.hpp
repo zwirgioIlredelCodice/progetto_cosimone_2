@@ -7,21 +7,26 @@
 
 #include "player.hpp"
 #include "strutture.h"
+#include "Salvataggio.hpp"
 
 #define MENU_ENTRY 3
+class Salvataggio;
 
 class manager {
 protected:
     // cose che servono al protagonista
-    weapon weapon_array[10];
 public:
     Protagonista protagonista;
     mapList maps;
+    weapon weapon_array[10];
+    Salvataggio* salvataggio;
+
     manager();
 
     void menu();
     void new_game();
     void resume();
+    void quit();
 
     void new_room();
     void next_room();

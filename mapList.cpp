@@ -50,6 +50,7 @@ void mapList::play() { // da implementare
 
     do
     {
+        usleep(100000);
         mainCh->getmv();
 
         for(int i = 0; i < maps[index].gobIndex; i++)

@@ -11,11 +11,7 @@
 
 using namespace std;
 
-#define REMOVE(var) remove(#var)
-#define GET_INT(var) get_int(#var)
-#define GET_STRING(var) get_string(#var)
-#define SET_INT(var) set_int(#var, var)
-#define SET_STRING(var) set_string(#var, var)
+class manager;
 
 class s_data {
 public:
@@ -36,6 +32,9 @@ public:
     // inizializza la lista
     s_list();
 
+    // cancella la lista
+    void free();
+
     // inserisce un nuovo nodo
     void insert(string name, string value);
     // data una stringa nome, ritorna il valore associato a quel nome
@@ -50,20 +49,22 @@ public:
     void print();
 };
 
-class salvataggio {
+class Salvataggio {
 protected:
     s_list datalist;
     string namefile;
     manager* m;
 public:
-
+    Salvataggio();
     // inizializza la classe saves sul file namefile
-    salvataggio(manager* m, string namefile);
+    Salvataggio(manager* m, string namefile);
 
     // legge il file dei salvataggi e crea una lista con essi in modo da poterli leggere e scrivere
     void load();
     // scrive i salvataggi nel file
     void save();
+    // cancella tutti i salvataggi
+    void deleteall();
 
     // data una stringa nome, ritorna il valore (stringa) associato a quel nome
     string get_string(string name);
@@ -74,7 +75,7 @@ public:
     void set_string(string name, string value);
     // inserisce o aggiorna un elemento a secondo se è presente o no
     void set_int(string name, int value);
-    // rimuove un dato dal salvataggio
+    // rimuove un dato dal Salvataggio
     void remove(string name);
 
     void set_protagonista();

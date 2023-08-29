@@ -2,7 +2,7 @@
 // Created by fabione on 09/02/23.
 //
 
-#include "salvataggio.hpp"
+#include "Salvataggio.hpp"
 
 #include <string>
 #include <fstream>
@@ -38,7 +38,7 @@ string s_list::getvalue(string name) {
     s_data* t = head;
     string val = "";
     bool found = false;
-    while (t != nullptr || !found) {
+    while (t != nullptr && !found) {
         if (name == t->name) {
             val = t->value;
             found = true;
@@ -109,23 +109,34 @@ void s_list::print() {
     cout << ']' << endl;
 }
 
-salvataggio::salvataggio(manager* m, string namefile) {
+void s_list::free() {
+    s_data* t = head;
+    while (t != nullptr) {
+        s_data* tocanc = t;
+        t = t->next;
+        delete tocanc;
+    }
+    head = nullptr;
+}
+
+
+Salvataggio::Salvataggio(manager* m, string namefile) {
     this->m = m;
     this->namefile = namefile;
 }
 
-string salvataggio::get_string(string name) {
+string Salvataggio::get_string(string name) {
     return datalist.getvalue(name);
 }
 
 /*
  * Post condition: se non può essere convertito a un int ritorna std::invalid_argument
  */
-int salvataggio::get_int(string name) {
+int Salvataggio::get_int(string name) {
     return stoi(datalist.getvalue(name));
 }
 
-void salvataggio::set_string(string name, string value) {
+void Salvataggio::set_string(string name, string value) {
     if (datalist.isin(name)) {
         datalist.updatevalue(name, value);
     } else {
@@ -133,7 +144,7 @@ void salvataggio::set_string(string name, string value) {
     }
 }
 
-void salvataggio::set_int(string name, int value) {
+void Salvataggio::set_int(string name, int value) {
     string svalue = to_string(value);
     if (datalist.isin(name)) {
         datalist.updatevalue(name, svalue);
@@ -142,7 +153,7 @@ void salvataggio::set_int(string name, int value) {
     }
 }
 
-void salvataggio::load() {
+void Salvataggio::load() {
     ifstream file;
     file.open(namefile); // apre il file in modalità lettura
 
@@ -152,7 +163,7 @@ void salvataggio::load() {
             getline(file, name, '='); //mette in name i caratteri fino a = escluso
             getline(file, value);
 
-            if (name != "" &&  value != "") { // se è in un formato valido
+            if (!name.empty() &&  !value.empty()) { // se è in un formato valido
                 datalist.insert(name, value);
             }
         }
@@ -160,7 +171,7 @@ void salvataggio::load() {
     }
 };
 
-void salvataggio::save() {
+void Salvataggio::save() {
     ofstream file;
     file.open(namefile); // apre il file in modalità scrittura
 
@@ -170,14 +181,15 @@ void salvataggio::save() {
             file << t->name << '=' << t->value << endl;
             t = t->next;
         }
+        file.close();
     }
 }
 
-void salvataggio::remove(string name) {
+void Salvataggio::remove(string name) {
     datalist.remove(name);
 }
 
-void salvataggio::set_protagonista() {
+void Salvataggio::set_protagonista() {
     Protagonista* p = &m->protagonista;
     set_int("p_life", p->getLife());
     set_int("p_currency", p->getCurrency());
@@ -195,14 +207,14 @@ void salvataggio::set_protagonista() {
     }
 }
 
-void salvataggio::get_protagonista() {
+void Salvataggio::get_protagonista() {
     int p_life = get_int("p_life");
     int p_currency = get_int("p_currency");
     int p_x = get_int("p_x");
     int p_y = get_int("p_y");
     int p_n_weap = get_int("p_n_weap");
 
-    m->protagonista = Protagonista(nullptr, p_x, p_y, '@', p_life, p_currency , nullptr, p_n_weap); // DA FINIRE
+    m->protagonista = Protagonista(&m->maps, p_x, p_y, '@', p_life, p_currency , m->weapon_array, p_n_weap);
 
     int n_weap = get_int("p_n_weap");
     for (int i = 0; i < n_weap; i++) {
@@ -217,7 +229,7 @@ void salvataggio::get_protagonista() {
 
 }
 
-void salvataggio::set_mapList() {
+void Salvataggio::set_mapList() {
     mapList* ml = m->protagonista.getMapList();
     set_int("ml_n", ml->getN());
     set_int("ml_index", ml->getIndex());
@@ -270,7 +282,7 @@ void salvataggio::set_mapList() {
     }
 }
 
-void salvataggio::get_mapList() {
+void Salvataggio::get_mapList() {
     mapList* ml = &m->maps;
     Protagonista* p = &m->protagonista;
 
@@ -314,16 +326,26 @@ void salvataggio::get_mapList() {
     p->setMapList(ml);
 }
 
-void salvataggio::save_gamestate() {
+void Salvataggio::save_gamestate() {
     set_protagonista();
-    // mappe
+    set_mapList();
 
     save();
 }
 
-void salvataggio::restore_gamestate() {
+void Salvataggio::restore_gamestate() {
     load();
 
     get_protagonista();
-    // mappe
+    get_mapList();
 }
+
+void Salvataggio::deleteall() {
+    datalist.free();
+
+    ofstream file;
+    file.open(namefile); // apre il file in modalità scrittura
+    file.close();
+}
+
+Salvataggio::Salvataggio() {}

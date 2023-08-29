@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include "manager.hpp"
 #include "player.hpp"
-#include "negozio.hpp"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
@@ -14,7 +13,7 @@ manager::manager() {
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
     protagonista = Protagonista(&maps, 1, 1, '@', 1000, 10, this->weapon_array, 1);
-
+    salvataggio = new Salvataggio(this, "saves.txt");
 }
 
 void manager::menu() {
@@ -36,8 +35,8 @@ void manager::menu() {
     string choices[MENU_ENTRY] = {"New game", "Resume", "Quit"};
     int choice, highlight = 0;
 
-    bool quit = false;
-    while(!quit) {
+    bool terminate = false;
+    while(!terminate) {
         for (int i = 0; i < MENU_ENTRY; i++) {
             if (i == highlight) wattron(menuwin, A_REVERSE);
 
@@ -70,7 +69,8 @@ void manager::menu() {
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
                 }
                 else if (choices[highlight] == "Quit") {
-                    quit = true;
+                    quit();
+                    terminate = true;
                 }
             /*case KEY_F(1):
                 quit = true;
@@ -96,15 +96,12 @@ void manager::new_game() {
 }
 
 void manager::resume() {
-    /*
-     * DEVE
-     * se c'erano partite in atto, ripristinare allo stato della precedente partita e giocare quella partita
-     */
+    salvataggio->restore_gamestate();
 }
 
 void manager::next_room() {
+    salvataggio->deleteall();
     new_room();
-
     maps.play();
     /*
      * DEVE
@@ -128,4 +125,12 @@ void manager::new_room() {
      * decidere una stanza a caso e inizializzarla con tutti i nemici (influenzato dalla difficoltà)
      */
     maps.add(map(0));
+}
+
+void manager::quit() {
+    /*
+     * DEVE
+     * salvare lo stato del gioco e permettere la terminazione del programma
+     */
+    salvataggio->save_gamestate();
 }
