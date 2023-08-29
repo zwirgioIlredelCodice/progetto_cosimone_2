@@ -57,10 +57,11 @@ public:
     int arcIndex;
     Goblin *gob[N_ENEM];
     int gobIndex;
+    int mapType;
 
-    static WINDOW* init_win(int maptype);
+    void init_win();
     map();
-    explicit map(int maptype);
+    map(int mapType);
 };
 
 class mapList {
@@ -115,6 +116,7 @@ public:
     int getIndex();
     map* getMaps();
 
+    void setIndex(int index);
 };
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP

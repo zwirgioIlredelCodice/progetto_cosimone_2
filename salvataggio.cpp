@@ -202,7 +202,7 @@ void salvataggio::get_protagonista() {
     int p_y = get_int("p_y");
     int p_n_weap = get_int("p_n_weap");
 
-    m->protagonista = Protagonista(nullptr, p_x, p_y, '@', p_life, p_currency , nullptr, p_n_weap);
+    m->protagonista = Protagonista(nullptr, p_x, p_y, '@', p_life, p_currency , nullptr, p_n_weap); // DA FINIRE
 
     int n_weap = get_int("p_n_weap");
     for (int i = 0; i < n_weap; i++) {
@@ -227,15 +227,46 @@ void salvataggio::set_mapList() {
     for (int i = 0; i < ml_n; i++) {
         map m = ma[i];
         string basename = "maps[" + to_string(i) + "]";
-        set_int(basename + "arcIndex", m.arcIndex);
-        set_int(basename + "gobIndex", m.gobIndex);
 
+        set_int(basename + "mapType", m.mapType);
+
+        int archIndex = 0; // numero di arcieri vivi
         for (int j = 0; j < m.arcIndex; j++) {
-            // robe salvare arcieri
+            if (m.arc[j]->retAlive()) {
+                string arcname = basename + "arch[" + to_string(archIndex) + "]";
+                int life = m.arc[j]->retLife();
+                set_int(arcname + "life", life);
+                int damage = m.arc[j]->retCurrentDamage();
+                set_int(arcname + "damage", damage);
+                int yLoc = m.arc[j]->positionY();
+                set_int(arcname + "yLoc", yLoc);
+                int xLoc = m.arc[j]->positionX();
+                set_int(arcname + "xLoc", xLoc);
+                int value = m.arc[j]->retValue();
+                set_int(arcname + "value", value);
+                archIndex++;
+            }
         }
+        set_int(basename + "arcIndex", archIndex);
+
+        int gobIndex = 0; // numero di goblin vivi
         for (int j = 0; j < m.gobIndex; j++) {
-            // robe salvare goblin
+            if (m.gob[j]->retAlive()) {
+                string gobname = basename + "gob[" + to_string(gobIndex) + "]";
+                int life = m.gob[j]->retLife();
+                set_int(gobname + "life", life);
+                int damage = m.gob[j]->retDamage();
+                set_int(gobname + "damage", damage);
+                int yLoc = m.gob[j]->positionY();
+                set_int(gobname + "yLoc", yLoc);
+                int xLoc = m.gob[j]->positionX();
+                set_int(gobname + "xLoc", xLoc);
+                int value = m.gob[j]->retValue();
+                set_int(gobname + "value", value);
+                gobIndex++;
+            }
         }
+        set_int(basename + "gobIndex", gobIndex);
     }
 }
 
@@ -243,23 +274,40 @@ void salvataggio::get_mapList() {
     mapList* ml = &m->maps;
     Protagonista* p = &m->protagonista;
 
-    get_int("ml_n");
-    get_int("ml_index");
+    int ml_index = get_int("ml_index");
+    ml->setIndex(ml_index);
 
     int ml_n = get_int("ml_n");
     map* ma = ml->getMaps();
     for (int i = 0; i < ml_n; i++) {
-        map* m = &ma[i];
+        map m = ma[i];
         string basename = "maps[" + to_string(i) + "]";
 
-        m->arcIndex = get_int(basename + "arcIndex");
-        m->gobIndex = get_int(basename + "gobIndex");
+        int mapType = get_int(basename + "mapType");
+        int gobIndex = get_int(basename + "gobIndex");
+        int arcIndex = get_int(basename + "arcIndex");
 
-        for (int j = 0; j < m->arcIndex; j++) {
-            // robe caricare arcieri
+        m = map(mapType);
+        ml->add(m);
+
+        for (int j = 0; j < arcIndex; j++) {
+            string arcname = basename + "arch[" + to_string(j) + "]";
+            int life = get_int(arcname + "life");
+            int damage = get_int(arcname + "damage");
+            int yLoc = get_int(arcname + "yLoc");
+            int xLoc = get_int(arcname + "xLoc");
+            int value = get_int(arcname + "value");
+            ml->addArch(life, damage, xLoc, yLoc, value);
         }
-        for (int j = 0; j < m->gobIndex; j++) {
-            // robe caricare goblin
+
+        for (int j = 0; j < gobIndex; j++) {
+            string gobname = basename + "gob[" + to_string(gobIndex) + "]";
+            int life = get_int(gobname + "life");
+            int damage = get_int(gobname + "damage");
+            int yLoc = get_int(gobname + "yLoc");
+            int xLoc = get_int(gobname + "xLoc");
+            int value = get_int(gobname + "value");
+            ml->addGob(life, damage, xLoc, yLoc, value);
         }
     }
 

@@ -142,6 +142,17 @@ int Goblin::retValue()
     return this->value;
 }
 
+char Goblin::retChar() {
+    return this->simbol;
+}
+
+int Goblin::retDamage() {
+    this->damage;
+}
+
+bool Goblin::retAlive() {
+    return this->alive;
+}
 
 //-----------------------------------------
 
@@ -238,4 +249,8 @@ int Arciere::positionY()
 int Arciere::retCurrentDamage()
 {
     return bow.damage;
+}
+
+bool Arciere::retAlive() {
+    return this->alive;
 }

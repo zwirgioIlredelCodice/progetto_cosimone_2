@@ -43,20 +43,22 @@ public:
     // ritorna il carattere
     char retChar();
 
-    int positionX();
-
-    int positionY();
-
     /*
      * ritorna la vita attuale del goblin
      */
     int retLife();
 
+    int retDamage();
+
+    int positionX();
+
+    int positionY();
+
     /*
      * ritorna il valore che si ottiene uccidendo il goblin
      */
     int retValue();
-
+    bool retAlive();
 };
 
 class Arciere
@@ -100,6 +102,8 @@ public:
     int positionY();
 
     int retCurrentDamage();
+
+    bool retAlive();
 };
 
 
