@@ -33,8 +33,9 @@ void Protagonista::mvup() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc--;
-        if (yLoc < 1)
-            yLoc = 1;
+     //
+     //   if (yLoc < 1)
+     //       yLoc = 1;
         display();
     }
 }
@@ -44,8 +45,8 @@ void Protagonista::mvdown() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc++;
-        if (yLoc > yMax - 2)
-            yLoc = yMax - 2;
+     //   if (yLoc > yMax - 2)
+     //       yLoc = yMax - 2;
         display();
     }
 }
@@ -55,8 +56,8 @@ void Protagonista::mvleft() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc--;
-        if (xLoc < 1)
-            xLoc = 1;
+     //   if (xLoc < 1)
+     //       xLoc = 1;
         display();
     }
 }
@@ -66,8 +67,8 @@ void Protagonista::mvright() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc++;
-        if (xLoc > xMax - 2)
-            xLoc = xMax - 2;
+      //  if (xLoc > xMax - 2)
+      //      xLoc = xMax - 2;
         display();
     }
 }
@@ -149,20 +150,20 @@ void Protagonista::shot()
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope && i + locx < xMax - 2) // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, i + locx + 1) == ' ' || mvwinch(listMap->getMap().win, locy, i + locx + 1) == '-')) // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc + i, ' ');
 
-        if (mvwinch(listMap->getMap().win, locy, locx + i + 1) == 'g')
+        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 'g')
         {
-            listMap->checkGoblin(locy, locx + i + 1, Protagonista::retCurrentDamage());
+            listMap->checkGoblin(locx + i + 2, locy, Protagonista::retCurrentDamage());
             break;
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }
 
-        if (mvwinch(listMap->getMap().win, locy, locx + i + 1) == 'a')
+        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 'a')
         {
-            listMap->checkArciere(locy, locx + i + 1, Protagonista::retCurrentDamage());
+            listMap->checkArciere(locx + i + 2, locy, Protagonista::retCurrentDamage());
             break;
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }

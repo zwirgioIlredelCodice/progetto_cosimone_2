@@ -85,14 +85,19 @@ void Goblin::getmv()
 {
     if (alive)
     {
-        if (yLoc > p->positionY())
-            mvup();
-        else if (yLoc < p->positionY())
-            mvdown();
-        else if (xLoc > p->positionX())
-            mvleft();
-        else if (xLoc < p->positionX())
-            mvright();
+        bool choice;
+        if (yLoc > p->positionY() && xLoc > p->positionX())
+            (choice ? mvup() : mvleft());
+        else if (yLoc > p->positionY() && xLoc < p->positionX())
+            (choice ? mvup() : mvright());
+        else if (yLoc < p->positionY() && xLoc > p->positionX())
+            (choice ? mvdown() : mvleft());
+        else if (yLoc < p->positionY() && xLoc < p->positionX())
+            (choice ? mvdown() : mvright());
+        else if (xLoc == p->positionX())
+            (yLoc > p->positionY() ? mvup() : mvdown());
+        else if (yLoc == p->positionY())
+            (xLoc > p->positionX() ? mvleft() : mvright());
     }
 }
 
@@ -117,9 +122,10 @@ void Goblin::decreaseLife(int damage)
 
 void Goblin::disappear()
 {
-    alive = false;
     this->simbol = ' ';
+    p->increaseCurrency(value);
     Goblin::display();
+    alive = false;
 }
 
 int Goblin::positionY()
@@ -147,7 +153,7 @@ char Goblin::retChar() {
 }
 
 int Goblin::retDamage() {
-    this->damage;
+    return this->damage;
 }
 
 bool Goblin::retAlive() {
@@ -183,7 +189,7 @@ void Arciere::display()
 {
     if (alive)
     {
-        if (yLoc == p->positionY()) {
+        if (yLoc == p->positionY() && xLoc > p->positionX()) {
             shot();
         }
         mvwaddch(win, yLoc, xLoc, this->simbol);
@@ -193,8 +199,8 @@ void Arciere::display()
 void Arciere::disappear()
 {
     this->simbol = ' ';
-    Arciere::display();
     alive = false;
+    Arciere::display();
     p->increaseCurrency(value);
 }
 
@@ -207,7 +213,7 @@ void Arciere::shot()
     auto startTime = chrono::steady_clock::now();
     while (i < bow.scope && locx - i > 2)
     {
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 8000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
             if (mvwinch(win, locy, locx - i- 1) == p->retChar())
             {

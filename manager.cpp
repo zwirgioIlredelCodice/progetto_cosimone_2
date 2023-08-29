@@ -11,7 +11,7 @@
 
 manager::manager() {
     srand(666123); // da cambiare
-    weapon_array[0] = {"bow", 20, 100};
+    weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
     protagonista = Protagonista(&maps, 1, 1, '@', 1000, 10, this->weapon_array, 1);
 
