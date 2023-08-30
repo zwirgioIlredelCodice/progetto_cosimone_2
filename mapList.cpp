@@ -116,7 +116,8 @@ void mapList::checkArciere(int x, int y, int damage) {
 
 map mapList::getMap()
 {
-    return maps[index];
+    map m = maps[index];
+    return m;
 }
 
 void mapList::addArch( int life, int damage, int x, int y, int value)
@@ -207,5 +208,15 @@ map *mapList::getMaps() {
 
 void mapList::setIndex(int index) {
     this->index = index;
+}
+
+bool mapList::hasNext() {
+    if (index < n-1) return true;
+    else return false;
+}
+
+bool mapList::hasPrev() {
+    if (index > 0) return true;
+    else return false;
 }
 

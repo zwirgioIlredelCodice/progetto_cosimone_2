@@ -20,12 +20,14 @@ public:
     mapList maps;
     weapon weapon_array[10];
     Salvataggio* salvataggio;
+    bool in_game;
 
     manager();
 
     void menu();
     void new_game();
     void resume();
+    void gameover();
     void quit();
 
     void new_room();

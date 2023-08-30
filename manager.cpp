@@ -12,8 +12,9 @@ manager::manager() {
     srand(666123); // da cambiare
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 10, this->weapon_array, 1);
+    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
+    in_game = false;
 }
 
 void manager::menu() {
@@ -32,12 +33,13 @@ void manager::menu() {
     wrefresh(menuwin);
     keypad(menuwin, true);
 
-    string choices[MENU_ENTRY] = {"New game", "Resume", "Quit"};
+    string choices[] = {"New game", "Resume", "Delete saves", "Quit"};
+    int menu_entry = sizeof(choices) / sizeof(choices[0]);
     int choice, highlight = 0;
 
     bool terminate = false;
     while(!terminate) {
-        for (int i = 0; i < MENU_ENTRY; i++) {
+        for (int i = 0; i < menu_entry; i++) {
             if (i == highlight) wattron(menuwin, A_REVERSE);
 
             mvwprintw(menuwin, i+1, 1, "%s", choices[i].c_str());
@@ -51,7 +53,7 @@ void manager::menu() {
                 break;
             case KEY_DOWN:
                 highlight++;
-                if (highlight >= MENU_ENTRY) highlight = MENU_ENTRY - 1;
+                if (highlight >= menu_entry) highlight = menu_entry - 1;
                 break;
             case ' ': // backspace
                 if (choices[highlight] == "New game") {
@@ -67,6 +69,9 @@ void manager::menu() {
                     box(menuwin, 0, 0);
                     mvwprintw(menuwin, 0, 0, "MENU");
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
+                }
+                else if (choices[highlight] == "Delete saves") {
+                    salvataggio->deleteall();
                 }
                 else if (choices[highlight] == "Quit") {
                     quit();
@@ -84,6 +89,7 @@ void manager::menu() {
 }
 
 void manager::new_game() {
+    in_game = true;
     if (!salvataggio->empty()) {
         if (salvataggio->is_game_saved()) {
             salvataggio->save_gameover();
@@ -105,10 +111,16 @@ void manager::new_game() {
 
 void manager::resume() {
     if (salvataggio->is_game_saved()) salvataggio->restore_gamestate();
+    else maps.play();
 }
 
 void manager::next_room() {
-    new_room();
+    if (maps.hasNext()) {
+        maps.next();
+    } else {
+        new_room();
+    }
+
     maps.play();
     /*
      * DEVE
@@ -119,11 +131,9 @@ void manager::next_room() {
 }
 
 void manager::prev_room() {
-    /*
-     * DEVE
-     * salvare lo stato della stanza e passare a quella prima ripristinandola come salvata
-     * giocare la stanza
-     */
+    if (maps.hasPrev()) {
+        maps.prev();
+    }
 }
 
 void manager::new_room() {
@@ -139,5 +149,10 @@ void manager::quit() {
      * DEVE
      * salvare lo stato del gioco e permettere la terminazione del programma
      */
-    salvataggio->save_gamestate();
+    if (in_game) salvataggio->save_gamestate();
+    else salvataggio->save_gameover();
+}
+
+void manager::gameover() {
+    salvataggio->save_gameover();
 }

@@ -364,15 +364,16 @@ void Salvataggio::save_gameover() {
         set_int(basename + "damage", weapons[i].damage);
         set_int(basename + "scope", weapons[i].scope);
     }
+    save();
 }
 
 void Salvataggio::restore_newgame() {
     int p_currency = get_int("p_currency");
     int p_n_weap = get_int("p_n_weap");
 
-    m->protagonista = Protagonista(&m->maps, p_currency , m->weapon_array, p_n_weap);
-
     int n_weap = get_int("p_n_weap");
+    m->protagonista = Protagonista(&m->maps, 1, 1, '@', 100, 0, m->weapon_array, n_weap);
+
     for (int i = 0; i < n_weap; i++) {
         weapon w;
         string basename = "weapons[" + to_string(i) + "]";
@@ -385,9 +386,15 @@ void Salvataggio::restore_newgame() {
 }
 
 bool Salvataggio::is_game_saved() {
-    load();
-    if (empty() || datalist.isin("is_game_saved")) return true;
-    else return false;
+    if (empty()) return false;
+    else {
+        if (datalist.isin("is_game_saved")) return true;
+        else {
+            load();
+            if (datalist.isin("is_game_saved")) return true;
+            else return false;
+        }
+    }
 }
 
 bool Salvataggio::empty() {
