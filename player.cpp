@@ -253,3 +253,7 @@ mapList *Protagonista::getMapList() {
 void Protagonista::setMapList(mapList* ml) {
     this->listMap = ml;
 }
+
+Protagonista::Protagonista(mapList *curMap, int currency, weapon *A, int n) {
+    Protagonista(curMap, '@', 1, 1, 100, currency, A, n);
+}

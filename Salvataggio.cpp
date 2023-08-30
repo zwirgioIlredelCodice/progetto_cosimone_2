@@ -226,7 +226,6 @@ void Salvataggio::get_protagonista() {
 
         m->protagonista.newWeapon(w);
     }
-
 }
 
 void Salvataggio::set_mapList() {
@@ -349,3 +348,56 @@ void Salvataggio::deleteall() {
 }
 
 Salvataggio::Salvataggio() {}
+
+void Salvataggio::save_gameover() {
+    deleteall();
+    // Salvare le cose del personaggio tipo i potenziamenti di velocità ... e monete
+    Protagonista* p = &m->protagonista;
+    set_int("p_currency", p->getCurrency());
+    set_int("p_n_weap", p->getN_weap());
+
+    int n_weap = p->getN_weap();
+    weapon* weapons = p->getWeapons();
+    for (int i = 0; i < n_weap; i++) {
+        string basename = "weapons[" + to_string(i) + "]";
+        set_string(basename + "name", weapons[i].name);
+        set_int(basename + "damage", weapons[i].damage);
+        set_int(basename + "scope", weapons[i].scope);
+    }
+}
+
+void Salvataggio::restore_newgame() {
+    int p_currency = get_int("p_currency");
+    int p_n_weap = get_int("p_n_weap");
+
+    m->protagonista = Protagonista(&m->maps, p_currency , m->weapon_array, p_n_weap);
+
+    int n_weap = get_int("p_n_weap");
+    for (int i = 0; i < n_weap; i++) {
+        weapon w;
+        string basename = "weapons[" + to_string(i) + "]";
+        w.name = get_string(basename + "name");
+        w.damage = get_int(basename + "damage");
+        w.scope = get_int(basename + "scope");
+
+        m->protagonista.newWeapon(w);
+    }
+}
+
+bool Salvataggio::is_game_saved() {
+    load();
+    if (empty() || datalist.isin("is_game_saved")) return true;
+    else return false;
+}
+
+bool Salvataggio::empty() {
+    ifstream file;
+    file.open(namefile); // apre il file in modalità lettura
+
+    if (file.is_open()) { // se esiste e si può leggere
+        // controllo che non sia vuoto
+        file.seekg(0, ios::end);
+        if (file.tellg() == 0) return true;
+        else return false;
+    } else return true;
+}

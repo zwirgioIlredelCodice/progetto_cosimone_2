@@ -12,7 +12,7 @@ manager::manager() {
     srand(666123); // da cambiare
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 1, 1, '@', 1000, 10, this->weapon_array, 1);
+    protagonista = Protagonista(&maps, 10, this->weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
 }
 
@@ -84,6 +84,14 @@ void manager::menu() {
 }
 
 void manager::new_game() {
+    if (!salvataggio->empty()) {
+        if (salvataggio->is_game_saved()) {
+            salvataggio->save_gameover();
+            salvataggio->restore_newgame();
+        } else {
+            salvataggio->restore_newgame();
+        }
+    }
     // da cambiare
     next_room();
 
@@ -96,11 +104,10 @@ void manager::new_game() {
 }
 
 void manager::resume() {
-    salvataggio->restore_gamestate();
+    if (salvataggio->is_game_saved()) salvataggio->restore_gamestate();
 }
 
 void manager::next_room() {
-    salvataggio->deleteall();
     new_room();
     maps.play();
     /*

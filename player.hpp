@@ -20,6 +20,7 @@ class Protagonista
     public:
         Protagonista();
         Protagonista(mapList* curMap, int y, int x, char c, int life, int currency, weapon A[], int n);
+        Protagonista(mapList* curMap, int currency, weapon A[], int n);
 
         void mvup();
         void mvdown();

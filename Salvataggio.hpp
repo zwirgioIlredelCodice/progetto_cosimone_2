@@ -65,6 +65,10 @@ public:
     void save();
     // cancella tutti i salvataggi
     void deleteall();
+    // ritorna true se non c'è niente di salvato
+    bool empty();
+    // ritorna true se c'è una partita salvata
+    bool is_game_saved();
 
     // data una stringa nome, ritorna il valore (stringa) associato a quel nome
     string get_string(string name);
@@ -86,6 +90,11 @@ public:
 
     void save_gamestate();
     void restore_gamestate();
+
+    // da chiamare quando il personaggio muore (salvare il personaggio)
+    void save_gameover();
+    // da chiamare quando si comincia un nuovo gioco (inizializzare il personaggio)
+    void restore_newgame();
 };
 
 
