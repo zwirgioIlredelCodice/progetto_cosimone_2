@@ -76,6 +76,8 @@ void manager::menu() {
                 else if (choices[highlight] == "Quit") {
                     quit();
                     terminate = true;
+                    endwin();
+                    exit(0);
                 }
             /*case KEY_F(1):
                 quit = true;
@@ -110,8 +112,8 @@ void manager::new_game() {
 }
 
 void manager::resume() {
-    if (salvataggio->is_game_saved()) salvataggio->restore_gamestate();
-    else maps.play();
+    if (in_game) play_map();
+    else if (salvataggio->is_game_saved()) salvataggio->restore_gamestate();
 }
 
 void manager::next_room() {
@@ -121,7 +123,7 @@ void manager::next_room() {
         new_room();
     }
 
-    maps.play();
+    play_map();
     /*
      * DEVE
      * salvare lo stato della stanza e passare a quella dopo ripristinandola come salvata
@@ -155,4 +157,65 @@ void manager::quit() {
 
 void manager::gameover() {
     salvataggio->save_gameover();
+}
+
+void manager::play_map() {
+    clear();
+    WINDOW* playwin = maps.getWin();
+
+    clear();
+    initscr();
+    noecho();
+    cbreak();
+    keypad(playwin, true);
+    curs_set(0);
+
+    nodelay(playwin, true);
+    refresh();
+    wrefresh(playwin);
+
+    auto startTime = chrono::steady_clock::now();
+
+    int index = maps.getIndex();
+    map* maps_array = maps.getMaps();
+
+    do
+    {
+        if (wgetch(playwin) == 'm') {
+            menu();
+        }
+        usleep(100000);
+        protagonista.getmv();
+
+        for(int i = 0; i < maps_array[index].gobIndex; i++)
+        {
+            maps_array[index].gob[i]->display();
+            protagonista.getmv();
+        }
+
+        for(int i = 0; i < maps_array[index].arcIndex; i++)
+        {
+            maps_array[index].arc[i]->display();
+        }
+
+        wrefresh(playwin);
+
+        protagonista.getmv();
+
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
+        {
+            for(int i = 0; i < maps_array[index].gobIndex; i++)
+            {
+                maps_array[index].gob[i]->getmv();
+                maps_array[index].gob[i]->display();
+                wrefresh(playwin);
+            }
+        }
+
+        wrefresh(playwin);
+        refresh();
+    }
+    while (true);  // termina con ctrl C
+
+    endwin();
 }

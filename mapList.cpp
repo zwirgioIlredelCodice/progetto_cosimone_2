@@ -32,63 +32,6 @@ void mapList::prev() {
 
 }
 
-void mapList::play() { // da implementare
-    WINDOW* playwin = getWin();
-
-    clear();
-    initscr();
-    noecho();
-    cbreak();
-    keypad(playwin, true);
-    curs_set(0);
-
-    nodelay(playwin, 1);
-    refresh();
-    wrefresh(playwin);
-
-    auto startTime = chrono::steady_clock::now();
-
-    do
-    {
-        usleep(100000);
-        mainCh->getmv();
-
-        for(int i = 0; i < maps[index].gobIndex; i++)
-        {
-            maps[index].gob[i]->display();
-            mainCh->getmv();
-        }
-
-        for(int i = 0; i < maps[index].arcIndex; i++)
-        {
-            maps[index].arc[i]->display();
-        }
-
-        wrefresh(playwin);
-
-        mainCh->getmv();
-
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
-        {
-            for(int i = 0; i < maps[index].gobIndex; i++)
-            {
-                maps[index].gob[i]->getmv();
-                maps[index].gob[i]->display();
-                wrefresh(playwin);
-            }
-        }
-
-        wrefresh(playwin);
-        refresh();
-    }
-    while (true);  // termina con ctrl C
-
-    //
-    while(wgetch(playwin) != ' ') {
-        sleep(1);
-    }
-    endwin();
-}
 
 void mapList::checkGoblin(int x, int y, int damage){
     bool flag = false;

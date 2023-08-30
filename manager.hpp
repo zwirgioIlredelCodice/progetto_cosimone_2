@@ -30,6 +30,8 @@ public:
     void gameover();
     void quit();
 
+    void play_map();
+
     void new_room();
     void next_room();
     void prev_room();

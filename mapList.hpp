@@ -92,11 +92,6 @@ public:
     void prev();
 
     /*
-     * funzione che "gioca" la mappa
-     */
-    void play();
-
-    /*
     * effettuano il danno ai nemici nella posizione data
     */
     void checkGoblin(int x, int y, int damage);
