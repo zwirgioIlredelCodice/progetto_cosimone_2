@@ -28,6 +28,7 @@ public:
     void new_game();
     void resume();
     void gameover();
+    void reset();
     void quit();
 
     void play_map();

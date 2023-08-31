@@ -117,7 +117,7 @@ map::map(int maptype) {
 }
 
 void map::init_win() {
-    WINDOW* win = newwin(MAP_XMAX, MAP_YMAX, 0, 0);
+    WINDOW* win = newwin(MAP_YMAX, MAP_XMAX, 0, 0);
     this->win = win;
     draw_map();
 }
@@ -129,7 +129,7 @@ map::map() {
 }
 
 void map::draw_map() {
-    for (int i = 0; i < MAP_XMAX; i++) {
+    for (int i = 0; i < MAP_YMAX; i++) {
         mvwprintw(win, i, 0, "%s", maps[this->mapType][i]);
         box(win, 0, 0);
     }

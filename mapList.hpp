@@ -20,12 +20,12 @@ class Goblin;
 
 class Protagonista;
 
-#define MAP_XMAX 20
-#define MAP_YMAX 100
+#define MAP_YMAX 20
+#define MAP_XMAX 100
 
 #define MAP_NUMBER 1
 
-const char maps[MAP_NUMBER][MAP_XMAX][MAP_YMAX+1] = {
+const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
 {
     "                                                                                                   ",
     "                                                                         |                         ",

@@ -107,10 +107,9 @@ int Protagonista::getmv(){
 
 void Protagonista::display()
 {
-    mvwprintw(stdscr, 30, 60, "                 ");
-    mvwprintw(stdscr, 32, 60, "                             ");
-    mvwprintw(stdscr, 30, 60, "Life : %d", getLife());
-    mvwprintw(stdscr, 32, 60, "Currency : %d", getCurrency());
+    mvwprintw(stdscr, MAP_YMAX + 1, 10, "Life : %d", getLife());
+    mvwprintw(stdscr, MAP_YMAX + 2, 10, "Currency : %d", getCurrency());
+    mvwprintw(stdscr, MAP_YMAX + 3, 10, "Hold m to open the menu");
     mvwaddch(listMap->getMap().win, yLoc, xLoc, character);
 }
 

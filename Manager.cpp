@@ -71,7 +71,7 @@ void Manager::menu() {
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
                 }
                 else if (choices[highlight] == "Delete saves") {
-                    salvataggio->deleteall();
+                    reset();
                 }
                 else if (choices[highlight] == "Quit") {
                     quit();
@@ -159,7 +159,6 @@ void Manager::quit() {
      * salvare lo stato del gioco e permettere la terminazione del programma
      */
     if (in_game) {
-        salvataggio->set_int("is_game_saved", 1);
         salvataggio->save_gamestate();
     } else {
         salvataggio->save_gameover();
@@ -226,4 +225,9 @@ void Manager::play_map() {
     while (true);  // termina con ctrl C
 
     endwin();
+}
+
+void Manager::reset() {
+    in_game = false;
+    salvataggio->deleteall();
 }

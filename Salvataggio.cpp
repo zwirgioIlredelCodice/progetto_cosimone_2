@@ -214,7 +214,7 @@ void Salvataggio::get_protagonista() {
     int p_y = get_int("p_y");
     int p_n_weap = get_int("p_n_weap");
 
-    manager->protagonista = Protagonista(&manager->maps, p_x, p_y, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
+    manager->protagonista = Protagonista(&manager->maps, p_y, p_x, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
     weapon* weapons = manager->protagonista.getWeapons();
 
     int n_weap = get_int("p_n_weap");
@@ -328,6 +328,8 @@ void Salvataggio::get_mapList() {
 }
 
 void Salvataggio::save_gamestate() {
+    deleteall();
+    set_int("is_game_saved", 1);
     set_protagonista();
     set_mapList();
 
@@ -375,7 +377,7 @@ void Salvataggio::restore_newgame() {
 
     int n_weap = get_int("p_n_weap");
     manager->protagonista = Protagonista(&manager->maps, 1, 1, '@', 100, 0, manager->weapon_array, n_weap);
-
+    weapon* weapons = manager->protagonista.getWeapons();
     for (int i = 0; i < n_weap; i++) {
         weapon w;
         string basename = "weapons[" + to_string(i) + "]";
@@ -383,7 +385,7 @@ void Salvataggio::restore_newgame() {
         w.damage = get_int(basename + "damage");
         w.scope = get_int(basename + "scope");
 
-        manager->protagonista.newWeapon(w);
+        weapons[i] = w;
     }
 }
 
