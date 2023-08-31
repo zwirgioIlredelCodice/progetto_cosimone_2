@@ -112,8 +112,14 @@ void manager::new_game() {
 }
 
 void manager::resume() {
-    if (in_game) play_map();
-    else if (salvataggio->is_game_saved()) salvataggio->restore_gamestate();
+    if (in_game) {
+        in_game = true;
+        play_map();
+    } else if (salvataggio->is_game_saved()) {
+        in_game = true;
+        salvataggio->restore_gamestate();
+        play_map();
+    }
 }
 
 void manager::next_room() {
@@ -144,6 +150,7 @@ void manager::new_room() {
      * decidere una stanza a caso e inizializzarla con tutti i nemici (influenzato dalla difficoltà)
      */
     maps.add(map(0));
+    maps.addEnemys();
 }
 
 void manager::quit() {
@@ -151,17 +158,24 @@ void manager::quit() {
      * DEVE
      * salvare lo stato del gioco e permettere la terminazione del programma
      */
-    if (in_game) salvataggio->save_gamestate();
-    else salvataggio->save_gameover();
+    if (in_game) {
+        salvataggio->set_int("is_game_saved", 1);
+        salvataggio->save_gamestate();
+    } else {
+        salvataggio->save_gameover();
+    }
 }
 
 void manager::gameover() {
     salvataggio->save_gameover();
+    in_game = false;
 }
 
 void manager::play_map() {
     clear();
     WINDOW* playwin = maps.getWin();
+    map thismap = maps.getMap();
+    thismap.draw_map();
 
     clear();
     initscr();
@@ -184,13 +198,12 @@ void manager::play_map() {
         if (wgetch(playwin) == 'm') {
             menu();
         }
-        usleep(100000);
+        usleep(10000);
         protagonista.getmv();
 
         for(int i = 0; i < maps_array[index].gobIndex; i++)
         {
             maps_array[index].gob[i]->display();
-            protagonista.getmv();
         }
 
         for(int i = 0; i < maps_array[index].arcIndex; i++)

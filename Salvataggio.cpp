@@ -312,7 +312,7 @@ void Salvataggio::get_mapList() {
         }
 
         for (int j = 0; j < gobIndex; j++) {
-            string gobname = basename + "gob[" + to_string(gobIndex) + "]";
+            string gobname = basename + "gob[" + to_string(j) + "]";
             int life = get_int(gobname + "life");
             int damage = get_int(gobname + "damage");
             int yLoc = get_int(gobname + "yLoc");

@@ -27,16 +27,16 @@ class Protagonista;
 
 const char maps[MAP_NUMBER][MAP_XMAX][MAP_YMAX+1] = {
 {
-    "                                                                                                    ",
-    "                                                                         |                          ",
-    "                                                                         |                          ",
-    "                                                                         |                          ",
-    "                                                                         |                          ",
-    "                                #######                                  |                          ",
-    "                                #######                                                             ",
-    "                                #######                                                             ",
-    "                                #######                                                             ",
-    "                                                                                                    ",
+    "                                                                                                   ",
+    "                                                                         |                         ",
+    "                                                                         |                         ",
+    "                                                                         |                         ",
+    "                                                                         |                         ",
+    "                                #######                                  |                         ",
+    "                                #######                                                            ",
+    "                                #######                                                            ",
+    "                                #######                                                            ",
+    "                                                                                                   ",
     "                                                                                                   ",
     "                                                                                                   ",
     "                                                                                                   ",
@@ -59,6 +59,7 @@ public:
     int gobIndex;
     int mapType;
 
+    void draw_map();
     void init_win();
     map();
     map(int mapType);
