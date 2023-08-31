@@ -190,11 +190,11 @@ void Manager::play_map() {
     auto startTime = chrono::steady_clock::now();
 
     int index = maps.getIndex();
-   // map* maps_array = maps.getMaps();
+    map* maps_array = maps.getMaps();
 
     do
     {
-        /*  // con questo non si muove il goblin perche si aspetta la m
+        /*
         if (wgetch(playwin) == 'm') {
             menu();
         }
@@ -202,22 +202,22 @@ void Manager::play_map() {
          */
         protagonista.getmv();
 
-        for(int i = 0; i < maps.getMap().gobIndex; i++)
+        for(int i = 0; i < maps_array[index].gobIndex; i++)
         {
-            maps.getMap().gob[i]->display();
+            maps_array[index].gob[i]->display();
         }
 
-        for(int i = 0; i < maps.getMap().arcIndex; i++)
+        for(int i = 0; i < maps_array[index].arcIndex; i++)
         {
-            maps.getMap().arc[i]->display();
+            maps_array[index].arc[i]->display();
         }
 
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
-            for(int i = 0; i < maps.getMap().gobIndex; i++)
+            for(int i = 0; i < maps_array[index].gobIndex; i++)
             {
-                maps.getMap().gob[i]->getmv();
-                maps.getMap().gob[i]->display();
+                maps_array[index].gob[i]->getmv();
+                maps_array[index].gob[i]->display();
             }
         }
 
