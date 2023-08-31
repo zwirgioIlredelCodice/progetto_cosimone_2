@@ -3,12 +3,12 @@
 //
 #include <curses.h>
 #include <cstdlib>
-#include "manager.hpp"
+#include "Manager.hpp"
 #include "player.hpp"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
-manager::manager() {
+Manager::Manager() {
     srand(666123); // da cambiare
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
@@ -17,7 +17,7 @@ manager::manager() {
     in_game = false;
 }
 
-void manager::menu() {
+void Manager::menu() {
     initscr();
     noecho();
     cbreak();
@@ -90,7 +90,7 @@ void manager::menu() {
     endwin();
 }
 
-void manager::new_game() {
+void Manager::new_game() {
     in_game = true;
     if (!salvataggio->empty()) {
         if (salvataggio->is_game_saved()) {
@@ -111,7 +111,7 @@ void manager::new_game() {
      */
 }
 
-void manager::resume() {
+void Manager::resume() {
     if (in_game) {
         in_game = true;
         play_map();
@@ -122,7 +122,7 @@ void manager::resume() {
     }
 }
 
-void manager::next_room() {
+void Manager::next_room() {
     if (maps.hasNext()) {
         maps.next();
     } else {
@@ -138,13 +138,13 @@ void manager::next_room() {
      */
 }
 
-void manager::prev_room() {
+void Manager::prev_room() {
     if (maps.hasPrev()) {
         maps.prev();
     }
 }
 
-void manager::new_room() {
+void Manager::new_room() {
     /*
      * DEVE
      * decidere una stanza a caso e inizializzarla con tutti i nemici (influenzato dalla difficoltà)
@@ -153,7 +153,7 @@ void manager::new_room() {
     maps.addEnemys();
 }
 
-void manager::quit() {
+void Manager::quit() {
     /*
      * DEVE
      * salvare lo stato del gioco e permettere la terminazione del programma
@@ -166,12 +166,12 @@ void manager::quit() {
     }
 }
 
-void manager::gameover() {
+void Manager::gameover() {
     salvataggio->save_gameover();
     in_game = false;
 }
 
-void manager::play_map() {
+void Manager::play_map() {
     clear();
     WINDOW* playwin = maps.getWin();
     map thismap = maps.getMap();
@@ -211,17 +211,12 @@ void manager::play_map() {
             maps_array[index].arc[i]->display();
         }
 
-        wrefresh(playwin);
-
-        protagonista.getmv();
-
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
         {
             for(int i = 0; i < maps_array[index].gobIndex; i++)
             {
                 maps_array[index].gob[i]->getmv();
                 maps_array[index].gob[i]->display();
-                wrefresh(playwin);
             }
         }
 

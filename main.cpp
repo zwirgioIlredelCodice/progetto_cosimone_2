@@ -1,11 +1,11 @@
 
 
-#include "manager.hpp"
+#include "Manager.hpp"
 
 using namespace std;
 
 int main() {
-    manager gamenmanager;
+    Manager gamenmanager;
     gamenmanager.menu();
 
     /*

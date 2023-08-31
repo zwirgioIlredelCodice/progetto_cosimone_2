@@ -120,8 +120,8 @@ void s_list::free() {
 }
 
 
-Salvataggio::Salvataggio(manager* m, string namefile) {
-    this->m = m;
+Salvataggio::Salvataggio(Manager* manager, string namefile) {
+    this->manager = manager;
     this->namefile = namefile;
 }
 
@@ -190,7 +190,7 @@ void Salvataggio::remove(string name) {
 }
 
 void Salvataggio::set_protagonista() {
-    Protagonista* p = &m->protagonista;
+    Protagonista* p = &manager->protagonista;
     set_int("p_life", p->getLife());
     set_int("p_currency", p->getCurrency());
     set_int("p_x", p->positionX());
@@ -214,7 +214,8 @@ void Salvataggio::get_protagonista() {
     int p_y = get_int("p_y");
     int p_n_weap = get_int("p_n_weap");
 
-    m->protagonista = Protagonista(&m->maps, p_x, p_y, '@', p_life, p_currency , m->weapon_array, p_n_weap);
+    manager->protagonista = Protagonista(&manager->maps, p_x, p_y, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
+    weapon* weapons = manager->protagonista.getWeapons();
 
     int n_weap = get_int("p_n_weap");
     for (int i = 0; i < n_weap; i++) {
@@ -224,12 +225,12 @@ void Salvataggio::get_protagonista() {
         w.damage = get_int(basename + "damage");
         w.scope = get_int(basename + "scope");
 
-        m->protagonista.newWeapon(w);
+        weapons[i] = w;
     }
 }
 
 void Salvataggio::set_mapList() {
-    mapList* ml = m->protagonista.getMapList();
+    mapList* ml = manager->protagonista.getMapList();
     set_int("ml_n", ml->getN());
     set_int("ml_index", ml->getIndex());
 
@@ -282,8 +283,9 @@ void Salvataggio::set_mapList() {
 }
 
 void Salvataggio::get_mapList() {
-    mapList* ml = &m->maps;
-    Protagonista* p = &m->protagonista;
+    mapList* ml = &manager->maps;
+    ml->clear();
+    Protagonista* p = &manager->protagonista;
 
     int ml_index = get_int("ml_index");
     ml->setIndex(ml_index);
@@ -352,7 +354,7 @@ Salvataggio::Salvataggio() {}
 void Salvataggio::save_gameover() {
     deleteall();
     // Salvare le cose del personaggio tipo i potenziamenti di velocità ... e monete
-    Protagonista* p = &m->protagonista;
+    Protagonista* p = &manager->protagonista;
     set_int("p_currency", p->getCurrency());
     set_int("p_n_weap", p->getN_weap());
 
@@ -372,7 +374,7 @@ void Salvataggio::restore_newgame() {
     int p_n_weap = get_int("p_n_weap");
 
     int n_weap = get_int("p_n_weap");
-    m->protagonista = Protagonista(&m->maps, 1, 1, '@', 100, 0, m->weapon_array, n_weap);
+    manager->protagonista = Protagonista(&manager->maps, 1, 1, '@', 100, 0, manager->weapon_array, n_weap);
 
     for (int i = 0; i < n_weap; i++) {
         weapon w;
@@ -381,7 +383,7 @@ void Salvataggio::restore_newgame() {
         w.damage = get_int(basename + "damage");
         w.scope = get_int(basename + "scope");
 
-        m->protagonista.newWeapon(w);
+        manager->protagonista.newWeapon(w);
     }
 }
 

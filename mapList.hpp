@@ -86,6 +86,8 @@ public:
 
     void remove(int mapIndex);
 
+    void clear();
+
     bool hasNext();
     void next();
 

@@ -12,7 +12,7 @@
 #define MENU_ENTRY 3
 class Salvataggio;
 
-class manager {
+class Manager {
 protected:
     // cose che servono al protagonista
 public:
@@ -22,7 +22,7 @@ public:
     Salvataggio* salvataggio;
     bool in_game;
 
-    manager();
+    Manager();
 
     void menu();
     void new_game();

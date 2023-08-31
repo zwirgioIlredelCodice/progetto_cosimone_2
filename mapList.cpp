@@ -21,6 +21,12 @@ void mapList::remove(int mapIndex){
         index --;
 
 }
+
+void mapList::clear() {
+    n = 0;
+    index = 0;
+}
+
 void mapList::next(){
     if (index < n-1) index++;
 

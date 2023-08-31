@@ -7,11 +7,11 @@
 
 #include <string>
 #include "player.hpp"
-#include "manager.hpp"
+#include "Manager.hpp"
 
 using namespace std;
 
-class manager;
+class Manager;
 
 class s_data {
 public:
@@ -53,11 +53,11 @@ class Salvataggio {
 protected:
     s_list datalist;
     string namefile;
-    manager* m;
+    Manager* manager;
 public:
     Salvataggio();
     // inizializza la classe saves sul file namefile
-    Salvataggio(manager* m, string namefile);
+    Salvataggio(Manager* manager, string namefile);
 
     // legge il file dei salvataggi e crea una lista con essi in modo da poterli leggere e scrivere
     void load();
