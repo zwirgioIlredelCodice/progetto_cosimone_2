@@ -78,6 +78,7 @@ protected:
 
 public:
     mapList();
+
     mapList(Protagonista *p);
     mapList(int n, int index, Protagonista *p);
 
