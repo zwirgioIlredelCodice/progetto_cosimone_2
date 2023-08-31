@@ -25,7 +25,11 @@ class Protagonista;
 
 #define MAP_NUMBER 1
 
-const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
+#define MAPTYPES 5
+WINDOW * mapArr [MAPTYPES];
+
+
+/*const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
 {
     "                                                                                                   ",
     "                                                                         |                         ",
@@ -48,7 +52,7 @@ const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
     "                                                                                                   ",
     "                                                                                                   ",
 },
-};
+};*/
 
 class map{
 public:
@@ -68,7 +72,7 @@ public:
 class mapList {
 protected:
     int n;  //capienza attuale array
-    map maps[10];
+    map* maps;
     int index; //mappa attualmente selezionata
     Protagonista *mainCh;
 
@@ -94,6 +98,7 @@ public:
     bool hasPrev();
     void prev();
 
+
     /*
     * effettuano il danno ai nemici nella posizione data
     */
@@ -118,5 +123,8 @@ public:
 
     void setIndex(int index);
 };
+
+void fillWwin ();
+void fillWobstacles ();
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
