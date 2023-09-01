@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <chrono>
+#include <string>
 // file in cui mettere le strutture dati per essere usate in tutti i file
 //include anche le librerie così da non doverle mettere in ogni file, basta includere questo file.
 

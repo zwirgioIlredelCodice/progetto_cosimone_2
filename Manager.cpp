@@ -92,6 +92,7 @@ void Manager::menu() {
 
 void Manager::new_game() {
     in_game = true;
+    fillWwin();
     if (!salvataggio->empty()) {
         if (salvataggio->is_game_saved()) {
             salvataggio->save_gameover();
@@ -179,7 +180,7 @@ void Manager::play_map() {
     clear();
     WINDOW* playwin = maps.getWin();
     map thismap = maps.getMap();
-    thismap.draw_map();
+    //thismap.draw_map();
 
     clear();
     initscr();

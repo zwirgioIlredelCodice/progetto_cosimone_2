@@ -8,7 +8,6 @@
 #define PROGETTO_COSIMONE_2_MAPLIST_HPP
 
 #include "nemici.hpp"
-#include "strutture.h"
 
 #define N_ENEM 10
 

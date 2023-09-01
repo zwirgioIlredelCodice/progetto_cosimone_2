@@ -6,7 +6,6 @@
 #define PROGETTO_COSIMONE_2_PLAYER_HPP
 
 
-#include "strutture.h"
 #include "mapList.hpp"
 
 //  using namespace std;

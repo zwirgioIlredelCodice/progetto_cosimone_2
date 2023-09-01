@@ -5,8 +5,6 @@
 #ifndef PROGETTO_COSIMONE_2_MANAGER_HPP
 #define PROGETTO_COSIMONE_2_MANAGER_HPP
 
-#include "player.hpp"
-#include "strutture.h"
 #include "Salvataggio.hpp"
 #include "Negozio.hpp"
 

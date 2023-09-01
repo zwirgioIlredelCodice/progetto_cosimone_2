@@ -5,7 +5,6 @@
 #ifndef PROGETTO_COSIMONE_2_NEGOZIO_HPP
 #define PROGETTO_COSIMONE_2_NEGOZIO_HPP
 
-#include "player.hpp"
 #include "Potenziamenti.hpp"
 #include "strutture.h"
 

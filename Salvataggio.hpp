@@ -5,7 +5,6 @@
 #ifndef PROGETTO_COSIMONE_2_SALVATAGGIO_HPP
 #define PROGETTO_COSIMONE_2_SALVATAGGIO_HPP
 
-#include <string>
 #include "player.hpp"
 #include "Manager.hpp"
 
