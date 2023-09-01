@@ -199,13 +199,13 @@ void Manager::play_map() {
 
     do
     {
-        /*
-        if (wgetch(playwin) == 'm') {
+
+        if (protagonista.getmv() == 'm') {
             menu();
         }
         usleep(10000);
-         */
-        protagonista.getmv();
+
+        //protagonista.getmv();
 
         for(int i = 0; i < maps_array[index].gobIndex; i++)
         {
