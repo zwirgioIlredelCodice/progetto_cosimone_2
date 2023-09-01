@@ -84,14 +84,14 @@ void s_list::remove(string name) {
                 if (t->next->name == name) {
                     s_data* temp = t->next;
                     t->next = t->next->next;
-                    delete temp;
+                    delete temp; // free memory
                     isdel = true;
                 }
                 if (!isdel && t != nullptr) {
                     if (t->name == name) {
                         s_data* temp = t;
                         t = t->next;
-                        delete temp;
+                        delete temp; // free memory
                     }
                 }
             }
@@ -114,7 +114,7 @@ void s_list::free() {
     while (t != nullptr) {
         s_data* tocanc = t;
         t = t->next;
-        delete tocanc;
+        delete tocanc; // free memory
     }
     head = nullptr;
 }
@@ -175,7 +175,7 @@ void Salvataggio::save() {
     ofstream file;
     file.open(namefile); // apre il file in modalità scrittura
 
-    if (file.is_open()) {
+    if (file.is_open()) { // se esiste e si può leggere
         s_data *t = datalist.head;
         while (t != nullptr) {
             file << t->name << '=' << t->value << endl;
@@ -191,6 +191,10 @@ void Salvataggio::remove(string name) {
 
 void Salvataggio::set_protagonista() {
     Protagonista* p = &manager->protagonista;
+
+    /*
+     * salva gli attributi base
+     */
     set_int("p_life", p->getLife());
     set_int("p_currency", p->getCurrency());
     set_int("p_x", p->positionX());
@@ -205,6 +209,9 @@ void Salvataggio::set_protagonista() {
     set_int("p_difficulty", p->getDifficulty());
 
 
+    /*
+     * salva le armi
+     */
     int n_weap = p->getN_weap();
     weapon* weapons = p->getWeapons();
     for (int i = 0; i < n_weap; i++) {
@@ -216,6 +223,9 @@ void Salvataggio::set_protagonista() {
 }
 
 void Salvataggio::get_protagonista() {
+    /*
+     * ripristina gli attributi base
+     */
     int p_life = get_int("p_life");
     int p_currency = get_int("p_currency");
     int p_x = get_int("p_x");
@@ -229,10 +239,14 @@ void Salvataggio::get_protagonista() {
     int p_coinPercent = get_int("p_coinPercent");
     int p_difficulty = get_int("p_difficulty");
 
+    // crea un nuovo protagonista e rimpiazza il vecchio
     manager->protagonista = Protagonista(&manager->maps, p_y, p_x, p_baseDamage, p_baseRange, p_armor, p_salesPercent,
                                          p_coinPercent, p_difficulty, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
     weapon* weapons = manager->protagonista.getWeapons();
 
+    /*
+     * ripristina le armi
+     */
     int n_weap = get_int("p_n_weap");
     for (int i = 0; i < n_weap; i++) {
         weapon w;
@@ -253,11 +267,17 @@ void Salvataggio::set_mapList() {
     int ml_n = ml->getN();
     map* ma = ml->getMaps();
     for (int i = 0; i < ml_n; i++) {
+        /*
+         * salva le mappe
+         */
         map m = ma[i];
         string basename = "maps[" + to_string(i) + "]";
 
         set_int(basename + "mapType", m.mapType);
 
+        /*
+         * salva i nemici
+         */
         int archIndex = 0; // numero di arcieri vivi
         for (int j = 0; j < m.arcIndex; j++) {
             if (m.arc[j]->retAlive()) {
@@ -309,6 +329,9 @@ void Salvataggio::get_mapList() {
     int ml_n = get_int("ml_n");
     map* ma = ml->getMaps();
     for (int i = 0; i < ml_n; i++) {
+        /*
+         * ripristina la mappa
+         */
         map m = ma[i];
         string basename = "maps[" + to_string(i) + "]";
 
@@ -316,9 +339,12 @@ void Salvataggio::get_mapList() {
         int gobIndex = get_int(basename + "gobIndex");
         int arcIndex = get_int(basename + "arcIndex");
 
-        m = map(mapType);
+        m = map(mapType); // crea una nuova mappa e la aggiunge
         ml->add(m);
 
+        /*
+         * ripristina i nemici
+         */
         for (int j = 0; j < arcIndex; j++) {
             string arcname = basename + "arch[" + to_string(j) + "]";
             int life = get_int(arcname + "life");
@@ -326,7 +352,7 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(arcname + "yLoc");
             int xLoc = get_int(arcname + "xLoc");
             int value = get_int(arcname + "value");
-            ml->addArch(life, damage, xLoc, yLoc, value);
+            ml->addArch(life, damage, xLoc, yLoc, value); // aggiunge l'arciere
         }
 
         for (int j = 0; j < gobIndex; j++) {
@@ -336,11 +362,11 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(gobname + "yLoc");
             int xLoc = get_int(gobname + "xLoc");
             int value = get_int(gobname + "value");
-            ml->addGob(life, damage, xLoc, yLoc, value);
+            ml->addGob(life, damage, xLoc, yLoc, value); // aggiunge il goblin
         }
     }
 
-    p->setMapList(ml);
+    p->setMapList(ml); // aggiorna le mappe del manager
 }
 
 void Salvataggio::save_gamestate() {
@@ -396,7 +422,6 @@ void Salvataggio::save_gameover() {
 
 void Salvataggio::restore_newgame() {
     int p_currency = get_int("p_currency");
-    int p_n_weap = get_int("p_n_weap");
     int p_baseDamage = get_int("p_baseDamage");
     int p_baseRange = get_int("p_baseRange");
     int p_armor = get_int("p_armor");
@@ -422,10 +447,10 @@ void Salvataggio::restore_newgame() {
 bool Salvataggio::is_game_saved() {
     if (empty()) return false;
     else {
-        if (datalist.isin("is_game_saved")) return true;
+        if (datalist.isin("is_game_saved")) return true; // controlla se è salvato in memoria
         else {
             load();
-            if (datalist.isin("is_game_saved")) return true;
+            if (datalist.isin("is_game_saved")) return true; // controlla se è salvato sul file
             else return false;
         }
     }
