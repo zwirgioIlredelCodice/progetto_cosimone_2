@@ -7,10 +7,8 @@
 
 
 void mapList::add(map m) {
-        if (n < 10){
-            maps[n] = m;
-            n++;
-        }
+    maps[n] = m;
+    n++;
 }
 
 void mapList::remove(int mapIndex){
@@ -95,6 +93,7 @@ mapList::mapList(int n, int index, Protagonista *p)
     this->mainCh = p;
 }
 
+
 WINDOW *mapList::getWin() {
     return maps[index].win;
 }
@@ -117,9 +116,9 @@ map::map(int maptype) {
 }
 
 void map::init_win() {
-    WINDOW* win = newwin(MAP_YMAX, MAP_XMAX, 0, 0);
+    WINDOW* win = mapArr[mapType];
     this->win = win;
-    draw_map();
+    //draw_map();
 }
 
 map::map() {
@@ -127,13 +126,13 @@ map::map() {
     this->arcIndex = 0;
     this->gobIndex = 0;
 }
-
+/*
 void map::draw_map() {
     for (int i = 0; i < MAP_YMAX; i++) {
         mvwprintw(win, i, 0, "%s", maps[this->mapType][i]);
         box(win, 0, 0);
     }
-}
+}*/
 
 int mapList::getGobNumber()
 {
@@ -171,4 +170,34 @@ bool mapList::hasPrev() {
     if (index > 0) return true;
     else return false;
 }
+
+void fillWwin () {
+    WINDOW * one = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
+    box(one, 0, 0);
+    mapArr[0]=one;
+
+    WINDOW * two = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
+    box(one, 0, 0);
+    mapArr[1]=two;
+
+    WINDOW * three = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
+    box(one, 0, 0);
+    mapArr[2]=three;
+
+    WINDOW * four = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
+    box(one, 0, 0);
+    mapArr[3]=four;
+
+    WINDOW * five = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
+    box(one, 0, 0);
+    mapArr[4]=five;
+
+    fillWobstacles();
+}
+
+void fillWobstacles () {
+    mvwprintw(mapArr[0], 5, 5, "mud");
+    //..., porta, $, vita
+}
+
 
