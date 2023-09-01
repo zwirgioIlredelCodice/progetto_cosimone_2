@@ -371,7 +371,7 @@ Salvataggio::Salvataggio() {}
 
 void Salvataggio::save_gameover() {
     deleteall();
-    // Salvare le cose del personaggio tipo i potenziamenti di velocità ... e monete
+    // Salvare le cose del personaggio tipo i Potenziamenti di velocità ... e monete
     Protagonista* p = &manager->protagonista;
     set_int("p_currency", p->getCurrency());
     set_int("p_n_weap", p->getN_weap());

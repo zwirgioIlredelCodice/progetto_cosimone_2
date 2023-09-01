@@ -2,15 +2,15 @@
 // Created by fabione on 3/17/23.
 //
 
-#include "potenziamenti.hpp"
+#include "Potenziamenti.hpp"
 
-potenziamenti::potenziamenti(Protagonista* p, effects effect, int val) {
+Potenziamenti::Potenziamenti(Protagonista* p, effects effect, int val) {
     this->protagonista = p;
     this->effect = effect;
     this->val = val;
 }
 
-void potenziamenti::apply() {
+void Potenziamenti::apply() {
     switch (effect) {
         case nothing:
             break;
@@ -40,7 +40,7 @@ void potenziamenti::apply() {
     }
 }
 
-string potenziamenti::to_string() {
+string Potenziamenti::to_string() {
     string s = "";
     switch (effect) {
         case nothing:
@@ -73,10 +73,10 @@ string potenziamenti::to_string() {
     return s;
 }
 
-int potenziamenti::get_val() {
+int Potenziamenti::get_val() {
     return val;
 }
 
-effects potenziamenti::get_effect() {
+effects Potenziamenti::get_effect() {
     return effect;
 }

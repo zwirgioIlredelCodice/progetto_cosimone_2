@@ -6,7 +6,7 @@
 #include "Negozio.hpp"
 #include "strutture.h"
 
-itemPotenziamenti::itemPotenziamenti(potenziamenti potenziamento, int cost) {
+itemPotenziamenti::itemPotenziamenti(Potenziamenti potenziamento, int cost) {
     this->potenziamento = potenziamento;
     this->cost = cost;
     this->can_buy = true;
@@ -27,13 +27,13 @@ Negozio::Negozio(Protagonista *protagonista) {
     this->pdifficulty = protagonista->getDifficulty();
     populate_negozio();
 
-    pot_choices[0] = itemPotenziamenti(potenziamenti(protagonista, life, 25), 10);
-    pot_choices[1] = itemPotenziamenti(potenziamenti(protagonista, damage, 5), 15);
-    pot_choices[2] = itemPotenziamenti(potenziamenti(protagonista, range, 5), 15);
-    pot_choices[3] = itemPotenziamenti(potenziamenti(protagonista, armor, 2), 20);
-    pot_choices[4] = itemPotenziamenti(potenziamenti(protagonista, sales, 10), 25);
-    pot_choices[5] = itemPotenziamenti(potenziamenti(protagonista, coins, 10), 30);
-    pot_choices[6] = itemPotenziamenti(potenziamenti(protagonista, difficulty, -2), 40);
+    pot_choices[0] = itemPotenziamenti(Potenziamenti(protagonista, life, 25), 10);
+    pot_choices[1] = itemPotenziamenti(Potenziamenti(protagonista, damage, 5), 15);
+    pot_choices[2] = itemPotenziamenti(Potenziamenti(protagonista, range, 5), 15);
+    pot_choices[3] = itemPotenziamenti(Potenziamenti(protagonista, armor, 2), 20);
+    pot_choices[4] = itemPotenziamenti(Potenziamenti(protagonista, sales, 10), 25);
+    pot_choices[5] = itemPotenziamenti(Potenziamenti(protagonista, coins, 10), 30);
+    pot_choices[6] = itemPotenziamenti(Potenziamenti(protagonista, difficulty, -2), 40);
 
     weapon_choices[0] = itemWeapon((weapon){"arco", 5, 10}, 20);
     weapon_choices[1] = itemWeapon((weapon){"spada", 10, 5}, 20);
@@ -177,7 +177,7 @@ itemPotenziamenti Negozio::adjustDifficultyPot(itemPotenziamenti ipot) {
         default:
             break;
     }
-    return itemPotenziamenti(potenziamenti(protagonista, effect, val), cost);
+    return itemPotenziamenti(Potenziamenti(protagonista, effect, val), cost);
 }
 
 itemWeapon Negozio::adjustDifficultyWeapon(itemWeapon iwp) {

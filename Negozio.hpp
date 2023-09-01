@@ -6,7 +6,7 @@
 #define PROGETTO_COSIMONE_2_NEGOZIO_HPP
 
 #include "player.hpp"
-#include "potenziamenti.hpp"
+#include "Potenziamenti.hpp"
 #include "strutture.h"
 
 #define NEGOZIO_POT_CHOICE 7
@@ -16,11 +16,11 @@
 
 class itemPotenziamenti {
 public:
-    potenziamenti potenziamento = potenziamenti(nullptr, nothing);
+    Potenziamenti potenziamento = Potenziamenti(nullptr, nothing);
     int cost;
     bool can_buy;
 
-    itemPotenziamenti(potenziamenti potenziamento, int cost);
+    itemPotenziamenti(Potenziamenti potenziamento, int cost);
     itemPotenziamenti();
 };
 
