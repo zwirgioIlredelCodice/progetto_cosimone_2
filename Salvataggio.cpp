@@ -197,6 +197,14 @@ void Salvataggio::set_protagonista() {
     set_int("p_y", p->positionY());
     set_int("p_n_weap", p->getN_weap());
 
+    set_int("p_baseDamage", p->getBaseDamage());
+    set_int("p_baseRange", p->getBaseRange());
+    set_int("p_armor", p->getArmor());
+    set_int("p_salesPercent", p->getSalesPercent());
+    set_int("p_coinPercent", p->getCoinPercent());
+    set_int("p_difficulty", p->getDifficulty());
+
+
     int n_weap = p->getN_weap();
     weapon* weapons = p->getWeapons();
     for (int i = 0; i < n_weap; i++) {
@@ -214,7 +222,15 @@ void Salvataggio::get_protagonista() {
     int p_y = get_int("p_y");
     int p_n_weap = get_int("p_n_weap");
 
-    manager->protagonista = Protagonista(&manager->maps, p_y, p_x, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
+    int p_baseDamage = get_int("p_baseDamage");
+    int p_baseRange = get_int("p_baseRange");
+    int p_armor = get_int("p_armor");
+    int p_salesPercent = get_int("p_salesPercent");
+    int p_coinPercent = get_int("p_coinPercent");
+    int p_difficulty = get_int("p_difficulty");
+
+    manager->protagonista = Protagonista(&manager->maps, p_y, p_x, p_baseDamage, p_baseRange, p_armor, p_salesPercent,
+                                         p_coinPercent, p_difficulty, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
     weapon* weapons = manager->protagonista.getWeapons();
 
     int n_weap = get_int("p_n_weap");
@@ -359,6 +375,13 @@ void Salvataggio::save_gameover() {
     Protagonista* p = &manager->protagonista;
     set_int("p_currency", p->getCurrency());
     set_int("p_n_weap", p->getN_weap());
+    set_int("p_baseDamage", p->getBaseDamage());
+    set_int("p_baseRange", p->getBaseRange());
+    set_int("p_armor", p->getArmor());
+    set_int("p_salesPercent", p->getSalesPercent());
+    set_int("p_coinPercent", p->getCoinPercent());
+    set_int("p_difficulty", p->getDifficulty());
+
 
     int n_weap = p->getN_weap();
     weapon* weapons = p->getWeapons();
@@ -374,9 +397,16 @@ void Salvataggio::save_gameover() {
 void Salvataggio::restore_newgame() {
     int p_currency = get_int("p_currency");
     int p_n_weap = get_int("p_n_weap");
+    int p_baseDamage = get_int("p_baseDamage");
+    int p_baseRange = get_int("p_baseRange");
+    int p_armor = get_int("p_armor");
+    int p_salesPercent = get_int("p_salesPercent");
+    int p_coinPercent = get_int("p_coinPercent");
+    int p_difficulty = get_int("p_difficulty");
 
     int n_weap = get_int("p_n_weap");
-    manager->protagonista = Protagonista(&manager->maps, 1, 1, '@', 100, 0, manager->weapon_array, n_weap);
+    manager->protagonista = Protagonista(&manager->maps, 1, 1, '@', 100, p_currency, p_baseDamage, p_baseRange, p_armor,
+                                         p_salesPercent, p_coinPercent, p_difficulty, manager->weapon_array, n_weap);
     weapon* weapons = manager->protagonista.getWeapons();
     for (int i = 0; i < n_weap; i++) {
         weapon w;

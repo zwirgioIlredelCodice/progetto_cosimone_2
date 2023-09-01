@@ -8,6 +8,7 @@
 #include "player.hpp"
 #include "strutture.h"
 #include "Salvataggio.hpp"
+#include "Negozio.hpp"
 
 #define MENU_ENTRY 3
 class Salvataggio;

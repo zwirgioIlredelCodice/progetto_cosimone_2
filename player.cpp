@@ -5,7 +5,8 @@
 
 #include "player.hpp"
 
-Protagonista::Protagonista(mapList *curMap, int y, int x, char c, int life, int currency, weapon A[], int n)
+Protagonista::Protagonista(mapList* curMap, int y, int x, char c, int life, int currency, int baseDamage, int baseRange,
+                           int armor, int salesPercent, int coinPercent, int difficulty , weapon A[], int n)
 {
     if (n > N_ARMI)
         this->n_weap = N_ARMI;
@@ -26,6 +27,13 @@ Protagonista::Protagonista(mapList *curMap, int y, int x, char c, int life, int 
     getmaxyx(listMap->getMap().win, yMax, xMax);
     keypad(listMap->getMap().win, 1);
     character = c;
+
+    this->baseDamage = baseDamage;
+    this->baseRange = baseRange;
+    this->armor = armor;
+    this->salesPercent = salesPercent;
+    this->coinPercent = coinPercent;
+    this->difficulty = difficulty;
 }
 
 void Protagonista::mvup() {
@@ -115,7 +123,7 @@ void Protagonista::display()
 
 void Protagonista::decreaseLife(int damage)
 {
-    this->life -= damage;
+    this->life -= (damage - armor);
 }
 
 void Protagonista::increaseLife(int life)
@@ -125,12 +133,12 @@ void Protagonista::increaseLife(int life)
 
 void Protagonista::increaseCurrency(int currency)
 {
-    this->currency += currency;
+    this->currency += (currency * coinPercent) / 100;
 }
 
 void Protagonista::decreaseCurrency(int currency)
 {
-    this->currency -= currency;
+    this->currency -= (currency - (currency % 100) * salesPercent);
 }
 
 void Protagonista::newWeapon(weapon Weapon)
@@ -213,12 +221,12 @@ char Protagonista::retChar()
 
 int Protagonista::retCurrentDamage()
 {
-    return weapons[weap_index].damage;
+    return weapons[weap_index].damage + baseDamage;
 }
 
 int Protagonista::retCurrentScope()
 {
-    return weapons[weap_index].scope;
+    return weapons[weap_index].scope + baseRange;
 }
 
 int Protagonista::getLife()
@@ -252,3 +260,55 @@ mapList *Protagonista::getMapList() {
 void Protagonista::setMapList(mapList* ml) {
     this->listMap = ml;
 }
+
+int Protagonista::getDifficulty() {
+    return difficulty;
+}
+
+void Protagonista::changeDifficulty(int value) {
+    if (difficulty + value >= 0) difficulty += value;
+}
+
+void Protagonista::increaseBaseDamage(int value) {
+    baseDamage += value;
+}
+
+void Protagonista::increaseBaseRange(int value) {
+    baseRange += value;
+}
+
+void Protagonista::increaseArmor(int value) {
+    armor += value;
+}
+
+void Protagonista::increaseSalesPercent(int value) {
+    if (salesPercent + value < 100) {
+        salesPercent += value;
+    }
+}
+
+void Protagonista::increaseCoinPercent(int value) {
+    coinPercent += value;
+}
+
+int Protagonista::getBaseDamage() {
+    return baseDamage;
+}
+
+int Protagonista::getBaseRange() {
+    return baseRange;
+}
+
+int Protagonista::getArmor() {
+    return armor;
+}
+
+int Protagonista::getCoinPercent() {
+    return coinPercent;
+}
+
+int Protagonista::getSalesPercent() {
+    return salesPercent;
+}
+
+

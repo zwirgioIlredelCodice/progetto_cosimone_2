@@ -19,7 +19,8 @@ class Protagonista
 {
     public:
         Protagonista();
-        Protagonista(mapList* curMap, int y, int x, char c, int life, int currency, weapon A[], int n);
+        Protagonista(mapList* curMap, int y, int x, char c, int life, int currency, int baseDamage, int baseRange,
+                     int armor, int salesPercent, int coinPercent, int difficulty , weapon A[], int n);
 
         void mvup();
         void mvdown();
@@ -87,11 +88,32 @@ class Protagonista
         weapon* getWeapons();
         mapList* getMapList();
 
+        int getBaseDamage();
+        int getBaseRange();
+        int getArmor();
+        int getCoinPercent();
+        int getSalesPercent();
+
+        void increaseBaseDamage(int value);
+        void increaseBaseRange(int value);
+        void increaseArmor(int value);
+        void increaseSalesPercent(int value);
+        void increaseCoinPercent(int value);
+
+        int getDifficulty();
+        void changeDifficulty(int value);
+
         void setMapList(mapList* ml);
 
     protected:
         int life;
         int currency;
+        int baseDamage;
+        int baseRange;
+        int armor; // ignora i danni del valore della armatura
+        int salesPercent; // percentuale di saldi nel Negozio (parte da 0% arriva a 100%)
+        int coinPercent; // percentuale di monete (parte da 100% )
+        int difficulty; // difficoltà del gioco (ogni nuova stanza aumenta di 1)
         int xLoc, yLoc, xMax, yMax;
         char character;
         mapList *listMap;

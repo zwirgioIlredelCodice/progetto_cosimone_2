@@ -9,7 +9,7 @@
 #include "potenziamenti.hpp"
 #include "strutture.h"
 
-#define NEGOZIO_POT_CHOICE 4
+#define NEGOZIO_POT_CHOICE 7
 #define NEGOZIO_WEAPON_CHOICE 2
 #define NEGOZIO_POTENZIAMENTI 3
 #define NEGOZIO_WEAPON 1
@@ -34,9 +34,10 @@ public:
     itemWeapon();
 };
 
-class negozio {
+class Negozio {
 protected:
     Protagonista* protagonista;
+    int pdifficulty;
     itemPotenziamenti pot_arr[NEGOZIO_POTENZIAMENTI];
     itemWeapon weapon_arr[NEGOZIO_WEAPON];
     string pot_arr_s[NEGOZIO_POTENZIAMENTI];
@@ -45,8 +46,10 @@ protected:
     itemPotenziamenti pot_choices[NEGOZIO_POT_CHOICE];
     itemWeapon weapon_choices[NEGOZIO_WEAPON_CHOICE];
 public:
-    negozio(Protagonista* protagonista);
+    Negozio(Protagonista* protagonista);
 
+    itemPotenziamenti adjustDifficultyPot(itemPotenziamenti ipot);
+    itemWeapon adjustDifficultyWeapon(itemWeapon iwp);
     void populate_negozio();
     bool buy_potenziamento(int index);
     bool buy_weapon(int index);

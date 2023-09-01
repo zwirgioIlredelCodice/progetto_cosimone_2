@@ -9,10 +9,10 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
 Manager::Manager() {
-    srand(666123); // da cambiare
+    srand(time(nullptr)); // da cambiare
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, weapon_array, 1);
+    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
     in_game = false;
 }
@@ -107,7 +107,7 @@ void Manager::new_game() {
      * DEVE
      * resettare tutto per cominciare una nuova partita
      * gestire quando si cambia mappa salvando robe
-     * fare entrare nel negozio quando richiesto
+     * fare entrare nel Negozio quando richiesto
      */
 }
 
@@ -149,6 +149,11 @@ void Manager::new_room() {
      * DEVE
      * decidere una stanza a caso e inizializzarla con tutti i nemici (influenzato dalla difficoltà)
      */
+    if (protagonista.getDifficulty() % 3 == 0) {
+        Negozio negozio(&protagonista);
+        negozio.room_enter();
+    }
+    protagonista.changeDifficulty(+1);
     maps.add(map(0));
     maps.addEnemys();
 }

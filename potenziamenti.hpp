@@ -9,9 +9,12 @@
 enum effects {
     nothing,
     life,
+    armor,
     damage,
     range,
-    speed
+    sales,
+    coins,
+    difficulty,
 };
 
 class potenziamenti {
@@ -23,8 +26,8 @@ public:
     potenziamenti(Protagonista* p, effects effect, int val = 0);
 
     void apply();
-    void remove();
-
+    int get_val();
+    effects get_effect();
     string to_string();
 };
 

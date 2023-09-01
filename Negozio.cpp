@@ -3,7 +3,7 @@
 //
 #include <cstdlib>
 #include <ncurses.h>
-#include "negozio.hpp"
+#include "Negozio.hpp"
 #include "strutture.h"
 
 itemPotenziamenti::itemPotenziamenti(potenziamenti potenziamento, int cost) {
@@ -22,35 +22,39 @@ itemWeapon::itemWeapon(weapon wp, int cost) {
 
 itemWeapon::itemWeapon(){};
 
-negozio::negozio(Protagonista *protagonista) {
+Negozio::Negozio(Protagonista *protagonista) {
     this->protagonista = protagonista;
+    this->pdifficulty = protagonista->getDifficulty();
     populate_negozio();
 
-    pot_choices[0] = itemPotenziamenti(potenziamenti(protagonista, life, 10), 10);
-    pot_choices[1] = itemPotenziamenti(potenziamenti(protagonista, damage, 10), 10);
-    pot_choices[2] = itemPotenziamenti(potenziamenti(protagonista, range, 10), 10);
-    pot_choices[3] = itemPotenziamenti(potenziamenti(protagonista, speed, 10), 10);
+    pot_choices[0] = itemPotenziamenti(potenziamenti(protagonista, life, 25), 10);
+    pot_choices[1] = itemPotenziamenti(potenziamenti(protagonista, damage, 5), 15);
+    pot_choices[2] = itemPotenziamenti(potenziamenti(protagonista, range, 5), 15);
+    pot_choices[3] = itemPotenziamenti(potenziamenti(protagonista, armor, 2), 20);
+    pot_choices[4] = itemPotenziamenti(potenziamenti(protagonista, sales, 10), 25);
+    pot_choices[5] = itemPotenziamenti(potenziamenti(protagonista, coins, 10), 30);
+    pot_choices[6] = itemPotenziamenti(potenziamenti(protagonista, difficulty, -2), 40);
 
     weapon_choices[0] = itemWeapon((weapon){"arco", 5, 10}, 20);
     weapon_choices[1] = itemWeapon((weapon){"spada", 10, 5}, 20);
 }
 
-void negozio::populate_negozio() {
+void Negozio::populate_negozio() {
     for (int i = 0; i < NEGOZIO_POTENZIAMENTI; i++) {
         int random = rand() % NEGOZIO_POTENZIAMENTI;
-        pot_arr[i] = pot_choices[random];
+        pot_arr[i] = adjustDifficultyPot(pot_choices[random]);
         pot_arr_s[i] = pot_arr[i].potenziamento.to_string();
         pot_arr_s[i].append(", " + to_string(pot_arr[i].cost) + "$");
     }
     for (int i = 0; i < NEGOZIO_WEAPON; i++) {
         int random = rand() % NEGOZIO_WEAPON;
-        weapon_arr[i] = weapon_choices[random];
+        weapon_arr[i] = adjustDifficultyWeapon(weapon_choices[random]);
         weapon_arr_s[i] = weapon_arr[i].wp.name + ", damage:" + to_string(weapon_arr[i].wp.damage) + ", raggio:" +
                 to_string(weapon_arr[i].wp.scope) + ", " + to_string(weapon_arr[i].cost) + "$";
     }
 }
 
-bool negozio::buy_potenziamento(int index) {
+bool Negozio::buy_potenziamento(int index) {
     itemPotenziamenti p = pot_arr[index];
     if (protagonista->getCurrency() >= p.cost && p.can_buy) {
         protagonista->decreaseCurrency(p.cost);
@@ -60,7 +64,7 @@ bool negozio::buy_potenziamento(int index) {
     } else return false;
 }
 
-bool negozio::buy_weapon(int index) {
+bool Negozio::buy_weapon(int index) {
     itemWeapon w = weapon_arr[index];
     if (protagonista->getCurrency() >= w.cost && w.can_buy) {
         protagonista->decreaseCurrency(w.cost);
@@ -70,7 +74,7 @@ bool negozio::buy_weapon(int index) {
     } else return false;
 }
 
-void negozio::room_enter() {
+void Negozio::room_enter() {
     populate_negozio();
     initscr();
     noecho();
@@ -140,4 +144,43 @@ void negozio::room_enter() {
         }
     }
     endwin();
+}
+
+itemPotenziamenti Negozio::adjustDifficultyPot(itemPotenziamenti ipot) {
+    int cost = ipot.cost  + (ipot.cost / 100) * difficulty;
+    int val = ipot.potenziamento.get_val();
+    effects effect = ipot.potenziamento.get_effect();
+    switch (effect) {
+        case nothing:
+            break;
+        case life:
+            val += pdifficulty * 10;
+            break;
+        case armor:
+            val += pdifficulty * 5;
+            break;
+        case damage:
+            val += pdifficulty * 2;
+            break;
+        case range:
+            val += pdifficulty;
+            break;
+        case sales:
+            val += pdifficulty;
+            break;
+        case coins:
+            val += pdifficulty;
+            break;
+        case difficulty:
+            val += pdifficulty / 2;
+            break;
+        default:
+            break;
+    }
+    return itemPotenziamenti(potenziamenti(protagonista, effect, val), cost);
+}
+
+itemWeapon Negozio::adjustDifficultyWeapon(itemWeapon iwp) {
+    return itemWeapon((weapon){iwp.wp.name, iwp.wp.damage + pdifficulty * 2, iwp.wp.scope + pdifficulty / 2},
+                      iwp.cost  + (iwp.cost / 100) * difficulty);
 }

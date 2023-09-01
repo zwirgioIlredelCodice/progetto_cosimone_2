@@ -17,29 +17,23 @@ void potenziamenti::apply() {
         case life:
             protagonista->increaseLife(val);
             break;
-        case damage:
-            break;
-        case range:
-            break;
-        case speed:
-            break;
-        default:
-            break;
-    }
-}
-
-void potenziamenti::remove() {
-    switch (effect) {
-        case nothing:
-            break;
-        case life:
-            protagonista->decreaseLife(val);
+        case armor:
+            protagonista->increaseArmor(val);
             break;
         case damage:
+            protagonista->increaseBaseDamage(val);
             break;
         case range:
+            protagonista->increaseBaseRange(val);
             break;
-        case speed:
+        case sales:
+            protagonista->increaseSalesPercent(val);
+            break;
+        case coins:
+            protagonista->increaseCoinPercent(val);
+            break;
+        case difficulty:
+            protagonista->changeDifficulty(val);
             break;
         default:
             break;
@@ -52,20 +46,37 @@ string potenziamenti::to_string() {
         case nothing:
             break;
         case life:
-            s.append("vita");
+           s.append("life");
+            break;
+        case armor:
+            s.append("armor");
             break;
         case damage:
-            s.append("danno");
+            s.append("damage");
             break;
         case range:
-            s.append("portata");
+            s.append("range");
             break;
-        case speed:
-            s.append("velocità");
+        case sales:
+            s.append("sales%");
+            break;
+        case coins:
+            s.append("coins%");
+            break;
+        case difficulty:
+            s.append("difficulty");
             break;
         default:
             break;
     }
-    s.append(", incremento: " + std::to_string(val));
+    s.append(", increment: " + std::to_string(val));
     return s;
+}
+
+int potenziamenti::get_val() {
+    return val;
+}
+
+effects potenziamenti::get_effect() {
+    return effect;
 }
