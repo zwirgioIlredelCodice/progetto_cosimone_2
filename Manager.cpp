@@ -9,7 +9,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
 Manager::Manager() {
-    srand(time(nullptr)); // da cambiare
+    srand(time(nullptr)); // setta il seme random diverso da ogni apertura del programma
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
     protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
@@ -26,22 +26,29 @@ void Manager::menu() {
     getmaxyx(stdscr, x_max, y_max);
 
     WINDOW* menuwin = newwin(x_max, y_max, 0, 0);
+
+    /*
+     * scrive la finestra
+     */
     box(menuwin, 0, 0);
     mvwprintw(menuwin, 0, 0, "MENU");
     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
+
     refresh();
     wrefresh(menuwin);
-    keypad(menuwin, true);
+    keypad(menuwin, true); // abilita l'uso delle frecce
 
     string choices[] = {"New game", "Resume", "Delete saves", "Quit"};
     int menu_entry = sizeof(choices) / sizeof(choices[0]);
     int choice, highlight = 0;
 
-    bool terminate = false;
-    while(!terminate) {
+    while(true) {
         for (int i = 0; i < menu_entry; i++) {
-            if (i == highlight) wattron(menuwin, A_REVERSE);
 
+            /*
+             * scrive il menu
+             */
+            if (i == highlight) wattron(menuwin, A_REVERSE);
             mvwprintw(menuwin, i+1, 1, "%s", choices[i].c_str());
             wattroff(menuwin, A_REVERSE);
         }
@@ -55,10 +62,12 @@ void Manager::menu() {
                 highlight++;
                 if (highlight >= menu_entry) highlight = menu_entry - 1;
                 break;
-            case ' ': // backspace
+            case ' ':
                 if (choices[highlight] == "New game") {
                     new_game();
                     wclear(menuwin);
+
+                    // riscrivi la finestra
                     box(menuwin, 0, 0);
                     mvwprintw(menuwin, 0, 0, "MENU");
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
@@ -66,6 +75,8 @@ void Manager::menu() {
                 else if (choices[highlight] == "Resume") {
                     resume();
                     wclear(menuwin);
+
+                    // riscrivi la finestra
                     box(menuwin, 0, 0);
                     mvwprintw(menuwin, 0, 0, "MENU");
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
@@ -75,14 +86,10 @@ void Manager::menu() {
                 }
                 else if (choices[highlight] == "Quit") {
                     quit();
-                    terminate = true;
                     endwin();
-                    exit(0);
+                    exit(0); // termina il programma
                 }
-            /*case KEY_F(1):
-                quit = true;
                 break;
-            */
             default:
                 break;
         }
@@ -93,32 +100,28 @@ void Manager::menu() {
 void Manager::new_game() {
     in_game = true;
     fillWwin();
-    if (!salvataggio->empty()) {
-        if (salvataggio->is_game_saved()) {
+    if (!salvataggio->empty()) { // se non è la prima volta che viene aperto il gioco
+        if (salvataggio->is_game_saved()) { // se c'è una partita salvata
+            // salva e carica la partita salvata come se fosse morto il personaggio
             salvataggio->save_gameover();
             salvataggio->restore_newgame();
         } else {
+            // carica la partita salvata dopo che è morto il personaggio
             salvataggio->restore_newgame();
         }
     }
-    // da cambiare
-    next_room();
 
-    /*
-     * DEVE
-     * resettare tutto per cominciare una nuova partita
-     * gestire quando si cambia mappa salvando robe
-     * fare entrare nel Negozio quando richiesto
-     */
+    // entra nella prima mappa
+    next_room();
 }
 
 void Manager::resume() {
     if (in_game) {
         in_game = true;
-        play_map();
+        play_map(); // riprende il gioco
     } else if (salvataggio->is_game_saved()) {
         in_game = true;
-        salvataggio->restore_gamestate();
+        salvataggio->restore_gamestate(); // carica l'ultima partita
         play_map();
     }
 }
@@ -131,12 +134,6 @@ void Manager::next_room() {
     }
 
     play_map();
-    /*
-     * DEVE
-     * salvare lo stato della stanza e passare a quella dopo ripristinandola come salvata
-     * se non ci sono stanze dopo crea una stanza con new_room()
-     * giocare la stanza
-     */
 }
 
 void Manager::prev_room() {
@@ -150,23 +147,19 @@ void Manager::new_room() {
      * DEVE
      * decidere una stanza a caso e inizializzarla con tutti i nemici (influenzato dalla difficoltà)
      */
-    if (protagonista.getDifficulty() % 3 == 0) {
+    if (protagonista.getDifficulty() % 3 == 0) { // ogni 3 stanze entra nel negozio prima di entrare in una nuova stanza
         Negozio negozio(&protagonista);
         negozio.room_enter();
     }
-    protagonista.changeDifficulty(+1);
+    protagonista.changeDifficulty(+1); // per ogni nuova stanza scoperta aumenta la difficoltà di 1
     maps.add(map(0));
     maps.addEnemys();
 }
 
 void Manager::quit() {
-    /*
-     * DEVE
-     * salvare lo stato del gioco e permettere la terminazione del programma
-     */
     if (in_game) {
         salvataggio->save_gamestate();
-    } else {
+    } else { // se il giocatore è morto o non sono state iniziate nuove partite
         salvataggio->save_gameover();
     }
 }
