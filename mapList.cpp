@@ -116,9 +116,9 @@ map::map(int maptype) {
 }
 
 void map::init_win() {
-    WINDOW* win = mapArr[mapType];
+    WINDOW* win = newwin(MAP_YMAX, MAP_XMAX, 0, 0);
     this->win = win;
-    //draw_map();
+    draw_map();
 }
 
 map::map() {
@@ -126,13 +126,13 @@ map::map() {
     this->arcIndex = 0;
     this->gobIndex = 0;
 }
-/*
+
 void map::draw_map() {
     for (int i = 0; i < MAP_YMAX; i++) {
         mvwprintw(win, i, 0, "%s", maps[this->mapType][i]);
         box(win, 0, 0);
     }
-}*/
+}
 
 int mapList::getGobNumber()
 {
@@ -171,6 +171,7 @@ bool mapList::hasPrev() {
     else return false;
 }
 
+/*
 void fillWwin () {
     WINDOW * one = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
     box(one, 0, 0);
@@ -199,5 +200,5 @@ void fillWobstacles () {
     mvwprintw(mapArr[0], 5, 5, "mud");
     //..., porta, $, vita
 }
-
+*/
 

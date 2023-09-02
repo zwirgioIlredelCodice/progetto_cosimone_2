@@ -99,7 +99,7 @@ void Manager::menu() {
 
 void Manager::new_game() {
     in_game = true;
-    fillWwin();
+  //  fillWwin();
     if (!salvataggio->empty()) { // se non è la prima volta che viene aperto il gioco
         if (salvataggio->is_game_saved()) { // se c'è una partita salvata
             // salva e carica la partita salvata come se fosse morto il personaggio
@@ -173,7 +173,7 @@ void Manager::play_map() {
     clear();
     WINDOW* playwin = maps.getWin();
     map thismap = maps.getMap();
-    //thismap.draw_map();
+    thismap.draw_map();
 
     clear();
     initscr();
@@ -197,7 +197,7 @@ void Manager::play_map() {
         if (protagonista.getmv() == 'm') {
             menu();
         }
-        usleep(10000);
+        //usleep(10000);
 
         //protagonista.getmv();
 

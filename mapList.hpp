@@ -22,13 +22,11 @@ class Protagonista;
 #define MAP_YMAX 20
 #define MAP_XMAX 100
 
-#define MAP_NUMBER 1
-
-#define MAPTYPES 5
-WINDOW * mapArr [MAPTYPES];
+#define MAP_NUMBER 1 // da modificare con capienza maps
 
 
-/*const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
+
+const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
 {
     "                                                                                                   ",
     "                                                                         |                         ",
@@ -51,7 +49,7 @@ WINDOW * mapArr [MAPTYPES];
     "                                                                                                   ",
     "                                                                                                   ",
 },
-};*/
+};
 
 class map{
 public:
@@ -71,7 +69,7 @@ public:
 class mapList {
 protected:
     int n;  //capienza attuale array
-    map* maps;
+    map maps[10];  // da traformare in vector o comunque rendere infinito
     int index; //mappa attualmente selezionata
     Protagonista *mainCh;
 
@@ -124,7 +122,7 @@ public:
     void setIndex(int index);
 };
 
-void fillWwin ();
-void fillWobstacles ();
+//void fillWwin ();
+//void fillWobstacles ();
 
 #endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
