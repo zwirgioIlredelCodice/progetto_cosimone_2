@@ -139,7 +139,7 @@ int mapList::getGobNumber()
     return maps[index].gobIndex;
 }
 
-void mapList::addEnemys() {
+void mapList::addEnemys() {  // da fare basandosi sulla difficolta
     // da cambiare
     addArch(10, 10, 10, 2, 100);
     addGob(20, 5, 80, 15, 22);

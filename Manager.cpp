@@ -12,7 +12,7 @@ Manager::Manager() {
     srand(time(nullptr)); // setta il seme random diverso da ogni apertura del programma
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
+    protagonista = Protagonista(&maps, 1, 1, '@', 1005, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
     in_game = false;
 }
@@ -152,7 +152,8 @@ void Manager::new_room() {
         negozio.room_enter();
     }
     protagonista.changeDifficulty(+1); // per ogni nuova stanza scoperta aumenta la difficoltà di 1
-    maps.add(map(0));
+    int choice = rand();
+    maps.add(map(choice % 5));  // scelta randomica della mappa a cui aggiungere poi i nemici
     maps.addEnemys();
 }
 
@@ -211,7 +212,7 @@ void Manager::play_map() {
             maps_array[index].arc[i]->display();
         }
 
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 50000 == 0)
         {
             for(int i = 0; i < maps_array[index].gobIndex; i++)
             {
