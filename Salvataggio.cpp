@@ -240,9 +240,10 @@ void Salvataggio::get_protagonista() {
     int p_difficulty = get_int("p_difficulty");
 
     // crea un nuovo protagonista e rimpiazza il vecchio
-    manager->protagonista = Protagonista(&manager->maps, p_y, p_x, p_baseDamage, p_baseRange, p_armor, p_salesPercent,
-                                         p_coinPercent, p_difficulty, '@', p_life, p_currency , manager->weapon_array, p_n_weap);
     weapon* weapons = manager->protagonista.getWeapons();
+    manager->protagonista = Protagonista(&manager->maps, p_y, p_x, '@', p_life, p_currency, p_baseDamage, p_baseRange,
+                                         p_armor, p_salesPercent, p_coinPercent, p_difficulty, weapons, p_n_weap
+    );
 
     /*
      * ripristina le armi
