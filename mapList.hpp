@@ -36,7 +36,7 @@ const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
     "                  ==                                                     |      .                  ",
     "                                                                         |                         ",
     "                                                                                                   ",
-    "                                             .                                                     ",
+    "              .                              .                                                     ",
     "                                                                                                   ",
     "                                                                                                   ",
     "                                           ==                                                      ",
