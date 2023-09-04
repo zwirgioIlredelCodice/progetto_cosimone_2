@@ -44,10 +44,16 @@ class Protagonista
         void newWeapon(weapon Weapon);
 
         // funzione per sparare
-        void shot(); // 'c' to trigger
+        void shotRight(); // 'd' to trigger
+
+        void shotLeft(); // 'a' to trigger
+
+        void shotUp(); // 'w' to trigger
+
+        void shotDown(); // 's' to trigger
 
         // funzione per cambiare arma
-        void changeWeapon();  // 's' to trigger
+        void changeWeapon();  // 'c' to trigger
 
         //ritorna la posizione del protagonista nell'asse x
         int positionX();

@@ -231,7 +231,6 @@ void Manager::play_map() {
             for(int i = 0; i < maps_array[index].sicIndex; i++)
             {
                 maps_array[index].sic[i]->getmv();
-                maps_array[index].sic[i]->display();
             }
         }
 

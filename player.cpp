@@ -96,11 +96,20 @@ int Protagonista::getmv(){
         case KEY_RIGHT:
             mvright();
             break;
+        case 'd':
+            shotRight();
+            break;
+        case 'a':
+            shotLeft();
+            break;
         case 's':
-            shot();
+            shotDown();
             break;
         case 'c':
             changeWeapon();
+            break;
+        case 'w':
+            shotUp();
             break;
         case -1:
             break;
@@ -152,37 +161,42 @@ void Protagonista::newWeapon(weapon Weapon)
     this->n_weap++;
 }
 
-void Protagonista::shot()
+void Protagonista::shotRight()
 {
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, i + locx + 1) == ' ' || mvwinch(listMap->getMap().win, locy, i + locx + 1) == '-')) // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, i + locx) == ' ' || mvwinch(listMap->getMap().win, locy, i + locx ) == '-') || mvwinch(listMap->getMap().win, locy, i + locx ) == 'a' || mvwinch(listMap->getMap().win, locy, i + locx ) == 'g' || mvwinch(listMap->getMap().win, locy, i + locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-        mvwaddch(listMap->getMap().win, yLoc, xLoc + i, ' ');
-
-        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 'g')
+    //    mvwaddch(listMap->getMap().win, yLoc, xLoc + i, ' ');
+        if (i > 1)
         {
-            listMap->checkGoblin(locx + i + 2, locy, Protagonista::retCurrentDamage());
+            mvwaddch(listMap->getMap().win, yLoc, xLoc + i - 1, ' ');
+        }
+
+        if (mvwinch(listMap->getMap().win, locy, locx + i) == 'g')
+        {
+            listMap->checkGoblin(locx + i , locy, Protagonista::retCurrentDamage());
             break;
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }
 
-        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 'a')
+        if (mvwinch(listMap->getMap().win, locy, locx + i) == 'a')
         {
-            listMap->checkArciere(locx + i + 2, locy, Protagonista::retCurrentDamage());
+            listMap->checkArciere(locx + i , locy, Protagonista::retCurrentDamage());
             break;
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }
 
-        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 's')
+        if (mvwinch(listMap->getMap().win, locy, locx + i) == 's')
         {
-            listMap->checkSicario(locx + i + 2, locy, Protagonista::retCurrentDamage());
+            listMap->checkSicario(locx + i , locy, Protagonista::retCurrentDamage());
             break;
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }
 
-        mvwaddch(listMap->getMap().win, yLoc, xLoc + i + 1, '-');
+
+        mvwaddch(listMap->getMap().win, yLoc, xLoc + i, '-');
         usleep(20000);
         wrefresh(listMap->getMap().win);
         i++;
@@ -196,7 +210,161 @@ void Protagonista::shot()
 
     }
     //usleep(20000);
-    mvwaddch(listMap->getMap().win, locy, locx + i, ' ');
+    mvwaddch(listMap->getMap().win, locy, locx + i - 1, ' ');
+    wrefresh(listMap->getMap().win);
+}
+
+void Protagonista::shotLeft()
+{
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, locx - i) == ' ' || mvwinch(listMap->getMap().win, locy, locx - i) == '-') || mvwinch(listMap->getMap().win, locy, locx - i) == 'a' || mvwinch(listMap->getMap().win, locy, -i + locx ) == 'g' || mvwinch(listMap->getMap().win, locy, -i + locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    {
+    //    mvwaddch(listMap->getMap().win, yLoc, xLoc - i, ' ');
+        if (i > 1)
+        {
+            mvwaddch(listMap->getMap().win, yLoc, xLoc - i + 1, ' ');
+        }
+
+        if (mvwinch(listMap->getMap().win, locy, locx - i ) == 'g')
+        {
+            listMap->checkGoblin(locx - i , locy, Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy, locx - i ) == 'a')
+        {
+            listMap->checkArciere(locx - i , locy, Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy, locx - i ) == 's')
+        {
+            listMap->checkSicario(locx - i , locy, Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        mvwaddch(listMap->getMap().win, yLoc, xLoc - i, '-');
+        usleep(20000);
+        wrefresh(listMap->getMap().win);
+        i++;
+
+        /*
+        for (int j = 0; j < listMap->getGobNumber(); ++j)
+        {
+            listMap
+        }
+         */
+
+    }
+    //usleep(20000);
+    mvwaddch(listMap->getMap().win, locy, locx - i + 1, ' ');
+}
+
+void Protagonista::shotDown()
+{
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy + i , locx) == ' ' || mvwinch(listMap->getMap().win, locy + i, locx) == '-') || mvwinch(listMap->getMap().win, locy + i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy + i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy + i, locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    {
+    //    mvwaddch(listMap->getMap().win, yLoc + i, xLoc, ' ');
+        if (i > 1)
+        {
+            mvwaddch(listMap->getMap().win, yLoc + i - 1, xLoc , ' ');
+        }
+
+        if (mvwinch(listMap->getMap().win, locy + i , locx) == 'g')
+        {
+            listMap->checkGoblin(locx, locy + i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy + i , locx) == 'a')
+        {
+            listMap->checkArciere(locx, locy + i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy + i , locx) == 's')
+        {
+            listMap->checkSicario(locx, locy + i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        mvwaddch(listMap->getMap().win, yLoc + i, xLoc, '|');
+        usleep(20000);
+        wrefresh(listMap->getMap().win);
+        i++;
+
+        /*
+        for (int j = 0; j < listMap->getGobNumber(); ++j)
+        {
+            listMap
+        }
+         */
+
+    }
+    //usleep(20000);
+    mvwaddch(listMap->getMap().win, locy + i - 1, locx, ' ');
+}
+
+void Protagonista::shotUp()
+{
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy - i , locx) == ' ' || mvwinch(listMap->getMap().win, locy - i, locx) == '-') || mvwinch(listMap->getMap().win, locy - i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy - i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy - i, locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    {
+        //    mvwaddch(listMap->getMap().win, yLoc + i, xLoc, ' ');
+        if (i > 1)
+        {
+            mvwaddch(listMap->getMap().win, yLoc - i + 1, xLoc , ' ');
+        }
+
+        if (mvwinch(listMap->getMap().win, locy - i , locx) == 'g')
+        {
+            listMap->checkGoblin(locx, locy - i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy - i , locx) == 'a')
+        {
+            listMap->checkArciere(locx, locy - i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        if (mvwinch(listMap->getMap().win, locy - i , locx) == 's')
+        {
+            listMap->checkSicario(locx, locy - i , Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
+        mvwaddch(listMap->getMap().win, yLoc - i, xLoc, '|');
+        usleep(20000);
+        wrefresh(listMap->getMap().win);
+        i++;
+
+        /*
+        for (int j = 0; j < listMap->getGobNumber(); ++j)
+        {
+            listMap
+        }
+         */
+
+    }
+    //usleep(20000);
+    mvwaddch(listMap->getMap().win, locy - i + 1, locx, ' ');
 }
 
 void Protagonista::changeWeapon()
