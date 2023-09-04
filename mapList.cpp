@@ -7,17 +7,20 @@
 
 
 void mapList::add(map m) {
+    if (n >= max_n) { // allungare l'array del doppio
+        max_n *= 2;
+        map* tmp = new map[max_n];
+        // copio le mappe dell'array
+        for (int i = 0; i < n; i++) {
+            tmp[i] = maps[i];
+        }
+        // libero la memoria del vecchio array
+        delete maps;
+        // sostituisco l'array
+        maps = tmp;
+    }
     maps[n] = m;
     n++;
-}
-
-void mapList::remove(int mapIndex){
-    for (int i=mapIndex; i<n; i++){
-        maps[i] = maps[i+1];
-    }
-    if (index >= mapIndex)
-        index --;
-
 }
 
 void mapList::clear() {
@@ -112,6 +115,9 @@ mapList::mapList(int n, int index, Protagonista *p)
     this->n = n;
     this->index = index;
     this->mainCh = p;
+
+    this->max_n = START_MAP_ARRAY_LEN;
+    this->maps = new map[START_MAP_ARRAY_LEN];
 }
 
 
@@ -120,13 +126,21 @@ WINDOW *mapList::getWin() {
 }
 
 mapList::mapList() {
+    this->n = 0;
+    this->index = 0;
+    this->mainCh = nullptr;
 
+    this->max_n = 0;
+    this->maps = nullptr;
 }
 
 mapList::mapList(Protagonista *p) {
     this->n = 0;
     this->index = 0;
     this->mainCh = p;
+
+    this->max_n = START_MAP_ARRAY_LEN;
+    this->maps = new map[START_MAP_ARRAY_LEN];
 }
 
 map::map(int maptype) {

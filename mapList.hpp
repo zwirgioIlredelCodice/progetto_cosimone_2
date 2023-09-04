@@ -159,10 +159,12 @@ public:
     map(int mapType);
 };
 
+#define START_MAP_ARRAY_LEN 10
 class mapList {
 protected:
     int n;  //capienza attuale array
-    map maps[10];  // da traformare in vector o comunque rendere infinito
+    int max_n; // capienza array
+    map* maps;  // da traformare in vector o comunque rendere infinito
     int index; //mappa attualmente selezionata
     Protagonista *mainCh;
 
@@ -178,8 +180,6 @@ public:
      */
 
     void add(map m); //aggiunge in coda
-
-    void remove(int mapIndex);
 
     void clear();
 
