@@ -46,6 +46,13 @@ void Protagonista::mvup() {
      //       yLoc = 1;
         display();
     }
+    else if (mvwinch(listMap->getMap().win, yLoc - 1, xLoc) == '$')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc--;
+        display();
+        increaseCurrency(2); // valore monete raccolte
+    }
 }
 
 void Protagonista::mvdown() {
@@ -56,6 +63,13 @@ void Protagonista::mvdown() {
      //   if (yLoc > yMax - 2)
      //       yLoc = yMax - 2;
         display();
+    }
+    else if (mvwinch(listMap->getMap().win, yLoc + 1, xLoc) == '$')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc++;
+        display();
+        increaseCurrency(2); // valore monete raccolte
     }
 }
 
@@ -68,6 +82,13 @@ void Protagonista::mvleft() {
      //       xLoc = 1;
         display();
     }
+    else if (mvwinch(listMap->getMap().win, yLoc, xLoc - 1) == '$')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc--;
+        display();
+        increaseCurrency(2); // valore monete raccolte
+    }
 }
 
 void Protagonista::mvright() {
@@ -78,6 +99,13 @@ void Protagonista::mvright() {
       //  if (xLoc > xMax - 2)
       //      xLoc = xMax - 2;
         display();
+    }
+    else if (mvwinch(listMap->getMap().win, yLoc, xLoc + 1) == '$')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc++;
+        display();
+        increaseCurrency(2); // valore monete raccolte
     }
 }
 
