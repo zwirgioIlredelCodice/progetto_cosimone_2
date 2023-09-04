@@ -60,6 +60,18 @@ void mapList::checkArciere(int x, int y, int damage) {
     }
 }
 
+void mapList::checkSicario(int x, int y, int damage) {
+    bool flag = false;
+    int i=0;
+    while (!flag && i < maps[index].sicIndex){
+        if (maps[index].sic[i]->positionX() == x && maps[index].sic[i]->positionY() == y) {
+            maps[index].sic[i]->decreaseLife(damage);
+            flag=true;
+        }
+        i++;
+    }
+}
+
 map mapList::getMap()
 {
     map m = maps[index];
@@ -83,6 +95,15 @@ void mapList::addGob(int life, int damage, int x, int y, int value)
     {
         maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].gobIndex++;
+    }
+}
+
+void mapList::addSic(int life, int damage, int x, int y, int value)
+{
+    if (maps[index].sicIndex < 10)
+    {
+        maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
+        maps[index].sicIndex++;
     }
 }
 
@@ -113,6 +134,7 @@ map::map(int maptype) {
     init_win();
     this->arcIndex = 0;
     this->gobIndex = 0;
+    this->sicIndex = 0;
 }
 
 void map::init_win() {
@@ -125,6 +147,7 @@ map::map() {
     this->win = nullptr;
     this->arcIndex = 0;
     this->gobIndex = 0;
+    this->sicIndex = 0;
 }
 
 void map::draw_map() {
@@ -143,6 +166,7 @@ void mapList::addEnemys() {  // da fare basandosi sulla difficolta
     // da cambiare
     addArch(10, 10, 10, 2, 100);
     addGob(20, 5, 80, 15, 22);
+    addSic(10, 5, 30, 6, 100);
 }
 
 int mapList::getN() {

@@ -212,12 +212,26 @@ void Manager::play_map() {
             maps_array[index].arc[i]->display();
         }
 
+        for(int i = 0; i < maps_array[index].sicIndex; i++)
+        {
+            maps_array[index].sic[i]->display();
+        }
+
         if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 50000 == 0)
         {
             for(int i = 0; i < maps_array[index].gobIndex; i++)
             {
                 maps_array[index].gob[i]->getmv();
                 maps_array[index].gob[i]->display();
+            }
+        }
+
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 70000 == 0)
+        {
+            for(int i = 0; i < maps_array[index].sicIndex; i++)
+            {
+                maps_array[index].sic[i]->getmv();
+                maps_array[index].sic[i]->display();
             }
         }
 

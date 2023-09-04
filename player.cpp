@@ -175,6 +175,13 @@ void Protagonista::shot()
             // segnale che vada a controllare e effettuare danno al nemico della mappa
         }
 
+        if (mvwinch(listMap->getMap().win, locy, locx + i + 2) == 's')
+        {
+            listMap->checkSicario(locx + i + 2, locy, Protagonista::retCurrentDamage());
+            break;
+            // segnale che vada a controllare e effettuare danno al nemico della mappa
+        }
+
         mvwaddch(listMap->getMap().win, yLoc, xLoc + i + 1, '-');
         usleep(20000);
         wrefresh(listMap->getMap().win);

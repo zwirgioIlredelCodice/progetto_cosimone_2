@@ -106,5 +106,56 @@ public:
     bool retAlive();
 };
 
+class Sicario
+{
+protected:
+    Protagonista *p;
+    int life;
+    weapon bow;
+    WINDOW * win;
+    int yMax, xMax, yLoc, xLoc;
+    char simbol;
+    int value;  // valore guadagnato se si uccide questo nemico
+    bool alive;
+
+public:
+    Sicario(int life, int damage, WINDOW * win, int yLoc, int xLox, int value, Protagonista *p);
+
+    void decreaseLife(int damage);
+
+    /*
+     * funzione che spara quando il nostro personaggio è nel tiro
+     */
+    void shot();
+
+    void display();
+
+    void disappear(); // quando viene eliminato
+
+    /*
+     * ritorna la vita attuale dell' arciere
+     */
+    int retLife();
+
+    /*
+     * ritorna il valore che si ottiene uccidendo l'arciere
+     */
+    int retValue();
+
+    int positionX();
+
+    int positionY();
+
+    int retCurrentDamage();
+
+    bool retAlive();
+
+    void mvup();
+
+    void mvdown();
+
+    void getmv();
+};
+
 
 #endif //PROGETTO_COSIMONE_2_NEMICI_HPP

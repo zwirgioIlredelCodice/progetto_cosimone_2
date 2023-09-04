@@ -211,9 +211,9 @@ void Arciere::shot()
     int locy = yLoc;
     int locx = xLoc;
     auto startTime = chrono::steady_clock::now();
-    while (i < bow.scope && locx - i > 2)
+    while (i < bow.scope && locx - i > 2 && (mvwinch(win, locy, locx - 1 - i) == ' ' || mvwinch(win, locy, locx - 1 - i) == '-'))
     {
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 20000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 9000 == 0)
         {
             if (mvwinch(win, locy, locx - i- 1) == p->retChar())
             {
@@ -259,4 +259,140 @@ int Arciere::retCurrentDamage()
 
 bool Arciere::retAlive() {
     return this->alive;
+}
+
+
+//--------------------------------------------------------------------------
+
+Sicario::Sicario(int life, int damage, WINDOW *win, int yLoc, int xLox, int value, Protagonista *p)
+{
+    this->life = life;
+    this->bow.scope = 10;
+    this->bow.name = "Gun";
+    this->bow.damage = damage;
+    this->win = win;
+    this->simbol = 's';
+    this->value = value;
+    this->yLoc = yLoc;
+    this->xLoc = xLox;
+    getmaxyx(win, this->yMax, this->xMax);
+    this->p = p;
+    this->alive = true;
+}
+
+void Sicario::decreaseLife(int damage)
+{
+    this->life -= damage;
+    if (this->life <= 0)
+        Sicario::disappear();
+}
+
+void Sicario::display()
+{
+    if (alive)
+    {
+        if (yLoc == p->positionY() && xLoc + this->bow.scope > p->positionX())
+        {
+            shot();
+        }
+        mvwaddch(win, yLoc, xLoc, this->simbol);
+    }
+}
+
+void Sicario::disappear()
+{
+    this->simbol = ' ';
+    alive = false;
+    Sicario::display();
+    p->increaseCurrency(value);
+}
+
+void Sicario::shot()
+{
+
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    auto startTime = chrono::steady_clock::now();
+    while (i < bow.scope && locx - i > 2 && (mvwinch(win, locy, locx - 1 - i) == ' ' || mvwinch(win, locy, locx - 1 - i) == '-'))
+    {
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 9000 == 0)
+        {
+            if (mvwinch(win, locy, locx - i- 1) == p->retChar())
+            {
+                p->decreaseLife(retCurrentDamage());
+            }
+            mvwaddch(win, locy, locx - i, ' ');
+            mvwaddch(win, locy, locx - i - 1, '-');
+            wrefresh(win);
+            i++;
+        }
+        p->getmv();
+        p->display();
+
+    }
+    // if (mvwinch(win, locy, locx - i) != p->retChar())
+    mvwaddch(win, locy, locx - i, ' ');
+}
+
+int Sicario::retLife()
+{
+    return this->life;
+}
+
+int Sicario::retValue()
+{
+    return this->value;
+}
+
+int Sicario::positionX()
+{
+    return this->xLoc;
+}
+
+int Sicario::positionY()
+{
+    return this->yLoc;
+}
+
+int Sicario::retCurrentDamage()
+{
+    return bow.damage;
+}
+
+bool Sicario::retAlive() {
+    return this->alive;
+}
+
+void Sicario::mvup()
+{
+    if (mvwinch(win, yLoc - 1, xLoc) == ' ')
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        yLoc--;
+        if (yLoc < 1)
+            yLoc = 1;
+    }
+}
+
+void Sicario::mvdown()
+{
+    if (mvwinch(win, yLoc + 1, xLoc) == ' ')
+    {
+        mvwaddch(win, yLoc, xLoc, ' ');
+        yLoc++;
+        if (yLoc > yMax - 2)
+            yLoc = yMax - 2;
+    }
+}
+
+void Sicario::getmv()
+{
+    if (alive)
+    {
+        if (yLoc != p->positionY())
+        {
+            (yLoc > p->positionY() ? mvup() : mvdown());
+        }
+    }
 }

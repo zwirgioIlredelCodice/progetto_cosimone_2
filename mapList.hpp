@@ -17,6 +17,8 @@ class Arciere;
 
 class Goblin;
 
+class Sicario;
+
 class Protagonista;
 
 #define MAP_YMAX 20
@@ -147,6 +149,8 @@ public:
     int arcIndex;
     Goblin *gob[N_ENEM];
     int gobIndex;
+    Sicario *sic[N_ENEM];
+    int sicIndex;
     int mapType;
 
     void draw_map();
@@ -193,12 +197,16 @@ public:
 
     void checkArciere(int x, int y, int damage);
 
+    void checkSicario(int x, int y, int damage);
+
     map getMap();
     WINDOW* getWin();
 
     void addArch( int life, int damage, int x, int y, int value);
 
     void addGob( int life, int damage, int x, int y, int value);
+
+    void addSic( int life, int damage, int x, int y, int value);
 
     int getGobNumber();
 
