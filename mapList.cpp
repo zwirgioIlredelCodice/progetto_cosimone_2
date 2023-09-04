@@ -171,6 +171,13 @@ void map::draw_map() {
         mvwprintw(win, i, 0, "%s", maps[this->mapType][i]);
         box(win, 0, 0);
     }
+    /*
+    wattron(win, COLOR_BLUE);
+    mvwprintw(win, 2, 2, " a ");
+    wattroff(win, COLOR_BLUE);
+    */
+
+    // funzione decorate da chiamare basata sul maptype void decorate(int maptYpe)
 }
 
 int mapList::getGobNumber()
