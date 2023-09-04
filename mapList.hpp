@@ -168,6 +168,10 @@ protected:
     int index; //mappa attualmente selezionata
     Protagonista *mainCh;
 
+
+
+    void setN(int n);
+
 public:
     mapList();
 
@@ -216,7 +220,9 @@ public:
     int getIndex();
     map* getMaps();
 
+    void setNewGame();
     void setIndex(int index);
+
 };
 
 //void fillWwin ();

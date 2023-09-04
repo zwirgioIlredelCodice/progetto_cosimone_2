@@ -111,6 +111,7 @@ void Manager::new_game() {
         }
     }
 
+    maps.setNewGame();
     // entra nella prima mappa
     next_room();
 }
@@ -132,13 +133,13 @@ void Manager::next_room() {
     } else {
         new_room();
     }
-
     play_map();
 }
 
 void Manager::prev_room() {
     if (maps.hasPrev()) {
         maps.prev();
+        play_map();
     }
 }
 
@@ -155,6 +156,7 @@ void Manager::new_room() {
     int choice = rand();
     maps.add(map(choice % 5));  // scelta randomica della mappa a cui aggiungere poi i nemici
     maps.addEnemys();
+    maps.next();
 }
 
 void Manager::quit() {
@@ -192,12 +194,56 @@ void Manager::play_map() {
     int index = maps.getIndex();
     map* maps_array = maps.getMaps();
 
+    protagonista.goToStartPosition();
+
     do
     {
-
-        if (protagonista.getmv() == 'm') {
+        int choice = protagonista.getmv();
+        if (choice == 'm') {
             menu();
         }
+
+        else if (mvwinch(playwin, protagonista.positionY() - 1, protagonista.positionX()) == '[' && choice == KEY_UP)
+        {
+            next_room();
+            break;
+        }
+        else if (mvwinch(playwin, protagonista.positionY(), protagonista.positionX() + 1) == '[' && choice == KEY_RIGHT)
+        {
+            next_room();
+            break;
+        }
+        else if (mvwinch(playwin, protagonista.positionY(), protagonista.positionX() - 1) == '[' && choice == KEY_LEFT)
+        {
+            next_room();
+            break;
+        }
+        else if (mvwinch(playwin, protagonista.positionY() + 1, protagonista.positionX()) == '[' && choice == KEY_DOWN)
+        {
+            next_room();
+            break;
+        }
+        if (maps.getIndex() > 0) {
+            if (mvwinch(playwin, protagonista.positionY() - 1, protagonista.positionX()) == ']' && choice == KEY_UP)
+            {
+                prev_room();
+                break;
+            } else if (mvwinch(playwin, protagonista.positionY() + 1, protagonista.positionX()) == ']' && choice == KEY_DOWN)
+            {
+                prev_room();
+                break;
+            } else if (mvwinch(playwin, protagonista.positionY(), protagonista.positionX() - 1) == ']' && choice == KEY_LEFT)
+            {
+                prev_room();
+                break;
+            } else if (mvwinch(playwin, protagonista.positionY(), protagonista.positionX() + 1) == ']' && choice == KEY_RIGHT)
+            {
+                prev_room();
+                break;
+            }
+        }
+
+
         //usleep(10000);
 
         //protagonista.getmv();

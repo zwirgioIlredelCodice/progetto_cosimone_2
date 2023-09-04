@@ -155,6 +155,7 @@ void Protagonista::display()
     mvwprintw(stdscr, MAP_YMAX + 1, 10, "Life : %d", getLife());
     mvwprintw(stdscr, MAP_YMAX + 2, 10, "Currency : %d", getCurrency());
     mvwprintw(stdscr, MAP_YMAX + 3, 10, "Hold m to open the menu");
+    mvwprintw(stdscr, MAP_YMAX + 4, 10, "Map #%d", listMap->getIndex());
     mvwaddch(listMap->getMap().win, yLoc, xLoc, character);
 }
 
@@ -514,4 +515,11 @@ int Protagonista::getSalesPercent() {
     return salesPercent;
 }
 
+void Protagonista::goToStartPosition()
+{
+    mvwaddch(listMap->getWin(), yLoc, xLoc, ' ');
+    xLoc = 1;
+    yLoc = 1;
+    display();
+}
 

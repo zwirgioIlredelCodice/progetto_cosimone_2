@@ -110,6 +110,8 @@ class Protagonista
 
         void setMapList(mapList* ml);
 
+        void goToStartPosition();
+
     protected:
         int life;
         int currency;

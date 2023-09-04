@@ -29,12 +29,14 @@ void mapList::clear() {
 }
 
 void mapList::next(){
-    if (index < n-1) index++;
+    if (index < n-1)
+        index++;
 
 };
 
 void mapList::prev() {
-    if (index > 0) index--;
+    if (index > 0)
+        index--;
 
 }
 
@@ -239,4 +241,13 @@ void fillWobstacles () {
     //..., porta, $, vita
 }
 */
+
+void mapList::setN(int n){
+    this->n = n;
+}
+
+void mapList::setNewGame() {
+    setN(0);
+    setIndex(-1);
+}
 
