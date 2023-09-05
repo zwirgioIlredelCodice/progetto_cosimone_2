@@ -177,6 +177,7 @@ void map::draw_map() {
     wattroff(win, COLOR_BLUE);
     */
 
+
     // funzione decorate da chiamare basata sul maptype void decorate(int maptYpe)
 }
 

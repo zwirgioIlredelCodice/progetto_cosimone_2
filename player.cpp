@@ -53,7 +53,15 @@ void Protagonista::mvup() {
         display();
         increaseCurrency(2); // valore monete raccolte
     }
+    else if (mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == '.')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc--;
+        display();
+        increaseLife(3); //valore vita raccolta
+    }
 }
+
 
 void Protagonista::mvdown() {
     if (mvwinch(listMap->getMap().win, yLoc + 1, xLoc) == ' ')
@@ -70,6 +78,18 @@ void Protagonista::mvdown() {
         yLoc++;
         display();
         increaseCurrency(2); // valore monete raccolte
+    }
+    else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '.')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc++;
+        display();
+        increaseLife(3); //valore vita raccolta
+    }
+    else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '<' || mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '>')
+    {
+        display();
+        decreaseLife(2); //valore vita raccolta
     }
 }
 
@@ -89,6 +109,13 @@ void Protagonista::mvleft() {
         display();
         increaseCurrency(2); // valore monete raccolte
     }
+    else if (mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == '.')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc--;
+        display();
+        increaseLife(3); //valore vita raccolta
+    }
 }
 
 void Protagonista::mvright() {
@@ -106,6 +133,13 @@ void Protagonista::mvright() {
         xLoc++;
         display();
         increaseCurrency(2); // valore monete raccolte
+    }
+    else if (mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == '.')
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc++;
+        display();
+        increaseLife(3); //valore vita raccolta
     }
 }
 

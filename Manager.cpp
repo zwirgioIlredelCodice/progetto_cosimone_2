@@ -206,7 +206,6 @@ void Manager::play_map() {
         if (choice == 'm') {
             menu();
         }
-
         else if (mvwinch(playwin, protagonista.positionY() - 1, protagonista.positionX()) == '[' && choice == KEY_UP)
         {
             next_room();
