@@ -275,7 +275,7 @@ void Manager::play_map() {
             }
         }
 
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 50000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 40000 == 0)
         {
             for(int i = 0; i < maps_array[index].sicIndex; i++)
             {
