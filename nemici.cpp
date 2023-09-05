@@ -190,8 +190,16 @@ void Arciere::display()
     if (alive)
     {
         mvwaddch(win, yLoc, xLoc, this->simbol);
-        if (yLoc == p->positionY() && xLoc > p->positionX()) {
-            shot();
+        if (yLoc == p->positionY())
+        {
+            if (xLoc > p->positionX() && xLoc - bow.scope <= p->positionX())
+            {
+                shotLeft();
+            }
+            else if (xLoc < p->positionX() && xLoc + bow.scope >= p->positionX())
+            {
+                shotRight();
+            }
         }
     }
 }
@@ -204,7 +212,7 @@ void Arciere::disappear()
     p->increaseCurrency(value);
 }
 
-void Arciere::shot()
+void Arciere::shotLeft()
 {
 
     int i = 1;
@@ -236,6 +244,39 @@ void Arciere::shot()
     }
    // if (mvwinch(win, locy, locx - i) != p->retChar())
         mvwaddch(win, locy, locx - i + 1, ' ');
+}
+
+void Arciere::shotRight()
+{
+
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    auto startTime = chrono::steady_clock::now();
+    while (i < bow.scope && (mvwinch(win, locy, locx + i) == ' ' || mvwinch(win, locy, locx + i) == '-' || mvwinch(win, locy, locx + i) == p->retChar()))
+    {
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 7000 == 0)
+        {
+            if (i > 1)
+            {
+                mvwaddch(win, yLoc, xLoc + i - 1, ' ');
+            }
+
+            if (mvwinch(win, locy, locx + i ) == p->retChar())
+            {
+                p->decreaseLife(retCurrentDamage());
+                break;
+            }
+            mvwaddch(win, locy, locx + i , '-');
+            wrefresh(win);
+            i++;
+        }
+        p->getmv();
+        p->display();
+
+    }
+    // if (mvwinch(win, locy, locx - i) != p->retChar())
+    mvwaddch(win, locy, locx + i - 1, ' ');
 }
 
 int Arciere::retLife()
@@ -299,9 +340,16 @@ void Sicario::display()
     if (alive)
     {
         mvwaddch(win, yLoc, xLoc, this->simbol);
-        if (yLoc == p->positionY() && xLoc + this->bow.scope > p->positionX())
+        if (yLoc == p->positionY())
         {
-            shot();
+            if (xLoc > p->positionX() && xLoc - bow.scope <= p->positionX())
+            {
+                shotLeft();
+            }
+            else if (xLoc < p->positionX() && xLoc + bow.scope >= p->positionX())
+            {
+                shotRight();
+            }
         }
     }
 }
@@ -314,7 +362,7 @@ void Sicario::disappear()
     p->increaseCurrency(value);
 }
 
-void Sicario::shot()
+void Sicario::shotLeft()
 {
 
     int i = 1;
@@ -345,6 +393,39 @@ void Sicario::shot()
     }
     // if (mvwinch(win, locy, locx - i) != p->retChar())
     mvwaddch(win, locy, locx - i + 1, ' ');
+}
+
+void Sicario::shotRight()
+{
+
+    int i = 1;
+    int locy = yLoc;
+    int locx = xLoc;
+    auto startTime = chrono::steady_clock::now();
+    while (i < bow.scope && (mvwinch(win, locy, locx + i) == ' ' || mvwinch(win, locy, locx + i) == '-' || mvwinch(win, locy, locx + i) == p->retChar()))
+    {
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 9000 == 0)
+        {
+            if (i > 1)
+            {
+                mvwaddch(win, yLoc, xLoc + i - 1, ' ');
+            }
+
+            if (mvwinch(win, locy, locx + i ) == p->retChar())
+            {
+                p->decreaseLife(retCurrentDamage());
+                break;
+            }
+            mvwaddch(win, locy, locx + i , '-');
+            wrefresh(win);
+            i++;
+        }
+        p->getmv();
+        p->display();
+
+    }
+    // if (mvwinch(win, locy, locx - i) != p->retChar())
+    mvwaddch(win, locy, locx + i - 1, ' ');
 }
 
 int Sicario::retLife()

@@ -81,7 +81,9 @@ public:
     /*
      * funzione che spara quando il nostro personaggio è nel tiro
      */
-    void shot();
+    void shotLeft();
+
+    void shotRight();
 
     void display();
 
@@ -126,7 +128,9 @@ public:
     /*
      * funzione che spara quando il nostro personaggio è nel tiro
      */
-    void shot();
+    void shotRight();
+
+    void shotLeft();
 
     void display();
 

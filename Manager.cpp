@@ -12,7 +12,7 @@ Manager::Manager() {
     srand(time(nullptr)); // setta il seme random diverso da ogni apertura del programma
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 1, 1, '@', 1005, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
+    protagonista = Protagonista(&maps, 1, 1, '@', 1000, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
     in_game = false;
 }
@@ -155,8 +155,8 @@ void Manager::new_room() {
     protagonista.changeDifficulty(+1); // per ogni nuova stanza scoperta aumenta la difficoltà di 1
     int choice = rand();
     maps.add(map(choice % 5));  // scelta randomica della mappa a cui aggiungere poi i nemici
-    maps.addEnemys();
     maps.next();
+    maps.addEnemys();
 }
 
 void Manager::quit() {
