@@ -12,7 +12,7 @@ Manager::Manager() {
     srand(time(nullptr)); // setta il seme random diverso da ogni apertura del programma
     weapon_array[0] = {"bow", 20, 30};
     maps = mapList(0, 0, &protagonista);
-    protagonista = Protagonista(&maps, 1, 1, '@', 1000, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
+    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");
     in_game = false;
 }
@@ -170,6 +170,7 @@ void Manager::quit() {
 void Manager::gameover() {
     salvataggio->save_gameover();
     in_game = false;
+    menu();
 }
 
 void Manager::play_map() {
