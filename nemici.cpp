@@ -165,7 +165,7 @@ bool Goblin::retAlive() {
 Arciere::Arciere(int life, int damage, WINDOW *win, int yLoc, int xLox, int value, Protagonista *p)
 {
     this->life = life;
-    this->bow.scope = 10;
+    this->bow.scope = 100;
     this->bow.name = "Bow";
     this->bow.damage = damage;
     this->win = win;
@@ -314,7 +314,7 @@ bool Arciere::retAlive() {
 Sicario::Sicario(int life, int damage, WINDOW *win, int yLoc, int xLox, int value, Protagonista *p)
 {
     this->life = life;
-    this->bow.scope = 10;
+    this->bow.scope = 25;
     this->bow.name = "Gun";
     this->bow.damage = damage;
     this->win = win;

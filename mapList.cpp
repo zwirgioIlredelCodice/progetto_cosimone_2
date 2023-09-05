@@ -85,31 +85,49 @@ map mapList::getMap()
 
 void mapList::addArch( int life, int damage, int x, int y, int value)
 {
-    if (maps[index].arcIndex < 10)
+    if (maps[index].arcIndex < N_ENEM)
     {
+        while(mvwinch(getWin(), y, x) != ' ')
+        {
+            y = rand() % 20;
+            x= rand() % 100;
+        }
         maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].arcIndex++;
     }
+    else addGob(life * 3, damage / 2, x, y, value);
 }
 
 
 
 void mapList::addGob(int life, int damage, int x, int y, int value)
 {
-    if (maps[index].gobIndex < 10)
+    if (maps[index].gobIndex < N_ENEM)
     {
+        while(mvwinch(getWin(), y, x) != ' ')
+        {
+            y = rand() % 20;
+            x= rand() % 100;
+        }
         maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].gobIndex++;
     }
+    else addSic(life / 2, damage + 4, x, y, value);
 }
 
 void mapList::addSic(int life, int damage, int x, int y, int value)
 {
-    if (maps[index].sicIndex < 10)
+    if (maps[index].sicIndex < N_ENEM)
     {
+        while(mvwinch(getWin(), y, x) != ' ')
+        {
+            y = rand() % 20;
+            x= rand() % 100;
+        }
         maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].sicIndex++;
     }
+    else addArch(life, damage * 2, x, y, value);
 }
 
 mapList::mapList(int n, int index, Protagonista *p)
@@ -186,11 +204,28 @@ int mapList::getGobNumber()
     return maps[index].gobIndex;
 }
 
-void mapList::addEnemys() {  // da fare basandosi sulla difficolta
-    // da cambiare
-    addArch(10, 10, 10, 2, 100);
-    addGob(20, 5, 80, 15, 22);
-    addSic(10, 5, 30, 6, 100);
+void mapList::addEnemys() {
+    int diff = mainCh->getDifficulty();
+    int type = maps[index].mapType;
+    addGob(diff*10, diff*5, rand() % 100, rand() % 20, diff);
+    addSic(diff*3, diff*3, rand() % 100, rand() % 20, diff + 2);
+    addArch(diff * 2 + 5, diff * 7, rand() % 100, rand() % 20, diff*2);
+    for (int i = 0; i < diff; ++i)
+    {
+        int choice = rand() % 3;
+        if (choice == 0)
+        {
+            addGob(diff*10, diff*5, rand() % 100, rand() % 20, diff);
+        }
+        else if (choice == 1)
+        {
+            addSic(diff*3, diff*3, rand() % 100, rand() % 20, diff + 2);
+        }
+        else
+        {
+            addArch(diff * 2 + 5, diff * 7, rand() % 100, rand() % 20, diff*2);
+        }
+    }
 }
 
 int mapList::getN() {

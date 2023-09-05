@@ -9,7 +9,7 @@
 
 #include "nemici.hpp"
 
-#define N_ENEM 10
+#define N_ENEM 15
 
 using namespace std;
 
@@ -164,7 +164,7 @@ class mapList {
 protected:
     int n;  //capienza attuale array
     int max_n; // capienza array
-    map* maps;  // da traformare in vector o comunque rendere infinito
+    map* maps;  //  infinito
     int index; //mappa attualmente selezionata
     Protagonista *mainCh;
 
