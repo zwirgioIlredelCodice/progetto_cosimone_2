@@ -60,6 +60,11 @@ void Protagonista::mvup() {
         display();
         increaseLife(3); //valore vita raccolta
     }
+    else if (mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == '<' || mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == '>')
+    {
+        display();
+        decreaseLife(2);
+    }
 }
 
 
@@ -89,7 +94,7 @@ void Protagonista::mvdown() {
     else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '<' || mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '>')
     {
         display();
-        decreaseLife(2); //valore vita raccolta
+        decreaseLife(2);
     }
 }
 
@@ -116,6 +121,11 @@ void Protagonista::mvleft() {
         display();
         increaseLife(3); //valore vita raccolta
     }
+    else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '>')
+    {
+        display();
+        decreaseLife(2);
+    }
 }
 
 void Protagonista::mvright() {
@@ -140,6 +150,11 @@ void Protagonista::mvright() {
         xLoc++;
         display();
         increaseLife(3); //valore vita raccolta
+    }
+    else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '<')
+    {
+        display();
+        decreaseLife(2);
     }
 }
 
