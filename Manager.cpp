@@ -198,6 +198,10 @@ void Manager::play_map() {
 
     do
     {
+        if (protagonista.isDead()) {
+            endwin();
+            gameover();
+        }
         int choice = protagonista.getmv();
         if (choice == 'm') {
             menu();

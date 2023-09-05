@@ -154,8 +154,10 @@ void Protagonista::display()
 {
     mvwprintw(stdscr, MAP_YMAX + 1, 10, "Life : %d", getLife());
     mvwprintw(stdscr, MAP_YMAX + 2, 10, "Currency : %d", getCurrency());
-    mvwprintw(stdscr, MAP_YMAX + 3, 10, "Hold m to open the menu");
+    mvwprintw(stdscr, MAP_YMAX + 3, 10, "Weapon : %s, damage: %d, range: %d", weapons[weap_index].name.c_str(), weapons[weap_index].damage, weapons[weap_index].scope);
     mvwprintw(stdscr, MAP_YMAX + 4, 10, "Map #%d", listMap->getIndex());
+    mvwprintw(stdscr, MAP_YMAX + 5, 10, "CONTROLS: movement: arrow keys, shoot: WASD, menu: M");
+    mvwprintw(stdscr, MAP_YMAX + 6, 10, "Guide: go near '[' ']' char to switch rooms");
     mvwaddch(listMap->getMap().win, yLoc, xLoc, character);
 }
 
@@ -521,5 +523,14 @@ void Protagonista::goToStartPosition()
     xLoc = 1;
     yLoc = 1;
     display();
+}
+
+bool Protagonista::isDead() {
+    if (life > 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
