@@ -16,7 +16,7 @@
 /**
  * numero di opzioni per le armi
  */
-#define NEGOZIO_WEAPON_CHOICE 2
+#define NEGOZIO_WEAPON_CHOICE 5
 
 /**
  * numero di opzioni per i potenziamenti visibili nel negozio

@@ -40,8 +40,11 @@ Negozio::Negozio(Protagonista *protagonista) {
     /*
      * inizializzo tutte le possibili armi acquistabili
      */
-    weapon_choices[0] = itemWeapon((weapon){"arco", 5, 10}, 20);
-    weapon_choices[1] = itemWeapon((weapon){"spada", 10, 5}, 20);
+    weapon_choices[0] = itemWeapon((weapon){"bow", 5, 10}, 20);
+    weapon_choices[1] = itemWeapon((weapon){"sword", 10, 2}, 18);
+    weapon_choices[2] = itemWeapon((weapon){"fist", 15, 1}, 25);
+    weapon_choices[3] = itemWeapon((weapon){"crossbow", 7, 20}, 30);
+    weapon_choices[4] = itemWeapon((weapon){"dagger", 20, 1}, 35);
 
     populate_negozio();
 }
