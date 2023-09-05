@@ -156,7 +156,7 @@ void Manager::new_room() {
     int choice = rand();
     maps.add(map(choice % 5));  // scelta randomica della mappa a cui aggiungere poi i nemici
     maps.next();
-    maps.addEnemys();
+    maps.addEnemies();
 }
 
 void Manager::quit() {

@@ -157,6 +157,7 @@ public:
     void init_win();
     map();
     map(int mapType);
+    void decorate();
 };
 
 #define START_MAP_ARRAY_LEN 10
@@ -220,7 +221,7 @@ public:
 
     int getGobNumber();
 
-    void addEnemys();
+    void addEnemies();
 
     int getN();
     int getIndex();
@@ -228,7 +229,6 @@ public:
 
     void setNewGame();
     void setIndex(int index);
-
 };
 
 //void fillWwin ();

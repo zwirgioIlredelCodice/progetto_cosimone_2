@@ -5,7 +5,6 @@
 #include "mapList.hpp"
 
 
-
 void mapList::add(map m) {
     if (n >= max_n) { // allungare l'array del doppio
         max_n *= 2;
@@ -194,17 +193,25 @@ void map::draw_map() {
     mvwprintw(win, 2, 2, " a ");
     wattroff(win, COLOR_BLUE);
     */
-
-
-    // funzione decorate da chiamare basata sul maptype void decorate(int maptYpe)
 }
+void map :: decorate (){
+    if (mapType == 0){
+        start_color();
+        init_pair (1, COLOR_CYAN, COLOR_BLUE);
+        attron (COLOR_PAIR(1));
+        mvwprintw (win , 2, 50, "water~water~water" );
+        attroff (COLOR_PAIR(1));
+    }
+}
+    // funzione decorate da chiamare basata sul maptype void decorate(int maptYpe)
+
 
 int mapList::getGobNumber()
 {
     return maps[index].gobIndex;
 }
 
-void mapList::addEnemys() {
+void mapList::addEnemies() {
     int diff = mainCh->getDifficulty();
     int type = maps[index].mapType;
     addGob(diff*10, diff*5, rand() % 100, rand() % 20, diff);
