@@ -31,7 +31,7 @@ class Protagonista;
 
 const char maps[MAP_NUMBER][MAP_YMAX][MAP_XMAX+1] = {
 {
-    "                                  $                         .                                      ",
+    "                  ]               $                         .                                      ",
     "                                                                                                   ",
     "             =======                  water~water~water                  |                         ",
     "               =====                                                     |                         ",
@@ -208,9 +208,15 @@ public:
 
     void addArch( int life, int damage, int x, int y, int value);
 
+    void restoreArch( int life, int damage, int x, int y, int value, int index);
+
     void addGob( int life, int damage, int x, int y, int value);
 
+    void restoreGob( int life, int damage, int x, int y, int value, int index);
+
     void addSic( int life, int damage, int x, int y, int value);
+
+    void restoreSic( int life, int damage, int x, int y, int value, int index);
 
     int getGobNumber();
 

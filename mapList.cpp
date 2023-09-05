@@ -89,8 +89,8 @@ void mapList::addArch( int life, int damage, int x, int y, int value)
     {
         while(mvwinch(getWin(), y, x) != ' ')
         {
-            y = rand() % 20;
-            x= rand() % 100;
+            int y = rand() % 20;
+            int x= rand() % 100;
         }
         maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].arcIndex++;
@@ -292,5 +292,21 @@ void mapList::setN(int n){
 void mapList::setNewGame() {
     setN(0);
     setIndex(-1);
+}
+
+void mapList::restoreArch(int life, int damage, int x, int y, int value, int index)
+{
+    maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
+    maps[index].arcIndex++;
+}
+
+void mapList::restoreGob(int life, int damage, int x, int y, int value, int index) {
+    maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
+    maps[index].gobIndex++;
+}
+
+void mapList::restoreSic(int life, int damage, int x, int y, int value, int index) {
+    maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
+    maps[index].sicIndex++;
 }
 

@@ -316,6 +316,25 @@ void Salvataggio::set_mapList() {
             }
         }
         set_int(basename + "gobIndex", gobIndex);
+
+        int sicIndex = 0; // numero di sicari vivi
+        for (int j = 0; j < m.sicIndex; j++) {
+            if (m.sic[j]->retAlive()) {
+                string sicname = basename + "sic[" + to_string(sicIndex) + "]";
+                int life = m.sic[j]->retLife();
+                set_int(sicname + "life", life);
+                int damage = m.sic[j]->retCurrentDamage();
+                set_int(sicname + "damage", damage);
+                int yLoc = m.sic[j]->positionY();
+                set_int(sicname + "yLoc", yLoc);
+                int xLoc = m.sic[j]->positionX();
+                set_int(sicname + "xLoc", xLoc);
+                int value = m.sic[j]->retValue();
+                set_int(sicname + "value", value);
+                sicIndex++;
+            }
+        }
+        set_int(basename + "sicIndex", sicIndex);
     }
 }
 
@@ -339,6 +358,7 @@ void Salvataggio::get_mapList() {
         int mapType = get_int(basename + "mapType");
         int gobIndex = get_int(basename + "gobIndex");
         int arcIndex = get_int(basename + "arcIndex");
+        int sicIndex = get_int(basename + "sicIndex");
 
         m = map(mapType); // crea una nuova mappa e la aggiunge
         ml->add(m);
@@ -353,7 +373,7 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(arcname + "yLoc");
             int xLoc = get_int(arcname + "xLoc");
             int value = get_int(arcname + "value");
-            ml->addArch(life, damage, xLoc, yLoc, value); // aggiunge l'arciere
+            ml->restoreArch(life, damage, xLoc, yLoc, value, j); // aggiunge l'arciere
         }
 
         for (int j = 0; j < gobIndex; j++) {
@@ -363,7 +383,17 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(gobname + "yLoc");
             int xLoc = get_int(gobname + "xLoc");
             int value = get_int(gobname + "value");
-            ml->addGob(life, damage, xLoc, yLoc, value); // aggiunge il goblin
+            ml->restoreGob(life, damage, xLoc, yLoc, value, j); // aggiunge il goblin
+        }
+
+        for (int j = 0; j < sicIndex; j++) {
+            string sicname = basename + "sic[" + to_string(j) + "]";
+            int life = get_int(sicname + "life");
+            int damage = get_int(sicname + "damage");
+            int yLoc = get_int(sicname + "yLoc");
+            int xLoc = get_int(sicname + "xLoc");
+            int value = get_int(sicname + "value");
+            ml->restoreSic(life, damage, xLoc, yLoc, value, j); // aggiunge il sicario
         }
     }
 
