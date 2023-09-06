@@ -370,7 +370,7 @@ void Protagonista::shotUp()
     int i = 1;
     int locy = yLoc;
     int locx = xLoc;
-    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy - i , locx) == ' ' || mvwinch(listMap->getMap().win, locy - i, locx) == '-') || mvwinch(listMap->getMap().win, locy - i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy - i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy - i, locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
+    while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy - i , locx) == ' ' || mvwinch(listMap->getMap().win, locy - i, locx) == '-') || mvwinch(listMap->getMap().win, locy - i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy - i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy - i, locx ) == 's')
     {
         if (i > 1)
         {

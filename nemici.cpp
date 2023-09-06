@@ -242,7 +242,6 @@ void Arciere::shotLeft()
         p->display();
 
     }
-   // if (mvwinch(win, locy, locx - i) != p->retChar())
         mvwaddch(win, locy, locx - i + 1, ' ');
 }
 
@@ -275,7 +274,6 @@ void Arciere::shotRight()
         p->display();
 
     }
-    // if (mvwinch(win, locy, locx - i) != p->retChar())
     mvwaddch(win, locy, locx + i - 1, ' ');
 }
 
@@ -380,7 +378,6 @@ void Sicario::shotLeft()
         p->display();
 
     }
-    // if (mvwinch(win, locy, locx - i) != p->retChar())
     mvwaddch(win, locy, locx - i + 1, ' ');
 }
 
@@ -413,7 +410,6 @@ void Sicario::shotRight()
         p->display();
 
     }
-    // if (mvwinch(win, locy, locx - i) != p->retChar())
     mvwaddch(win, locy, locx + i - 1, ' ');
 }
 
