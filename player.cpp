@@ -245,6 +245,7 @@ int Protagonista::getmv(){
 
 void Protagonista::display()
 {
+    mvwprintw(stdscr, MAP_YMAX, 0, "Difficulty : %d", getDifficulty());
     mvwprintw(stdscr, MAP_YMAX + 1, 10, "Life : %d     ", getLife());
     mvwprintw(stdscr, MAP_YMAX + 2, 10, "Currency : %d     ", getCurrency());
     mvwprintw(stdscr, MAP_YMAX + 3, 10, "Weapon : %s, damage: %d, range: %d      ", weapons[weap_index].name.c_str(), weapons[weap_index].damage, weapons[weap_index].scope);

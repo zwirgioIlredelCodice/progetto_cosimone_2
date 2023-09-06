@@ -38,7 +38,7 @@ void Manager::menu() {
     wrefresh(menuwin);
     keypad(menuwin, true); // abilita l'uso delle frecce
 
-    string choices[] = {"New game", "Resume", "Delete saves", "Quit"};
+    string choices[] = {"New game", "Resume", "Delete all saves and reset the program", "Quit"};
     int menu_entry = sizeof(choices) / sizeof(choices[0]);
     int choice, highlight = 0;
 
@@ -81,7 +81,7 @@ void Manager::menu() {
                     mvwprintw(menuwin, 0, 0, "MENU");
                     mvwprintw(menuwin, x_max - 2, 1, "type space to select");
                 }
-                else if (choices[highlight] == "Delete saves") {
+                else if (choices[highlight] == "Delete all saves and reset the program") {
                     reset();
                 }
                 else if (choices[highlight] == "Quit") {
@@ -300,6 +300,10 @@ void Manager::play_map() {
 }
 
 void Manager::reset() {
-    in_game = false;
     salvataggio->deleteall();
+    weapon_array[0] = {"bow", 8, 18};
+    maps = mapList(0, 0, &protagonista);
+    protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
+    salvataggio = new Salvataggio(this, "saves.txt");
+    in_game = false;
 }

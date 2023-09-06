@@ -19,6 +19,10 @@ scaricare ed aprire il progetto col l'ide Clion, compilare il progetto normalmen
 * aprire il terminale dove è stato compilato il progetto, ovvero `CHARacter_adventure/cmake-build-release`
 * eseguire il programma `./CHARacter_adventure`
 
+Se vengono riscontrati eventuali malfunzionamenti del programma persistenti alla rieseguzione è
+consigliato cancellare i salvataggi con l'apposita opzione `Delete all saves and reset the program` dal
+menù di gioco.
+
 ## tasti utilizzati
 * per il movimento del personaggio vengono utilizzati i tasti `freccia`
 * per attaccare i nemici si utilizza la combinazione di tasti `w` `a` `s` `d` per sparare nelle rispettive direzioni

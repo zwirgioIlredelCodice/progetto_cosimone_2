@@ -65,7 +65,7 @@ void Negozio::populate_negozio() {
         weapon_arr[i] = adjustDifficultyWeapon(weapon_choices[random]); // la bilancio
 
         // la rappresento come una stringa
-        weapon_arr_s[i] = weapon_arr[i].wp.name + ", damage:" + to_string(weapon_arr[i].wp.damage) + ", range:" +
+        weapon_arr_s[i] = weapon_arr[i].wp.name + ", damage: " + to_string(weapon_arr[i].wp.damage) + ", range: " +
                 to_string(weapon_arr[i].wp.scope) + ", " + to_string(weapon_arr[i].cost) + "$";
     }
 }
@@ -166,7 +166,7 @@ void Negozio::room_enter() {
 }
 
 itemPotenziamenti Negozio::adjustDifficultyPot(itemPotenziamenti ipot) {
-    int cost = ipot.cost  + (ipot.cost / 100) * difficulty;
+    int cost = ipot.cost + (5 * pdifficulty);
     int val = ipot.potenziamento.get_val();
     effects effect = ipot.potenziamento.get_effect();
     switch (effect) {
@@ -201,5 +201,5 @@ itemPotenziamenti Negozio::adjustDifficultyPot(itemPotenziamenti ipot) {
 
 itemWeapon Negozio::adjustDifficultyWeapon(itemWeapon iwp) {
     return itemWeapon((weapon){iwp.wp.name, iwp.wp.damage + pdifficulty * 2, iwp.wp.scope + pdifficulty / 2},
-                      iwp.cost  + (iwp.cost / 100) * difficulty); // ritorna l'arma in vendita bilanciata
+                      iwp.cost + (5 * pdifficulty)); // ritorna l'arma in vendita bilanciata
 }
