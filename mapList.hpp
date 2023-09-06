@@ -156,7 +156,6 @@ public:
     void init_win();
     map();
     map(int mapType);
-    void decorate();
 };
 
 #define START_MAP_ARRAY_LEN 10
