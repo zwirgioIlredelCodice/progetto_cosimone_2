@@ -48,7 +48,7 @@ void Protagonista::mvup() {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc--;
         display();
-        increaseCurrency(2); // valore monete raccolte
+        increaseCurrency(3); // valore monete raccolte
     }
     else if (mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == '.')
     {
@@ -62,6 +62,18 @@ void Protagonista::mvup() {
         mvdown();
         display();
         decreaseLife(2);
+    }
+    else if (this->currency >= 2 && (mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == 'W' ||
+             mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == 'A' ||
+             mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == 'T' ||
+             mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == 'E' ||
+             mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == 'R' ||
+             mvwinch (listMap->getMap().win, yLoc - 1, xLoc) == '~'))
+    {
+        mvwaddch (listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc--;
+        display();
+        decreaseCurrency(2);
     }
 }
 
@@ -78,7 +90,7 @@ void Protagonista::mvdown() {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc++;
         display();
-        increaseCurrency(2); // valore monete raccolte
+        increaseCurrency(3); // valore monete raccolte
     }
     else if (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '.')
     {
@@ -92,6 +104,18 @@ void Protagonista::mvdown() {
         mvup();
         display();
         decreaseLife(2);
+    }
+    else if (this->currency >= 2 && (mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == 'W' ||
+             mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == 'A' ||
+             mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == 'T' ||
+             mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == 'E' ||
+             mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == 'R' ||
+             mvwinch (listMap->getMap().win, yLoc + 1, xLoc) == '~'))
+    {
+        mvwaddch (listMap->getMap().win, yLoc, xLoc, ' ');
+        yLoc++;
+        display();
+        decreaseCurrency(2);
     }
 }
 
@@ -107,7 +131,7 @@ void Protagonista::mvleft() {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc--;
         display();
-        increaseCurrency(2); // valore monete raccolte
+        increaseCurrency(3); // valore monete raccolte
     }
     else if (mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == '.')
     {
@@ -121,6 +145,18 @@ void Protagonista::mvleft() {
         mvright();
         display();
         decreaseLife(2);
+    }
+    else if (this->currency >= 2 && (mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == 'W' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == 'A' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == 'T' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == 'E' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == 'R' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc - 1) == '~'))
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc--;
+        display();
+        decreaseCurrency(2);
     }
 }
 
@@ -136,7 +172,7 @@ void Protagonista::mvright() {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc++;
         display();
-        increaseCurrency(2); // valore monete raccolte
+        increaseCurrency(3); // valore monete raccolte
     }
     else if (mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == '.')
     {
@@ -151,6 +187,19 @@ void Protagonista::mvright() {
         display();
         decreaseLife(2);
     }
+    else if (this->currency >= 2 && (mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == 'W' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == 'A' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == 'T' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == 'E' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == 'R' ||
+             mvwinch (listMap->getMap().win, yLoc, xLoc + 1) == '~'))
+    {
+        mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
+        xLoc++;
+        display();
+        decreaseCurrency(2);
+    }
+
 }
 
 int Protagonista::getmv(){
