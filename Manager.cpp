@@ -133,12 +133,14 @@ void Manager::next_room() {
     } else {
         new_room();
     }
+    protagonista.goToStartPosition();
     play_map();
 }
 
 void Manager::prev_room() {
     if (maps.hasPrev()) {
         maps.prev();
+        protagonista.goToStartPosition();
         play_map();
     }
 }
@@ -194,8 +196,6 @@ void Manager::play_map() {
 
     int index = maps.getIndex();
     map* maps_array = maps.getMaps();
-
-    protagonista.goToStartPosition();
 
     do
     {
