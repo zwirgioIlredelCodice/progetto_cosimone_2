@@ -159,6 +159,8 @@ public:
     void mvdown();
 
     void getmv();
+
+    void move();
 };
 
 

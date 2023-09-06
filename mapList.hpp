@@ -229,6 +229,8 @@ public:
 
     void setNewGame();
     void setIndex(int index);
+
+    int getPrevType();
 };
 
 //void fillWwin ();

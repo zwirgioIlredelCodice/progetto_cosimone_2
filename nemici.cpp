@@ -340,10 +340,6 @@ void Sicario::display()
     if (alive)
     {
         mvwaddch(win, yLoc, xLoc, this->simbol);
-        if (yLoc != p->positionY())
-        {
-            (yLoc > p->positionY() ? mvup() : mvdown());
-        }
     }
 }
 
@@ -486,6 +482,16 @@ void Sicario::getmv()
             {
                 shotRight();
             }
+        }
+    }
+}
+
+void Sicario::move()
+{
+    if (alive)
+    {
+        if (yLoc != p->positionY()) {
+            (yLoc > p->positionY() ? mvup() : mvdown());
         }
     }
 }

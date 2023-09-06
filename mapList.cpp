@@ -285,37 +285,6 @@ bool mapList::hasPrev() {
     else return false;
 }
 
-/*
-void fillWwin () {
-    WINDOW * one = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
-    box(one, 0, 0);
-    mapArr[0]=one;
-
-    WINDOW * two = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
-    box(one, 0, 0);
-    mapArr[1]=two;
-
-    WINDOW * three = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
-    box(one, 0, 0);
-    mapArr[2]=three;
-
-    WINDOW * four = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
-    box(one, 0, 0);
-    mapArr[3]=four;
-
-    WINDOW * five = newwin (MAP_YMAX, MAP_XMAX, 0, 0);
-    box(one, 0, 0);
-    mapArr[4]=five;
-
-    fillWobstacles();
-}
-
-void fillWobstacles () {
-    mvwprintw(mapArr[0], 5, 5, "mud");
-    //..., porta, $, vita
-}
-*/
-
 void mapList::setN(int n){
     this->n = n;
 }
@@ -339,5 +308,12 @@ void mapList::restoreGob(int life, int damage, int x, int y, int value, int inde
 void mapList::restoreSic(int life, int damage, int x, int y, int value, int index) {
     maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
     maps[index].sicIndex++;
+}
+
+int mapList::getPrevType()
+{
+    if (index >= 0)
+        return maps[index].mapType;
+    return 0;
 }
 

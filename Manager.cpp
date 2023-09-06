@@ -155,8 +155,11 @@ void Manager::new_room() {
         negozio.room_enter();
     }
     protagonista.changeDifficulty(+1); // per ogni nuova stanza scoperta aumenta la difficoltà di 1
-    int choice = rand();
-    maps.add(map(choice % 5));  // scelta randomica della mappa a cui aggiungere poi i nemici
+    int choice;
+    while((choice = rand() % 5) == maps.getPrevType()){
+        choice = rand() % 5;
+    }
+    maps.add(map(choice));  // scelta randomica della mappa a cui aggiungere poi i nemici
     maps.next();
     maps.addEnemies();
 }
@@ -285,11 +288,19 @@ void Manager::play_map() {
             }
         }
 
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 40000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 30000 == 0)
         {
             for(int i = 0; i < maps_array[index].sicIndex; i++)
             {
                 maps_array[index].sic[i]->getmv();
+            }
+        }
+
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 50000 == 0)
+        {
+            for(int i = 0; i < maps_array[index].sicIndex; i++)
+            {
+                maps_array[index].sic[i]->move();
             }
         }
 
