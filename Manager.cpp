@@ -10,7 +10,7 @@
 
 Manager::Manager() {
     srand(time(nullptr)); // setta il seme random diverso da ogni apertura del programma
-    weapon_array[0] = {"bow", 20, 30};
+    weapon_array[0] = {"bow", 8, 18};
     maps = mapList(0, 0, &protagonista);
     protagonista = Protagonista(&maps, 1, 1, '@', 100, 0, 0, 0, 0, 0, 100, 0, weapon_array, 1);
     salvataggio = new Salvataggio(this, "saves.txt");

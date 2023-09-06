@@ -22,4 +22,5 @@ scaricare ed aprire il progetto col l'ide Clion, compilare il progetto normalmen
 ## tasti utilizzati
 * per il movimento del personaggio vengono utilizzati i tasti `freccia`
 * per attaccare i nemici si utilizza la combinazione di tasti `w` `a` `s` `d` per sparare nelle rispettive direzioni
+* per cambiare arma viene utilizzato il tasto `c`
 

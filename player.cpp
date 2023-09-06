@@ -249,7 +249,7 @@ void Protagonista::display()
     mvwprintw(stdscr, MAP_YMAX + 2, 10, "Currency : %d     ", getCurrency());
     mvwprintw(stdscr, MAP_YMAX + 3, 10, "Weapon : %s, damage: %d, range: %d      ", weapons[weap_index].name.c_str(), weapons[weap_index].damage, weapons[weap_index].scope);
     mvwprintw(stdscr, MAP_YMAX + 4, 10, "Map #%d   ", listMap->getIndex());
-    mvwprintw(stdscr, MAP_YMAX + 5, 10, "CONTROLS: movement: arrow keys, shoot: WASD, menu: M");
+    mvwprintw(stdscr, MAP_YMAX + 5, 10, "CONTROLS: movement: arrow keys, shoot: WASD, change weapon: C, menu: M");
     mvwprintw(stdscr, MAP_YMAX + 6, 10, "Guide: go near '[' ']' char to switch rooms");
     mvwprintw(stdscr, MAP_YMAX + 10, 2, "'.' adds life, '<>' damages you");
     mvwprintw(stdscr, MAP_YMAX + 11, 2, "'$' adds money, 'WATER' makes you lose money");
