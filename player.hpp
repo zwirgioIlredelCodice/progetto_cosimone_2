@@ -84,15 +84,19 @@ class Protagonista
          */
         int getCurrency();
 
-        /*
-         * funzione che cambia la finestra in cui si trova il protagonista
-         */
-
+        // funzione che controlla se il protagonista è morto
         bool isDead();
 
+        // ritorna numero armi
         int getN_weap();
+
+        // ritorna indice arma attuale
         int getWeap_index();
+
+        //ritorna lista di armi
         weapon* getWeapons();
+
+        //ritorla la maplist
         mapList* getMapList();
 
         int getBaseDamage();
@@ -107,11 +111,13 @@ class Protagonista
         void increaseSalesPercent(int value);
         void increaseCoinPercent(int value);
 
+        // ritorna la difficoltà attuale
         int getDifficulty();
+
+        // cambia la difficoltà attuale delta
         void changeDifficulty(int value);
 
         void setMapList(mapList* ml);
-
         void goToStartPosition();
 
     protected:
