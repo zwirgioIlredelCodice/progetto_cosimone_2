@@ -2,8 +2,8 @@
 // Created by fabione on 8/21/23.
 //
 
-#ifndef PROGETTO_COSIMONE_2_NEGOZIO_HPP
-#define PROGETTO_COSIMONE_2_NEGOZIO_HPP
+#ifndef CHARACTER_ADVENTURE_NEGOZIO_HPP
+#define CHARACTER_ADVENTURE_NEGOZIO_HPP
 
 #include "Potenziamenti.hpp"
 #include "strutture.h"
@@ -127,4 +127,4 @@ public:
     void room_enter();
 };
 
-#endif //PROGETTO_COSIMONE_2_NEGOZIO_HPP
+#endif //CHARACTER_ADVENTURE_NEGOZIO_HPP

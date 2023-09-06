@@ -4,8 +4,8 @@
 
 
 
-#ifndef PROGETTO_COSIMONE_2_MAPLIST_HPP
-#define PROGETTO_COSIMONE_2_MAPLIST_HPP
+#ifndef CHARACTER_ADVENTURE_MAPLIST_HPP
+#define CHARACTER_ADVENTURE_MAPLIST_HPP
 
 #include "nemici.hpp"
 
@@ -234,4 +234,4 @@ public:
 //void fillWwin ();
 //void fillWobstacles ();
 
-#endif //PROGETTO_COSIMONE_2_MAPLIST_HPP
+#endif //CHARACTER_ADVENTURE_MAPLIST_HPP

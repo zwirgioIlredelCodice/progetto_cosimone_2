@@ -2,8 +2,8 @@
 // Created by fabione on 8/24/23.
 //
 
-#ifndef PROGETTO_COSIMONE_2_MANAGER_HPP
-#define PROGETTO_COSIMONE_2_MANAGER_HPP
+#ifndef CHARACTER_ADVENTURE_MANAGER_HPP
+#define CHARACTER_ADVENTURE_MANAGER_HPP
 
 #include "Salvataggio.hpp"
 #include "Negozio.hpp"
@@ -87,4 +87,4 @@ public:
     void prev_room();
 };
 
-#endif //PROGETTO_COSIMONE_2_MANAGER_HPP
+#endif //CHARACTER_ADVENTURE_MANAGER_HPP

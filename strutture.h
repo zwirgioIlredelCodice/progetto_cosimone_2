@@ -1,6 +1,6 @@
 
-#ifndef PROGETTO_COSIMONE_2_STRUTTURE_H
-#define PROGETTO_COSIMONE_2_STRUTTURE_H
+#ifndef CHARACTER_ADVENTURE_STRUTTURE_H
+#define CHARACTER_ADVENTURE_STRUTTURE_H
 
 #include <iostream>
 #include <ctime>
@@ -26,4 +26,4 @@ struct weapon
     int scope;
 };
 
-#endif //PROGETTO_COSIMONE_2_STRUTTURE_H
+#endif //CHARACTER_ADVENTURE_STRUTTURE_H

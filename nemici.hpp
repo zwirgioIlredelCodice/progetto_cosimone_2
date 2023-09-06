@@ -1,6 +1,6 @@
 
-#ifndef PROGETTO_COSIMONE_2_NEMICI_HPP
-#define PROGETTO_COSIMONE_2_NEMICI_HPP
+#ifndef CHARACTER_ADVENTURE_NEMICI_HPP
+#define CHARACTER_ADVENTURE_NEMICI_HPP
 
 #include "strutture.h"
 #include "player.hpp"
@@ -164,4 +164,4 @@ public:
 };
 
 
-#endif //PROGETTO_COSIMONE_2_NEMICI_HPP
+#endif //CHARACTER_ADVENTURE_NEMICI_HPP

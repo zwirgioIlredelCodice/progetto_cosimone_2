@@ -2,8 +2,8 @@
 // Created by marco on 18/03/2023.
 //
 
-#ifndef PROGETTO_COSIMONE_2_PLAYER_HPP
-#define PROGETTO_COSIMONE_2_PLAYER_HPP
+#ifndef CHARACTER_ADVENTURE_PLAYER_HPP
+#define CHARACTER_ADVENTURE_PLAYER_HPP
 
 
 #include "mapList.hpp"
@@ -139,4 +139,4 @@ class Protagonista
 };
 
 
-#endif //PROGETTO_COSIMONE_2_PLAYER_HPP
+#endif //CHARACTER_ADVENTURE_PLAYER_HPP
