@@ -65,27 +65,27 @@ void Negozio::populate_negozio() {
         weapon_arr[i] = adjustDifficultyWeapon(weapon_choices[random]); // la bilancio
 
         // la rappresento come una stringa
-        weapon_arr_s[i] = weapon_arr[i].wp.name + ", damage:" + to_string(weapon_arr[i].wp.damage) + ", raggio:" +
+        weapon_arr_s[i] = weapon_arr[i].wp.name + ", damage:" + to_string(weapon_arr[i].wp.damage) + ", range:" +
                 to_string(weapon_arr[i].wp.scope) + ", " + to_string(weapon_arr[i].cost) + "$";
     }
 }
 
 bool Negozio::buy_potenziamento(int index) {
-    itemPotenziamenti p = pot_arr[index];
-    if (protagonista->getCurrency() >= p.cost && p.can_buy) { // se il protagonista ha abbastanza monete e non è già stato comprato
-        protagonista->decreaseCurrency(p.cost);
-        p.can_buy = false;
-        p.potenziamento.apply(); // applica il potenziamento comprato al personaggio
+    itemPotenziamenti* p = &pot_arr[index];
+    if (protagonista->getCurrency() >= p->cost && p->can_buy) { // se il protagonista ha abbastanza monete e non è già stato comprato
+        protagonista->decreaseCurrency(p->cost);
+        p->can_buy = false;
+        p->potenziamento.apply(); // applica il potenziamento comprato al personaggio
         return true;
     } else return false;
 }
 
 bool Negozio::buy_weapon(int index) {
-    itemWeapon w = weapon_arr[index];
-    if (protagonista->getCurrency() >= w.cost && w.can_buy) { // se il protagonista ha abbastanza monete e non è già stato comprata
-        protagonista->decreaseCurrency(w.cost);
-        w.can_buy = false;
-        protagonista->newWeapon(w.wp); // aggiungi l'arma comprata al personaggio
+    itemWeapon* w = &weapon_arr[index];
+    if (protagonista->getCurrency() >= w->cost && w->can_buy) { // se il protagonista ha abbastanza monete e non è già stato comprata
+        protagonista->decreaseCurrency(w->cost);
+        w->can_buy = false;
+        protagonista->newWeapon(weapon_arr[index].wp); // aggiungi l'arma comprata al personaggio
         return true;
     } else return false;
 }
@@ -94,6 +94,7 @@ void Negozio::room_enter() {
     initscr(); // entra in curse mode
     noecho();
     cbreak();
+    curs_set(0); // toglie il cursore
 
     clear();
 
@@ -126,10 +127,10 @@ void Negozio::room_enter() {
             if (i == highlight) wattron(menuwin, A_REVERSE);
             if (i < pot_entry) {
                 if (pot_arr[i].can_buy) mvwprintw(menuwin, i+menu_space, 1, "%s", pot_arr_s[i].c_str());
-                else mvwprintw(menuwin, i+menu_space, 1, "...");
+                else mvwprintw(menuwin, i+menu_space, 1, "sold out                         ");
             } else {
                 if (weapon_arr[i - pot_entry].can_buy) mvwprintw(menuwin, i+menu_space, 1, "%s", weapon_arr_s[i - pot_entry].c_str());
-                else mvwprintw(menuwin, i+menu_space, 1, "...");
+                else mvwprintw(menuwin, i+menu_space, 1, "sold out                         ");
             }
             wattroff(menuwin, A_REVERSE);
         }
@@ -146,11 +147,11 @@ void Negozio::room_enter() {
             case ' ':
                 if (highlight < pot_entry) {
                     if (!buy_potenziamento(highlight)) {
-                        mvwprintw(menuwin, x_max - 3, 1, "monete insufficienti");
+                        mvwprintw(menuwin, x_max - 3, 1, "not enough coins");
                     }
                 } else {
                     if (!buy_weapon(highlight - pot_entry)) {
-                        mvwprintw(menuwin, x_max - 3, 1, "monete insufficienti");
+                        mvwprintw(menuwin, x_max - 3, 1, "not enough coins");
                     }
                 }
                 break;
