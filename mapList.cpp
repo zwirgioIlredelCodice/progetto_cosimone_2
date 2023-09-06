@@ -88,8 +88,8 @@ void mapList::addArch( int life, int damage, int x, int y, int value)
     {
         while(mvwinch(getWin(), y, x) != ' ')
         {
-            int y = rand() % 20;
-            int x= rand() % 100;
+             y = rand() % 20;
+             x= rand() % 100;
         }
         maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].arcIndex++;
