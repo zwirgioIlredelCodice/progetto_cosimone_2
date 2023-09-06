@@ -347,12 +347,11 @@ void Salvataggio::get_mapList() {
     ml->setIndex(ml_index);
 
     int ml_n = get_int("ml_n");
-    map* ma = ml->getMaps();
     for (int i = 0; i < ml_n; i++) {
         /*
          * ripristina la mappa
          */
-        map m = ma[i];
+        map m;
         string basename = "maps[" + to_string(i) + "]";
 
         int mapType = get_int(basename + "mapType");
@@ -373,7 +372,7 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(arcname + "yLoc");
             int xLoc = get_int(arcname + "xLoc");
             int value = get_int(arcname + "value");
-            ml->restoreArch(life, damage, xLoc, yLoc, value, j); // aggiunge l'arciere
+            ml->restoreArch(life, damage, xLoc, yLoc, value); // aggiunge l'arciere
         }
 
         for (int j = 0; j < gobIndex; j++) {
@@ -383,7 +382,7 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(gobname + "yLoc");
             int xLoc = get_int(gobname + "xLoc");
             int value = get_int(gobname + "value");
-            ml->restoreGob(life, damage, xLoc, yLoc, value, j); // aggiunge il goblin
+            ml->restoreGob(life, damage, xLoc, yLoc, value); // aggiunge il goblin
         }
 
         for (int j = 0; j < sicIndex; j++) {
@@ -393,7 +392,7 @@ void Salvataggio::get_mapList() {
             int yLoc = get_int(sicname + "yLoc");
             int xLoc = get_int(sicname + "xLoc");
             int value = get_int(sicname + "value");
-            ml->restoreSic(life, damage, xLoc, yLoc, value, j); // aggiunge il sicario
+            ml->restoreSic(life, damage, xLoc, yLoc, value); // aggiunge il sicario
         }
     }
 

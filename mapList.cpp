@@ -254,18 +254,18 @@ void mapList::setNewGame() {
     setIndex(-1);
 }
 
-void mapList::restoreArch(int life, int damage, int x, int y, int value, int index)
+void mapList::restoreArch(int life, int damage, int x, int y, int value)
 {
     maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
     maps[index].arcIndex++;
 }
 
-void mapList::restoreGob(int life, int damage, int x, int y, int value, int index) {
+void mapList::restoreGob(int life, int damage, int x, int y, int value) {
     maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
     maps[index].gobIndex++;
 }
 
-void mapList::restoreSic(int life, int damage, int x, int y, int value, int index) {
+void mapList::restoreSic(int life, int damage, int x, int y, int value) {
     maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
     maps[index].sicIndex++;
 }

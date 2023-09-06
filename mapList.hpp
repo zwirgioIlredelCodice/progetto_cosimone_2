@@ -207,15 +207,15 @@ public:
 
     void addArch( int life, int damage, int x, int y, int value);
 
-    void restoreArch( int life, int damage, int x, int y, int value, int index);
+    void restoreArch( int life, int damage, int x, int y, int value);
 
     void addGob( int life, int damage, int x, int y, int value);
 
-    void restoreGob( int life, int damage, int x, int y, int value, int index);
+    void restoreGob( int life, int damage, int x, int y, int value);
 
     void addSic( int life, int damage, int x, int y, int value);
 
-    void restoreSic( int life, int damage, int x, int y, int value, int index);
+    void restoreSic( int life, int damage, int x, int y, int value);
 
     int getGobNumber();
 
