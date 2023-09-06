@@ -221,7 +221,7 @@ void Arciere::shotLeft()
     auto startTime = chrono::steady_clock::now();
     while (i < bow.scope && (mvwinch(win, locy, locx - i) == ' ' || mvwinch(win, locy, locx - i) == '-' || mvwinch(win, locy, locx - i) == p->retChar()))
     {
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 7000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 5000 == 0)
         {
             if (i > 1)
             {
@@ -254,7 +254,7 @@ void Arciere::shotRight()
     auto startTime = chrono::steady_clock::now();
     while (i < bow.scope && (mvwinch(win, locy, locx + i) == ' ' || mvwinch(win, locy, locx + i) == '-' || mvwinch(win, locy, locx + i) == p->retChar()))
     {
-        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 7000 == 0)
+        if (chrono::duration_cast<chrono::nanoseconds>(chrono::steady_clock::now() - startTime).count() % 5000 == 0)
         {
             if (i > 1)
             {
