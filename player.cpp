@@ -41,9 +41,6 @@ void Protagonista::mvup() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc--;
-     //
-     //   if (yLoc < 1)
-     //       yLoc = 1;
         display();
     }
     else if (mvwinch(listMap->getMap().win, yLoc - 1, xLoc) == '$')
@@ -74,8 +71,6 @@ void Protagonista::mvdown() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         yLoc++;
-     //   if (yLoc > yMax - 2)
-     //       yLoc = yMax - 2;
         display();
     }
     else if (mvwinch(listMap->getMap().win, yLoc + 1, xLoc) == '$')
@@ -105,8 +100,6 @@ void Protagonista::mvleft() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc--;
-     //   if (xLoc < 1)
-     //       xLoc = 1;
         display();
     }
     else if (mvwinch(listMap->getMap().win, yLoc, xLoc - 1) == '$')
@@ -136,8 +129,6 @@ void Protagonista::mvright() {
     {
         mvwaddch(listMap->getMap().win, yLoc, xLoc, ' ');
         xLoc++;
-      //  if (xLoc > xMax - 2)
-      //      xLoc = xMax - 2;
         display();
     }
     else if (mvwinch(listMap->getMap().win, yLoc, xLoc + 1) == '$')
@@ -253,7 +244,6 @@ void Protagonista::shotRight()
     int locx = xLoc;
     while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, i + locx) == ' ' || mvwinch(listMap->getMap().win, locy, i + locx ) == '-') || mvwinch(listMap->getMap().win, locy, i + locx ) == 'a' || mvwinch(listMap->getMap().win, locy, i + locx ) == 'g' || mvwinch(listMap->getMap().win, locy, i + locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-    //    mvwaddch(listMap->getMap().win, yLoc, xLoc + i, ' ');
         if (i > 1)
         {
             mvwaddch(listMap->getMap().win, yLoc, xLoc + i - 1, ' ');
@@ -286,15 +276,7 @@ void Protagonista::shotRight()
         wrefresh(listMap->getMap().win);
         i++;
 
-        /*
-        for (int j = 0; j < listMap->getGobNumber(); ++j)
-        {
-            listMap
-        }
-         */
-
     }
-    //usleep(20000);
     mvwaddch(listMap->getMap().win, locy, locx + i - 1, ' ');
     wrefresh(listMap->getMap().win);
 }
@@ -306,7 +288,6 @@ void Protagonista::shotLeft()
     int locx = xLoc;
     while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy, locx - i) == ' ' || mvwinch(listMap->getMap().win, locy, locx - i) == '-') || mvwinch(listMap->getMap().win, locy, locx - i) == 'a' || mvwinch(listMap->getMap().win, locy, -i + locx ) == 'g' || mvwinch(listMap->getMap().win, locy, -i + locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-    //    mvwaddch(listMap->getMap().win, yLoc, xLoc - i, ' ');
         if (i > 1)
         {
             mvwaddch(listMap->getMap().win, yLoc, xLoc - i + 1, ' ');
@@ -338,15 +319,7 @@ void Protagonista::shotLeft()
         wrefresh(listMap->getMap().win);
         i++;
 
-        /*
-        for (int j = 0; j < listMap->getGobNumber(); ++j)
-        {
-            listMap
-        }
-         */
-
     }
-    //usleep(20000);
     mvwaddch(listMap->getMap().win, locy, locx - i + 1, ' ');
 }
 
@@ -357,7 +330,6 @@ void Protagonista::shotDown()
     int locx = xLoc;
     while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy + i , locx) == ' ' || mvwinch(listMap->getMap().win, locy + i, locx) == '-') || mvwinch(listMap->getMap().win, locy + i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy + i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy + i, locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-    //    mvwaddch(listMap->getMap().win, yLoc + i, xLoc, ' ');
         if (i > 1)
         {
             mvwaddch(listMap->getMap().win, yLoc + i - 1, xLoc , ' ');
@@ -389,15 +361,7 @@ void Protagonista::shotDown()
         wrefresh(listMap->getMap().win);
         i++;
 
-        /*
-        for (int j = 0; j < listMap->getGobNumber(); ++j)
-        {
-            listMap
-        }
-         */
-
     }
-    //usleep(20000);
     mvwaddch(listMap->getMap().win, locy + i - 1, locx, ' ');
 }
 
@@ -408,7 +372,6 @@ void Protagonista::shotUp()
     int locx = xLoc;
     while( i < weapons[weap_index].scope  && (mvwinch(listMap->getMap().win, locy - i , locx) == ' ' || mvwinch(listMap->getMap().win, locy - i, locx) == '-') || mvwinch(listMap->getMap().win, locy - i,  locx ) == 'a' || mvwinch(listMap->getMap().win, locy - i, locx ) == 'g' || mvwinch(listMap->getMap().win, locy - i, locx ) == 's') // && mvwinch(curMap.win, locy, locx + i + 1) != 'g' && mvwinch(curMap.win, locy, locx + i) != 'g'
     {
-        //    mvwaddch(listMap->getMap().win, yLoc + i, xLoc, ' ');
         if (i > 1)
         {
             mvwaddch(listMap->getMap().win, yLoc - i + 1, xLoc , ' ');
@@ -440,15 +403,7 @@ void Protagonista::shotUp()
         wrefresh(listMap->getMap().win);
         i++;
 
-        /*
-        for (int j = 0; j < listMap->getGobNumber(); ++j)
-        {
-            listMap
-        }
-         */
-
     }
-    //usleep(20000);
     mvwaddch(listMap->getMap().win, locy - i + 1, locx, ' ');
 }
 

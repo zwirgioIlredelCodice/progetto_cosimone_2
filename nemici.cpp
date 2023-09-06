@@ -340,16 +340,9 @@ void Sicario::display()
     if (alive)
     {
         mvwaddch(win, yLoc, xLoc, this->simbol);
-        if (yLoc == p->positionY())
+        if (yLoc != p->positionY())
         {
-            if (xLoc > p->positionX() && xLoc - bow.scope <= p->positionX())
-            {
-                shotLeft();
-            }
-            else if (xLoc < p->positionX() && xLoc + bow.scope >= p->positionX())
-            {
-                shotRight();
-            }
+            (yLoc > p->positionY() ? mvup() : mvdown());
         }
     }
 }
@@ -483,9 +476,16 @@ void Sicario::getmv()
 {
     if (alive)
     {
-        if (yLoc != p->positionY())
+        if (yLoc == p->positionY())
         {
-            (yLoc > p->positionY() ? mvup() : mvdown());
+            if (xLoc > p->positionX() && xLoc - bow.scope <= p->positionX())
+            {
+                shotLeft();
+            }
+            else if (xLoc < p->positionX() && xLoc + bow.scope >= p->positionX())
+            {
+                shotRight();
+            }
         }
     }
 }
