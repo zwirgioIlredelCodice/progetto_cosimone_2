@@ -89,7 +89,7 @@ void mapList::addArch( int life, int damage, int x, int y, int value)
         while(mvwinch(getWin(), y, x) != ' ')
         {
              y = rand() % 20;
-             x= rand() % 100;
+             x = rand() + 5 % 100;
         }
         maps[index].arc[maps[index].arcIndex] = new Arciere(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].arcIndex++;
@@ -106,7 +106,7 @@ void mapList::addGob(int life, int damage, int x, int y, int value)
         while(mvwinch(getWin(), y, x) != ' ')
         {
             y = rand() % 20;
-            x= rand() % 100;
+            x= rand() + 5 % 100;
         }
         maps[index].gob[maps[index].gobIndex] = new Goblin(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].gobIndex++;
@@ -121,7 +121,7 @@ void mapList::addSic(int life, int damage, int x, int y, int value)
         while(mvwinch(getWin(), y, x) != ' ')
         {
             y = rand() % 20;
-            x= rand() % 100;
+            x= rand() + 5 % 100;
         }
         maps[index].sic[maps[index].sicIndex] = new Sicario(life, damage, maps[index].win, y, x, value, this->mainCh);
         maps[index].sicIndex++;
