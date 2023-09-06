@@ -188,47 +188,7 @@ void map::draw_map() {
         mvwprintw(win, i, 0, "%s", maps[this->mapType][i]);
         box(win, 0, 0);
     }
-    /*
-    wattron(win, COLOR_BLUE);
-    mvwprintw(win, 2, 2, " a ");
-    wattroff(win, COLOR_BLUE);
-    */
 }
-void map :: decorate (){
-    start_color();
-    if (mapType == 0){
-        init_pair (1, COLOR_CYAN, COLOR_BLUE);
-        attron (COLOR_PAIR(1));
-        mvwprintw (win , 2, 50, "water~water~water" );
-        attroff (COLOR_PAIR(1));
-    }
-    else if (mapType == 1){
-        init_pair (1, COLOR_CYAN, COLOR_BLUE);
-        attron (COLOR_PAIR(1));
-        mvwprintw (win , 2, 50, "water~water~water" );
-        attroff (COLOR_PAIR(1));
-    }
-    else if (mapType == 2){
-        init_pair (1, COLOR_CYAN, COLOR_BLUE);
-        attron (COLOR_PAIR(1));
-        mvwprintw (win , 2, 50, "water~water~water" );
-        attroff (COLOR_PAIR(1));
-    }
-    else if (mapType == 3){
-        init_pair (1, COLOR_CYAN, COLOR_BLUE);
-        attron (COLOR_PAIR(1));
-        mvwprintw (win , 2, 50, "water~water~water" );
-        attroff (COLOR_PAIR(1));
-    }
-    else if (mapType == 4){
-        init_pair (1, COLOR_CYAN, COLOR_BLUE);
-        attron (COLOR_PAIR(1));
-        mvwprintw (win , 2, 50, "water~water~water" );
-        attroff (COLOR_PAIR(1));
-    }
-}
-    // funzione decorate da chiamare basata sul maptype void decorate(int maptYpe)
-
 
 int mapList::getGobNumber()
 {
