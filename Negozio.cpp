@@ -51,7 +51,7 @@ Negozio::Negozio(Protagonista *protagonista) {
 
 void Negozio::populate_negozio() {
     for (int i = 0; i < NEGOZIO_POTENZIAMENTI; i++) {
-        int random = rand() % NEGOZIO_POTENZIAMENTI; // decide un potenziamento random tra tutti i disponibili
+        int random = rand() % NEGOZIO_POT_CHOICE; // decide un potenziamento random tra tutti i disponibili
 
         pot_arr[i] = adjustDifficultyPot(pot_choices[random]); // lo bilancio
 
@@ -60,7 +60,7 @@ void Negozio::populate_negozio() {
         pot_arr_s[i].append(", " + to_string(pot_arr[i].cost) + "$");
     }
     for (int i = 0; i < NEGOZIO_WEAPON; i++) {
-        int random = rand() % NEGOZIO_WEAPON; // decide un'arma random tra tutte le disponibili
+        int random = rand() % NEGOZIO_WEAPON_CHOICE; // decide un'arma random tra tutte le disponibili
 
         weapon_arr[i] = adjustDifficultyWeapon(weapon_choices[random]); // la bilancio
 
