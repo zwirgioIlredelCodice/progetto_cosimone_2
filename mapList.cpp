@@ -195,8 +195,32 @@ void map::draw_map() {
     */
 }
 void map :: decorate (){
+    start_color();
     if (mapType == 0){
-        start_color();
+        init_pair (1, COLOR_CYAN, COLOR_BLUE);
+        attron (COLOR_PAIR(1));
+        mvwprintw (win , 2, 50, "water~water~water" );
+        attroff (COLOR_PAIR(1));
+    }
+    else if (mapType == 1){
+        init_pair (1, COLOR_CYAN, COLOR_BLUE);
+        attron (COLOR_PAIR(1));
+        mvwprintw (win , 2, 50, "water~water~water" );
+        attroff (COLOR_PAIR(1));
+    }
+    else if (mapType == 2){
+        init_pair (1, COLOR_CYAN, COLOR_BLUE);
+        attron (COLOR_PAIR(1));
+        mvwprintw (win , 2, 50, "water~water~water" );
+        attroff (COLOR_PAIR(1));
+    }
+    else if (mapType == 3){
+        init_pair (1, COLOR_CYAN, COLOR_BLUE);
+        attron (COLOR_PAIR(1));
+        mvwprintw (win , 2, 50, "water~water~water" );
+        attroff (COLOR_PAIR(1));
+    }
+    else if (mapType == 4){
         init_pair (1, COLOR_CYAN, COLOR_BLUE);
         attron (COLOR_PAIR(1));
         mvwprintw (win , 2, 50, "water~water~water" );
