@@ -7,7 +7,6 @@ using namespace std;
 int main() {
     Manager gamenmanager;
     gamenmanager.menu();
-    /*
-    cxiao */
+    /* ciao caio */
     return 0;
 }
